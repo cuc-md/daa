@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: gateway_development
+  host:     gateway-db
+  user:     gateway_user
+  password: 123456
+
+test:
+  <<: *default
+  database: gateway_test
+
+production:
+  <<: *default
+  database: gateway_production
+  username: gateway
+  password: <%= ENV['GATEWAY_DATABASE_PASSWORD'] %>
