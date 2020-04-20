@@ -19,6 +19,8 @@ services:
       - "3000:8000"
     depends_on:
       - gateway-db
+    env_file:
+      - gateway/.env
 
 volumes:
   gateway-database:
