@@ -192,6 +192,7 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.2)
+    settingslogic (2.0.9)
     spring (2.1.0)
     sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   rest-client
   rspec
   rspec-rails
+  settingslogic
   spring
 
 BUNDLED WITH
