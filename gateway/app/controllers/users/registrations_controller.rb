@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.errors.any?
       render json: { error: { details: resource.errors } }
     else
-      render json: { data: resource.slice("name", "email") }
+      render json: { data: resource.slice(:name, :email) }
     end
   end
 

@@ -6,14 +6,10 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    render json: resource
+    render json: { data: resource.slice(:email) }
   end
 
   def respond_to_on_destroy
     head :no_content
-  end
-
-  def create
-    super
   end
 end

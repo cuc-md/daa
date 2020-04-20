@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Users::EventsController do
+describe Users::RegistrationsController do
   describe "POST #create" do
     it "creates new user" do
       post user_registration_path, params: {

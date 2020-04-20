@@ -2,7 +2,7 @@ class AuthFailureApp < Devise::FailureApp
   def http_auth_body
     return super unless request_format == :json
     {
-      sucess: false,
+      success: false,
       message: i18n_message
     }.to_json
   end
