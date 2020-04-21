@@ -1,24 +1,19 @@
-# README
+# API Gateway
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install
 
-Things you may want to cover:
+Run the following commands to work without Docker container:
 
-* Ruby version
+```bash
+# install all gems
+bundle install
 
-* System dependencies
+# add create DB user
+sudo -u postgres psql
+CREATE USER gateway_user WITH ENCRYPTED PASSWORD '123456';
+ALTER USER gateway_user CREATEDB;
+\q
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# create DB and run migrations
+bundle exec rails db:create db:migrate
+```

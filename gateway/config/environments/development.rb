@@ -14,7 +14,6 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.active_storage.service = :local
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
   config.active_record.verbose_query_logs = true

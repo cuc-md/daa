@@ -2,17 +2,18 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  user:     gateway_user
+  password: 123456
 
 development:
   <<: *default
   database: gateway_development
-  host:     gateway-db
-  user:     gateway_user
-  password: 123456
+  host:     <%= ENV.fetch("CONTAINER") { false } ? "gateway-db" : "localhost" %>
 
 test:
   <<: *default
   database: gateway_test
+  host:     <%= ENV.fetch("CONTAINER") { false } ? "gateway-db" : "localhost" %>
 
 production:
   <<: *default
