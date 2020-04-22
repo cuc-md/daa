@@ -1,3 +1,12 @@
+body {
+    width: 100%;
+    /*margin: 0;*/
+    /*font-family: Jost-300-Light, serif;*/
+    /*font-style: normal;*/
+    /*font-weight: normal;*/
+    background-color: #ededf4;
+}
+
 .rowStyle {
     width: 100%;
 }
