@@ -11,7 +11,7 @@ class Clubs extends Component {
     }
 
     render() {
-        return <div>Clubs</div>
+        return <div className="main">Clubs</div>
     }
 }
 

@@ -11,7 +11,7 @@ class Teams extends Component {
     }
 
     render() {
-        return <div>Teams</div>
+        return <div className="main">Teams</div>
     }
 }
 

@@ -11,7 +11,7 @@ class Results extends Component {
     }
 
     render() {
-        return <div>Results</div>
+        return <div className="main">Results</div>
     }
 }
 

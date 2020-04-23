@@ -11,7 +11,7 @@ class Events extends Component {
     }
 
     render() {
-        return <div>Events</div>
+        return <div className="main">Events</div>
     }
 }
 
