@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {Image} from 'react-bootstrap';
-import {NavLink, Link} from 'react-router-dom';
 import {ReactComponent as LogoIcon} from '../../../assets/icons/logo/logo.svg';
 import './Navbar.css';
-import {ReactComponent as ClubIcon} from "../../../assets/icons/sidebar/club.svg";
 
 class Navbar extends Component {
 
@@ -37,11 +34,11 @@ class Navbar extends Component {
 
     render() {
         return (
-            <ul className="navbar">
+            <div className="navbar">
                 <div className="divNavbarLogo">
                     <LogoIcon className="navbarLogo"/>
                 </div>
-            </ul>
+            </div>
         );
     }
 }

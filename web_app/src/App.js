@@ -8,7 +8,6 @@ import Teams from './components/Teams/Teams';
 import Results from './components/Results/Results';
 import Navbar from './components/Navigation/Navbar/Navbar';
 import Sidebar from './components/Navigation/Sidebar/Sidebar';
-import './App.css';
 
 function App() {
 
@@ -22,7 +21,7 @@ function App() {
 
     return (
         <>
-        <BrowserRouter basename={'react'}>
+            <BrowserRouter basename={'react'}>
                 <div>
                     <Navbar/>
                     <div className="row rowStyle">
@@ -40,8 +39,8 @@ function App() {
                         </div>
                     </div>
                 </div>
-        </BrowserRouter>
-            </>
+            </BrowserRouter>
+        </>
     )
 }
 

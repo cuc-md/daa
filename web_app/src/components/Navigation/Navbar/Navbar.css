@@ -1,4 +1,8 @@
 .navbar {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
     height: 70px;
     background-color: #f2f2fc;
     border-bottom: 1.5px solid #dcdcf7;
