@@ -20,37 +20,27 @@ class Sidebar extends Component {
         return <div className="sidebar">
             <div className="divSidebar">
                 <NavLink exact activeClassName="active" className="" to='/'>
-                    <div className="sidebarIcon">
-                        <HomeIcon className="sidebarIcon"/>
-                    </div>
+                    <HomeIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
             <div className="divSidebar">
                 <NavLink activeClassName="active" className="" to='/events'>
-                    <div className="sidebarIcon">
-                        <EventIcon className="sidebarIcon"/>
-                    </div>
+                    <EventIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
             <div className="divSidebar">
                 <NavLink activeClassName="active" className="" to='/clubs'>
-                    <div className="sidebarIcon">
-                        <ClubIcon className="sidebarIcon"/>
-                    </div>
+                    <ClubIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
             <div className="divSidebar">
                 <NavLink activeClassName="active" className="" to='/teams'>
-                    <div className="sidebarIcon">
-                        <TeamIcon className="sidebarIcon"/>
-                    </div>
+                    <TeamIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
             <div className="divSidebar">
                 <NavLink activeClassName="active" className="" to='/results'>
-                    <div className="sidebarIcon">
-                        <ResultsIcon className="sidebarIcon"/>
-                    </div>
+                    <ResultsIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
         </div>

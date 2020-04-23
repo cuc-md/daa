@@ -24,8 +24,8 @@
 }
 
 .divSidebar > a.active {
-    border-right: 3px solid #00af66;
-    color: #00af66;
+    border-right: 3px solid #1cc8eb;
+    color: #1cc8eb;
 }
 
 .sidebarIcon {
@@ -34,5 +34,5 @@
 }
 
 .divSidebar > a.active .sidebarIcon path {
-    fill: #00af66;
+    fill: #1cc8eb;
 }
