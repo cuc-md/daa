@@ -1,0 +1,65 @@
+.eventsTableHead {
+    display: table;
+    width: 100%;
+    height: 30px;
+    color: #a7b1b2;
+}
+
+.eventsTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: rgba(28, 200, 235, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.divEventsTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+}
+
+.eventNumber {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    padding-left: 16px;
+    color: #a7b1b2;
+}
+
+.eventName {
+    display: table-cell;
+    vertical-align: middle;
+    width: 40%;
+}
+
+.eventDate {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.eventLocation {
+    display: table-cell;
+    vertical-align: middle;
+    width: 35%;
+}
+
+.eventArrow {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+}
+
+.eventArrowIcon {
+    height: 20px;
+    width: 20px;
+}
+
+.divEventDetails {
+    width: 100%;
+    height: 160px;
+    display: table;
+}
