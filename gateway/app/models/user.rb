@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :validatable,
     :jwt_authenticatable, jwt_revocation_strategy: self
 
-  ROLES = %w(manage_events manage_all_events)
+  ROLES = %w(manage_events manage_all_events manage_users)
   ROLES.each do |role|
     const_set(role.upcase, role)
   end

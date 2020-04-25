@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         resources :events, except: [:edit, :new]
+
+        resources :users, except: [:create] do
+          get :me, on: :collection
+        end
       end
     end
+
   end
 end
