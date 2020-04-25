@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  namespace :users do
+  devise_scope :users do
     resources :events, only: [:index]
   end
 end
