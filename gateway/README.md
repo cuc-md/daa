@@ -26,3 +26,22 @@ During development on startup there may appear `GemNotFound` error or similar wh
 docker-compose run gateway bundle
 docker-compose build gateway
 ```
+
+## Usage
+
+Each endpoint returns the data in the following format:
+
+```json
+{
+  "data": collection / object
+}
+```
+
+If an error occurs, the data will follow the pattern:
+
+
+```json
+{
+  "error": { details }
+}
+```
