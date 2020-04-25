@@ -20,5 +20,17 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     user.has_role?(User::MANAGE_USERS)
   end
+
+  def list_roles?
+    user.has_role?(User::MANAGE_USERS)
+  end
+
+  def grant_roles?
+    user.has_role?(User::MANAGE_USERS)
+  end
+
+  def revoke_roles?
+    user.has_role?(User::MANAGE_USERS)
+  end
 end
 

@@ -205,4 +205,100 @@ describe Api::V1::UsersController do
       )
     end
   end
+
+  describe "GET #roles" do
+    context "without JWT" do
+      it "raises 401 Unauthorized" do
+        get roles_api_v1_user_path(id: 1), headers: headers
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context "without manage_users role" do
+      it "raises 403 Forbidden" do
+        user = create :user
+
+        get roles_api_v1_user_path(id: 1), headers: auth_headers(headers, user)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    it "returns user's roles" do
+      user = create :user, roles: [User::MANAGE_USERS]
+
+      get roles_api_v1_user_path(user), headers: auth_headers(headers, user)
+
+      expect(response).to have_http_status(:ok)
+      expect(parsed_response).to eq(data: { roles: user.roles })
+    end
+  end
+
+  describe "DELETE #revoke_roles" do
+    context "without JWT" do
+      it "raises 401 Unauthorized" do
+        delete roles_api_v1_user_path(id: 1), headers: headers, params: {
+          roles: []
+        }.to_json
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context "without manage_users role" do
+      it "raises 403 Forbidden" do
+        user = create :user
+
+        delete roles_api_v1_user_path(id: 1), headers: auth_headers(headers, user)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    it "revokes roles for a user" do
+      user         = create :user, roles: [User::MANAGE_USERS]
+      another_user = create :user, roles: [User::MANAGE_EVENTS]
+
+      delete roles_api_v1_user_path(another_user), headers: auth_headers(headers, user), params: {
+        roles: [User::MANAGE_EVENTS]
+      }.to_json
+
+      expect(response).to have_http_status(:ok)
+      expect(another_user.reload.roles).to eq([])
+      expect(parsed_response).to eq(data: { roles: another_user.roles })
+    end
+  end
+
+  describe "POST #grant_roles" do
+    context "without JWT" do
+      it "raises 401 Unauthorized" do
+        post roles_api_v1_user_path(id: 1), headers: headers
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context "without manage_users role" do
+      it "raises 403 Forbidden" do
+        user = create :user
+
+        post roles_api_v1_user_path(id: 1), headers: auth_headers(headers, user)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    it "returns info about a user" do
+      user = create :user, roles: [User::MANAGE_USERS]
+
+      post roles_api_v1_user_path(user), headers: auth_headers(headers, user), params: {
+        roles: [User::MANAGE_EVENTS]
+      }.to_json
+
+      expect(response).to have_http_status(:ok)
+      expect(parsed_response).to match(data: { roles: [User::MANAGE_USERS, User::MANAGE_EVENTS]})
+      expect(user.reload.has_role?(User::MANAGE_EVENTS)).to eq true
+    end
+  end
 end

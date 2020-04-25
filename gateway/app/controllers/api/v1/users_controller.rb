@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def index
-    authorize :user, :index?
+    authorize :user
     users = User.pluck(:id, :name, :email, :roles).map do |id, name, email, roles|
       {
         id:    id,
@@ -21,17 +21,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    authorize :user, :show?
-
-    user = User.find(params[:id])
-
+    authorize :user
     render_user(user)
   end
 
   def update
-    authorize :user, :update?
+    authorize :user
 
-    user = User.find(params[:id])
     user.assign_attributes(permitted_params)
     user.save!
 
@@ -39,18 +35,43 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    authorize :user, :destroy?
-
-    user = User.find(params[:id])
+    authorize :user
     user.destroy!
-
     render_user(user)
+  end
+
+  def roles
+    authorize :user, :list_roles?
+    render_roles(user)
+  end
+
+  def revoke_roles
+    authorize :user
+    user.remove_roles(permitted_roles)
+    user.save!
+    render_roles(user)
+  end
+
+  def grant_roles
+    authorize :user
+    binding.pry
+    user.add_roles(permitted_roles)
+    user.save!
+    render_roles(user)
   end
 
   private
 
+  def user
+    @user ||= User.find(params[:id])
+  end
+
   def permitted_params
     params.require(:user).permit(:name, :email)
+  end
+
+  def permitted_roles
+    params.require(:roles)
   end
 
   def render_user(user)
@@ -64,5 +85,9 @@ class Api::V1::UsersController < ApplicationController
         }
       }
     }
+  end
+
+  def render_roles(user)
+    render json: { data: { roles: user.roles  } }
   end
 end
