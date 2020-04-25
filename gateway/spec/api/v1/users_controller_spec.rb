@@ -10,7 +10,6 @@ describe Api::V1::UsersController do
 
         expect(response).to have_http_status(:unauthorized)
       end
-
     end
 
     it "returns info about current user" do
@@ -22,9 +21,9 @@ describe Api::V1::UsersController do
       expect(parsed_response).to eq(
         data: {
           user: {
-            id: user.id,
+            id:    user.id,
             email: user.email,
-            name: user.name,
+            name:  user.name,
             roles: user.roles
           }
         }
@@ -52,7 +51,7 @@ describe Api::V1::UsersController do
     end
 
     it "returns a list of users" do
-      user = create :user, roles: [User::MANAGE_USERS]
+      user         = create :user, roles: [User::MANAGE_USERS]
       another_user = create :user
 
       get api_v1_users_path, headers: auth_headers(headers, user)
@@ -74,7 +73,6 @@ describe Api::V1::UsersController do
           ]
         }
       )
-
     end
   end
 
@@ -107,9 +105,9 @@ describe Api::V1::UsersController do
       expect(parsed_response).to eq(
         data: {
           user: {
-            id: another_user.id,
+            id:    another_user.id,
             email: another_user.email,
-            name: another_user.name,
+            name:  another_user.name,
             roles: another_user.roles
           }
         }
@@ -120,9 +118,7 @@ describe Api::V1::UsersController do
   describe "PUT #update" do
     context "without JWT" do
       it "raises 401 Unauthorized" do
-        put api_v1_user_path(id: 1), headers: headers, params: {
-          user: {}
-        }
+        put api_v1_user_path(id: 1), headers: headers
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -132,9 +128,7 @@ describe Api::V1::UsersController do
       it "raises 403 Forbidden" do
         user = create :user
 
-        put api_v1_user_path(id: 1), headers: auth_headers(headers, user), params: {
-          user: {}
-        }
+        put api_v1_user_path(id: 1), headers: auth_headers(headers, user)
 
         expect(response).to have_http_status(:forbidden)
       end
@@ -273,7 +267,9 @@ describe Api::V1::UsersController do
   describe "POST #grant_roles" do
     context "without JWT" do
       it "raises 401 Unauthorized" do
-        post roles_api_v1_user_path(id: 1), headers: headers
+        user = create :user
+
+        post roles_api_v1_user_path(user), headers: headers
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -283,22 +279,38 @@ describe Api::V1::UsersController do
       it "raises 403 Forbidden" do
         user = create :user
 
-        post roles_api_v1_user_path(id: 1), headers: auth_headers(headers, user)
+        post roles_api_v1_user_path(user), headers: auth_headers(headers, user)
 
         expect(response).to have_http_status(:forbidden)
       end
     end
 
-    it "returns info about a user" do
-      user = create :user, roles: [User::MANAGE_USERS]
+    it "grant roles to another user" do
+      user         = create :user, roles: [User::MANAGE_USERS]
+      another_user = create :user
 
-      post roles_api_v1_user_path(user), headers: auth_headers(headers, user), params: {
+      post roles_api_v1_user_path(another_user), headers: auth_headers(headers, user), params: {
         roles: [User::MANAGE_EVENTS]
       }.to_json
 
       expect(response).to have_http_status(:ok)
-      expect(parsed_response).to match(data: { roles: [User::MANAGE_USERS, User::MANAGE_EVENTS]})
-      expect(user.reload.has_role?(User::MANAGE_EVENTS)).to eq true
+      expect(parsed_response).to match(data: { roles: [User::MANAGE_EVENTS]})
+      expect(another_user.reload.has_role?(User::MANAGE_EVENTS)).to eq true
+    end
+
+    context "when user adds roles to itself" do
+      it "raises 403 Forbidden" do
+        user = create :user, roles: [User::MANAGE_USERS]
+
+        expect do
+          post roles_api_v1_user_path(user), headers: auth_headers(headers, user), params: {
+            roles: [User::MANAGE_EVENTS]
+          }.to_json
+          user.reload
+        end.to_not change(user, :roles)
+
+        expect(response).to have_http_status(:forbidden)
+      end
     end
   end
 end

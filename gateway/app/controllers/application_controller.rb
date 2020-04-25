@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :forbidden
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   respond_to :json
 
@@ -11,6 +12,12 @@ class ApplicationController < ActionController::API
   def forbidden
     render status: :forbidden, json: {
       error: { message: "Forbidden" }
+    }
+  end
+
+  def not_found
+    render status: :not_found, json: {
+      error: { message: "Not found" }
     }
   end
 end

@@ -53,8 +53,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def grant_roles
-    authorize :user
-    binding.pry
+    authorize user
     user.add_roles(permitted_roles)
     user.save!
     render_roles(user)

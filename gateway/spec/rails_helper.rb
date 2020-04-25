@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include AuthHelpers, type: :request
   config.include ApiHelpers, type: :request
+  config.include ApiHelpers, type: :controller
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

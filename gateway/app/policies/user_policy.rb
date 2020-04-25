@@ -26,7 +26,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def grant_roles?
-    user.has_role?(User::MANAGE_USERS)
+    user.has_role?(User::MANAGE_USERS) && user.id != resource.id
   end
 
   def revoke_roles?
