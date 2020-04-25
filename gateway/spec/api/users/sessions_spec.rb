@@ -8,8 +8,9 @@ describe Users::SessionsController do
 
         expect(response).to have_http_status(:unauthorized)
         expect(parsed_response).to match(
-          success: false,
-          message: anything
+          error: {
+            message: "Unauthorized"
+          }
         )
       end
     end

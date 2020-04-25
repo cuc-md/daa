@@ -33,4 +33,8 @@ class User < ApplicationRecord
     unknown_roles = roles - ROLES
     errors.add(:roles, "Unknown roles: #{unknown_roles.join(', ')}") if unknown_roles.size > 0
   end
+
+  def has_role?(role)
+    roles.include?(role)
+  end
 end
