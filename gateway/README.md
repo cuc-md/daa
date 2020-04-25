@@ -17,3 +17,12 @@ ALTER USER gateway_user CREATEDB;
 # create DB and run migrations
 bundle exec rails db:create db:migrate
 ```
+
+## Troubleshooting
+
+During development on startup there may appear `GemNotFound` error or similar when launching as Docker container. Rebuild the container:
+
+```bash
+docker-compose run gateway bundle
+docker-compose build gateway
+```
