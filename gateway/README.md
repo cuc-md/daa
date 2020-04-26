@@ -15,7 +15,7 @@ ALTER USER gateway_user CREATEDB;
 \q
 
 # create DB and run migrations
-bundle exec rails db:create db:migrate
+bundle exec rails db:create db:migrate db:seed
 ```
 
 ## Troubleshooting
