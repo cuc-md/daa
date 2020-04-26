@@ -7,17 +7,15 @@ class ApplicationController < ActionController::API
 
   respond_to :json
 
-  private
+  def not_found
+    render status: :not_found, json: {
+      error: { message: "Not found" }
+    }
+  end
 
   def forbidden
     render status: :forbidden, json: {
       error: { message: "Forbidden" }
-    }
-  end
-
-  def not_found
-    render status: :not_found, json: {
-      error: { message: "Not found" }
     }
   end
 end
