@@ -242,6 +242,12 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY'] || "secret-key"
+    jwt.dispatch_requests = [
+      ["POST", /^\/users\/sign_in$/]
+    ]
+    jwt.revocation_requests = [
+      ["DELETE", /^\/users\/sign_out$/]
+    ]
   end
 
   config.warden do |manager|

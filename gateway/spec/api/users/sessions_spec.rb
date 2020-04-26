@@ -37,12 +37,15 @@ describe Users::SessionsController do
 
   describe "DELETE #destroy" do
     it "signs out the user" do
-      user    = create :user
-      headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+      user        = create :user
+      headers     = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+      new_headers = auth_headers(headers, user)
 
-      delete destroy_user_session_path, headers: auth_headers(headers, user)
-
+      delete destroy_user_session_path, headers: new_headers
       expect(response).to have_http_status(:no_content)
+
+      get me_api_v1_users_path, headers: new_headers
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end
