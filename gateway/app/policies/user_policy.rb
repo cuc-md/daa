@@ -6,30 +6,36 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    user.has_role?(User::MANAGE_USERS)
+    can_manage_users?
   end
 
   def show?
-    user.has_role?(User::MANAGE_USERS)
+    can_manage_users?
   end
 
   def update?
-    user.has_role?(User::MANAGE_USERS)
+    can_manage_users?
   end
 
   def destroy?
-    user.has_role?(User::MANAGE_USERS)
+    can_manage_users?
   end
 
   def list_roles?
-    user.has_role?(User::MANAGE_USERS)
+    can_manage_users?
   end
 
   def grant_roles?
-    user.has_role?(User::MANAGE_USERS) && user.id != resource.id
+    can_manage_users? && user.id != resource.id
   end
 
   def revoke_roles?
+    can_manage_users?
+  end
+
+  private
+
+  def can_manage_users?
     user.has_role?(User::MANAGE_USERS)
   end
 end
