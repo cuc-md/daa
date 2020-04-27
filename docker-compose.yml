@@ -1,0 +1,26 @@
+version: '3.0'
+services:
+  web:
+    build: ./web_app
+    ports:
+    - "8080:3000"
+  gateway-db:
+    image: postgres
+    volumes:
+      - gateway-database:/var/lib/postgresql/data
+    env_file:
+      - gateway/db.env
+  gateway:
+    build: ./gateway
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    volumes:
+      - ./gateway:/app
+    ports:
+      - "3000:8000"
+    depends_on:
+      - gateway-db
+    env_file:
+      - gateway/.env
+
+volumes:
+  gateway-database:
