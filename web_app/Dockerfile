@@ -16,4 +16,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD [ "npm", "start_ci" ]
+CMD [ "npm", "run", "start_ci" ]
