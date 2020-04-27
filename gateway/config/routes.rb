@@ -20,4 +20,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  root "application#not_found"
+  match "/*pages", to: "application#not_found", via: :all
 end
