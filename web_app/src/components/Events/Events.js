@@ -25,6 +25,7 @@ class Events extends Component {
                     <div className="eventLocation">
                         Location
                     </div>
+                    <div className="eventArrow"/>
                 </div>
                 <Event keyItem={1}
                        divItemId="id1"

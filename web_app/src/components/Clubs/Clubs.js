@@ -19,6 +19,7 @@ class Clubs extends Component {
                     <div className="clubName">
                         Club
                     </div>
+                    <div className="clubArrow"/>
                 </div>
                 <Club keyItem={1}
                       divItemId="id1"
