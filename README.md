@@ -14,5 +14,5 @@ To setup API Gateway, run
 docker-compose run gateway bash
 
 # inside the shell
-rails db:create db:migrate
+rails db:create db:migrate db:seed
 ```
