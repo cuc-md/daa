@@ -1,10 +1,4 @@
 class UserPolicy < ApplicationPolicy
-  attr_reader :user, :resource
-
-  def initialize(user, resource)
-    @user, @resource = user, resource
-  end
-
   def index?
     can_manage_users?
   end
@@ -26,7 +20,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def grant_roles?
-    can_manage_users? && user.id != resource.id
+    can_manage_users? && user.id != record.id
   end
 
   def revoke_roles?
