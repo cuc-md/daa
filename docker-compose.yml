@@ -21,6 +21,10 @@ services:
       - gateway-db
     env_file:
       - gateway/.env
+  results_stats:
+    build: ./results_stats
+    ports:
+      - "8000:8080"
 
 volumes:
   gateway-database:
