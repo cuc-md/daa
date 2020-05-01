@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   devise_scope :users do
     namespace :api do
       namespace :v1 do
-        resources :events, except: [:edit, :new]
-
+        resources :events,  except: [:edit, :new]
+        resources :clubs,   except: [:edit, :new]
+        resources :teams,   except: [:edit, :new]
+        resources :results, except: [:edit, :new]
         resources :users, except: [:create] do
           get :me, on: :collection
           member do
