@@ -25,6 +25,13 @@ services:
     build: ./results_stats
     ports:
       - "8000:8080"
+  storage:
+    build: ./storage
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 5000 -b '0.0.0.0'"
+    volumes:
+      - ./storage:/app
+    ports:
+      - "5000:5000"
 
 volumes:
   gateway-database:
