@@ -21,6 +21,8 @@ services:
       - gateway-db
     env_file:
       - gateway/.env
+    stdin_open: true
+    tty: true
   results_stats:
     build: ./results_stats
     ports:

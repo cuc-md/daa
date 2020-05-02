@@ -49,5 +49,7 @@ class StorageService
 
   def json(&block)
     JSON.parse(block.call).deep_symbolize_keys
+  rescue RestClient::ExceptionWithResponse => e
+    JSON.parse(e.response.body)
   end
 end

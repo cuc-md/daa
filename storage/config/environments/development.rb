@@ -19,4 +19,5 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
   config.log_level = :debug
   config.active_storage.service = :local
+  config.hosts << "storage"
 end
