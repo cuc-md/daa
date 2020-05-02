@@ -56,6 +56,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -63,6 +65,8 @@ GEM
     byebug (11.1.2)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     crass (1.0.6)
     database_cleaner (1.8.4)
     database_cleaner-active_record (1.8.0)
@@ -98,6 +102,7 @@ GEM
       railties (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashdiff (1.0.1)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -136,6 +141,7 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
+    public_suffix (4.0.4)
     puma (4.3.3)
       nio4r (~> 2.0)
     pundit (2.1.0)
@@ -203,6 +209,7 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.2)
+    safe_yaml (1.0.5)
     settingslogic (2.0.9)
     spring (2.1.0)
     sprockets (4.0.0)
@@ -226,6 +233,10 @@ GEM
       dry-configurable (~> 0.9, < 0.11)
       jwt (~> 2.1)
       warden (~> 1.2)
+    webmock (3.8.3)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -256,6 +267,7 @@ DEPENDENCIES
   rspec-rails
   settingslogic
   spring
+  webmock
 
 BUNDLED WITH
    1.17.2

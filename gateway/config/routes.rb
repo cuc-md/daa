@@ -19,6 +19,10 @@ Rails.application.routes.draw do
             post :roles,   action: :grant_roles
           end
         end
+        resources :question_packs, except: [:edit, :new] do
+          get :random, on: :collection
+          get :document, on: :member
+        end
       end
     end
   end
