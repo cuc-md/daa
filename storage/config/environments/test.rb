@@ -12,4 +12,5 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
   config.active_support.deprecation = :stderr
   config.log_level = :info
+  config.active_storage.service = :test
 end
