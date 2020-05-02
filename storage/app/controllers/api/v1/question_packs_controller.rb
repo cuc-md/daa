@@ -35,7 +35,7 @@ class Api::V1::QuestionPacksController < ApplicationController
   end
 
   def document
-    send_data pack.document.download, filename: pack.document.filename.to_s, type: pack.document.content_type
+    send_data pack.document.download, filename: pack.document.filename.to_s, type: pack.document.content_type, disposition: "inline"
   end
 
   private
