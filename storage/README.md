@@ -1,24 +1,42 @@
-# README
+# Questions storage
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install
 
-Things you may want to cover:
+Run the following commands to work without Docker container:
 
-* Ruby version
+```bash
+# install all gems
+bundle install
 
-* System dependencies
+# create DB and run migrations
+bundle exec rails db:create db:migrate db:seed
+```
 
-* Configuration
+## Troubleshooting
 
-* Database creation
+During development on startup there may appear `GemNotFound` error or similar when launching as Docker container. Rebuild the container:
 
-* Database initialization
+```bash
+docker-compose run storage bundle
+docker-compose build storage
+```
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
+Each endpoint returns the data in the following format:
 
-* Deployment instructions
+```json
+{
+  "data": collection / object
+}
+```
 
-* ...
+If an error occurs, the data will follow the pattern:
+
+
+```json
+{
+  "error": { details }
+}
+```
+
