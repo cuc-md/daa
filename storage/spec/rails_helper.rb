@@ -24,6 +24,17 @@ RSpec.configure do |config|
   config.define_derived_metadata(:file_path => Regexp.new('/spec/api/')) do |metadata|
     metadata[:type] = :request
   end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 end
 
 Shoulda::Matchers.configure do |config|

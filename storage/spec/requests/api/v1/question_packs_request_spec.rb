@@ -11,6 +11,7 @@ RSpec.describe "Api::V1::QuestionPacks", type: :request do
           author:     "somebody",
           user_id:    "123",
           event_name: "world championship",
+          event_id:   "456",
           difficulty: "simple",
           blob:       blob
         }
@@ -25,6 +26,7 @@ RSpec.describe "Api::V1::QuestionPacks", type: :request do
             author:     pack.author,
             user_id:    pack.user_id,
             event_name: pack.event_name,
+            event_id:   pack.event_id,
             difficulty: pack.difficulty,
             id:         pack.id
           }
@@ -67,7 +69,8 @@ RSpec.describe "Api::V1::QuestionPacks", type: :request do
             user_id:    pack.user_id,
             author:     pack.author,
             difficulty: pack.difficulty,
-            event_name: pack.event_name
+            event_name: pack.event_name,
+            event_id:   pack.event_id
           }
         }
       )
@@ -97,13 +100,15 @@ RSpec.describe "Api::V1::QuestionPacks", type: :request do
           question_pack: {
             author: "new author",
             difficulty: QuestionPack::HARD,
-            event_name: "olympics"
+            event_name: "olympics",
+            event_id:   "12345"
           }
         }
         pack.reload
       end.to change(pack, :author).to("new author")
         .and change(pack, :difficulty).to(QuestionPack::HARD)
         .and change(pack, :event_name).to("olympics")
+        .and change(pack, :event_id).to("12345")
         .and not_change(pack.document, :download)
     end
 
@@ -120,6 +125,7 @@ RSpec.describe "Api::V1::QuestionPacks", type: :request do
         pack.reload
       end.to not_change(pack, :author)
         .and not_change(pack, :event_name)
+        .and not_change(pack, :event_id)
         .and not_change(pack, :difficulty)
         .and change(pack.document, :download).to("new data")
     end

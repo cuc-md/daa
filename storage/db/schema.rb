@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_081107) do
 
   create_table "question_packs", force: :cascade do |t|
     t.string "event_name"
+    t.string "event_id"
     t.string "difficulty", null: false
     t.string "user_id", null: false
     t.string "author", null: false

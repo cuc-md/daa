@@ -6,7 +6,7 @@ class Api::V1::QuestionPacksController < ApplicationController
   end
 
   def index
-    packs = QuestionPack.select(:id, :difficulty, :event_name)
+    packs = QuestionPack.select(:id, :difficulty, :event_name, :event_id)
     packs = packs.where(difficulty: params[:difficulty]) if params[:difficulty]
     render_packs(packs)
   end
@@ -41,11 +41,11 @@ class Api::V1::QuestionPacksController < ApplicationController
   private
 
   def permitted_create_params
-    params.require(:question_pack).permit(:author, :event_name, :user_id, :difficulty)
+    params.require(:question_pack).permit(:author, :event_id, :event_name, :user_id, :difficulty)
   end
 
   def permitted_update_params
-    params.require(:question_pack).permit(:author, :event_name, :difficulty)
+    params.require(:question_pack).permit(:author, :event_id, :event_name, :difficulty)
   end
 
   def pack
@@ -69,6 +69,7 @@ class Api::V1::QuestionPacksController < ApplicationController
           id:         pack.id,
           user_id:    pack.user_id,
           event_name: pack.event_name,
+          event_id:   pack.event_id,
           difficulty: pack.difficulty,
           author:     pack.author
         }
@@ -83,6 +84,7 @@ class Api::V1::QuestionPacksController < ApplicationController
           {
             id:         pack.id,
             event_name: pack.event_name,
+            event_id:   pack.event_id,
             difficulty: pack.difficulty
           }
         end
