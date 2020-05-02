@@ -1,3 +1,4 @@
+RSpec::Matchers.define_negated_matcher :not_change, :change
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
