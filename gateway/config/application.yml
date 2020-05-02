@@ -1,4 +1,10 @@
 defaults: &defaults
+  storage_url: "localhost:5000"
 
 development:
   <<: *defaults
+
+test:
+  <<: *defaults
+  storage_url: "example.com"
+
