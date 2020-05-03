@@ -5,7 +5,7 @@ import SignedOutLinks from './SignedOutLinks/SignedOutLinks';
 import './Navbar.css';
 
 const Navbar = (props) => {
-    return JSON.stringify(props.currentUser) === '{}' ?
+    return JSON.stringify(props.currentUser) !== '{}' ?
         <SignedInLinks currentUser={props.currentUser}/> :
         <SignedOutLinks/>;
 };
