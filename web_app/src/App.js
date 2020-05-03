@@ -33,12 +33,12 @@ function App() {
                         <div className="col-sm-11">
                             <Switch>
                                 <Route exact path='/' component={Home}/>
-                                <Route exact path='/events' component={Events}/>
-                                <Route exact path='/clubs' component={Clubs}/>
-                                <Route exact path='/teams' component={Teams}/>
-                                <Route exact path='/results' component={Results}/>
-                                <Route exact path='/register' component={Registration}/>
-                                <Route exact path='/sign_in' component={SignIn}/>
+                                <Route path='/events' component={Events}/>
+                                <Route path='/clubs' component={Clubs}/>
+                                <Route path='/teams' component={Teams}/>
+                                <Route path='/results' component={Results}/>
+                                <Route path='/register' component={Registration}/>
+                                <Route path='/sign_in' component={SignIn}/>
                             </Switch>
                         </div>
                     </div>

@@ -9,15 +9,17 @@ const SignedOutLinks = () => {
             <div className="divNavbarLogo">
                 <LogoIcon className="navbarLogo"/>
             </div>
-            <div className="divNavbar">
-                <NavLink to='/sign_in'>
-                    Sign In
-                </NavLink>
-            </div>
-            <div className="divNavbar">
-                <NavLink to='/register'>
-                    Register
-                </NavLink>
+            <div className="navbarLinks">
+                <div className="divNavbar">
+                    <NavLink to='/sign_in'>
+                        Sign In
+                    </NavLink>
+                </div>
+                <div className="divNavbar">
+                    <NavLink to='/register'>
+                        Register
+                    </NavLink>
+                </div>
             </div>
         </div>
     );

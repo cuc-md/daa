@@ -25,10 +25,14 @@
     width: 40px;
 }
 
+.navbarLinks {
+    display: flex;
+}
+
 .divNavbar a {
     display: block;
     height: 100%;
-    padding: 22px;
+    padding: 16px;
     text-decoration: none;
     color: #1cc8eb;
 }
