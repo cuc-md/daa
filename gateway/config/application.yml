@@ -1,4 +1,11 @@
 defaults: &defaults
+  storage_url: "localhost:5000"
 
 development:
   <<: *defaults
+  storage_url: <%= ENV.fetch("CONTAINER") { false } ? "storage:5000" : "localhost:5000" %>
+
+test:
+  <<: *defaults
+  storage_url: "example.com"
+

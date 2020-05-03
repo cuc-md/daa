@@ -1,4 +1,4 @@
-module ErrorRespoder
+module ErrorResponder
   protected
 
   def json_resource_errors
