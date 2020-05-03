@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {signOutUser} from '../../../../store/actions/authActions';
+import {openSignOutPopUpBox} from '../../../Utils/PopUpBox/PopUpBox';
 import {ReactComponent as LogoIcon} from '../../../../assets/icons/logo/logo.svg';
 import '../Navbar.css';
 
@@ -42,7 +41,6 @@ class SignedInLinks extends Component {
         this.props.signOutUser();
     };
 
-
     render() {
         console.log(this.props.currentUser);
         return (
@@ -50,14 +48,12 @@ class SignedInLinks extends Component {
                 <div className="divNavbarLogo">
                     <LogoIcon className="navbarLogo"/>
                 </div>
-                <button onClick={this.logOut}>Sign Out</button>
+                <div className="divNavbar" tabIndex={3} onClick={openSignOutPopUpBox}>
+                    Sign Out
+                </div>
             </div>
         );
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    signOutUser: () => dispatch(signOutUser())
-});
-
-export default connect(null, mapDispatchToProps)(SignedInLinks);
+export default SignedInLinks;

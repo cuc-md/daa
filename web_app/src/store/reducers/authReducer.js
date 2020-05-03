@@ -3,9 +3,9 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'SIGN_IN_USER':
-            return {user: action.payload};
+            return action.payload;
         case 'SIGN_OUT_USER':
-            return {user: {}};
+            return {};
         default:
             return state;
     }

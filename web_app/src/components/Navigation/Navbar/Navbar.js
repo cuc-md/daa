@@ -5,14 +5,14 @@ import SignedOutLinks from './SignedOutLinks/SignedOutLinks';
 import './Navbar.css';
 
 const Navbar = (props) => {
-    return JSON.stringify(props.currentUser) !== '{}' ?
-        <SignedInLinks currentUser={props.currentUser}/> :
+    return JSON.stringify(props.user) !== '{}' ?
+        <SignedInLinks currentUser={props.user}/> :
         <SignedOutLinks/>;
 };
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.currentUser
+        user: state.user
     }
 };
 
