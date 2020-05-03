@@ -50,3 +50,25 @@
     margin-bottom: 16px;
     cursor: pointer;
 }
+
+.choiceButton {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 35%;
+    padding: 3%;
+    border: none;
+    border-radius: 7px 7px 7px 7px;
+    color: #FFFFFF;
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.cancelButton {
+    background: #9b9696;;
+}
+
+.okButton {
+    background: #1cc8eb;
+}
