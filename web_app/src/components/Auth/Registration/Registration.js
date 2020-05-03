@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {signUpFetch} from '../../../store/actions/authActions';
+import {registerFetch} from '../../../store/actions/authActions';
 
-class SignUp extends Component {
+class Registration extends Component {
 
     constructor(props) {
         super(props);
@@ -23,14 +23,14 @@ class SignUp extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.signUpFetch(this.state)
+        this.props.registerFetch(this.state)
     };
 
     render() {
         return (
             <div className="main">
                 <form onSubmit={this.handleSubmit}>
-                    <h1>Sign Up</h1>
+                    <h1>Register</h1>
 
                     <label>Email</label>
                     <input
@@ -66,7 +66,7 @@ class SignUp extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    signUpFetch: userInfo => dispatch(signUpFetch(userInfo))
+    registerFetch: userInfo => dispatch(registerFetch(userInfo))
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(Registration);

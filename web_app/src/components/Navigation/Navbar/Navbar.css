@@ -25,24 +25,10 @@
     width: 40px;
 }
 
-.divNavbar{
-    float: right;
-}
-
 .divNavbar a {
     display: block;
     height: 100%;
-    text-align: center;
     padding: 22px;
     text-decoration: none;
-    color: black;
-}
-
-.divNavbar :hover {
-    background-color: rgba(255, 255, 255, 0.04);
-}
-
-.divNavbar > a.active {
-    border-bottom: 3px solid #1cc8eb;
     color: #1cc8eb;
 }

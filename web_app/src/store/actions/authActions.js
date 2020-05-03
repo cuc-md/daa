@@ -1,4 +1,4 @@
-export const signUpFetch = (user) => {
+export const registerFetch = (user) => {
     return dispatch => {
         return fetch("/users", {
             method: "POST",

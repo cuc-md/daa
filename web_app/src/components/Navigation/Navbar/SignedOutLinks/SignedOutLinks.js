@@ -10,13 +10,13 @@ const SignedOutLinks = () => {
                 <LogoIcon className="navbarLogo"/>
             </div>
             <div className="divNavbar">
-                <NavLink exact activeClassName="active" className="" to='/sign_in'>
+                <NavLink to='/sign_in'>
                     Sign In
                 </NavLink>
             </div>
             <div className="divNavbar">
-                <NavLink exact activeClassName="active" className="" to='/sign_up'>
-                    Sign Up
+                <NavLink to='/register'>
+                    Register
                 </NavLink>
             </div>
         </div>
