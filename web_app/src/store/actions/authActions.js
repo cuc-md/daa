@@ -1,3 +1,5 @@
+import {PopupboxManager} from 'react-popupbox';
+
 export const registerFetch = (user) => {
     return dispatch => {
         return fetch("/users/sign_up", {
@@ -15,7 +17,8 @@ export const registerFetch = (user) => {
                     // 'message' if there is an error with creating the user, i.e. invalid username
                 } else {
                     localStorage.setItem("token", data.token);
-                    dispatch(signInUser(data.data))
+                    dispatch(signInUser(data.data));
+                    PopupboxManager.close();
                 }
             })
     }
@@ -39,6 +42,7 @@ export const signInFetch = (user) => {
                 } else {
                     localStorage.setItem("token", data.token);
                     dispatch(signInUser(data.data));
+                    PopupboxManager.close();
                 }
             })
     }
