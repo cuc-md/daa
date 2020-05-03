@@ -1,6 +1,6 @@
 export const registerFetch = (user) => {
     return dispatch => {
-        return fetch("/users", {
+        return fetch("/users/sign_up", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ export const signInFetch = (user) => {
                     // 'message' if there is an error
                 } else {
                     localStorage.setItem("token", data.token);
-                    dispatch(signInUser(data.user))
+                    dispatch(signInUser(data.user));
                 }
             })
     }

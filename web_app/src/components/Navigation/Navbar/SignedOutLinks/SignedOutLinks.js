@@ -1,6 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import {ReactComponent as LogoIcon} from '../../../../assets/icons/logo/logo.svg';
+import {openSignInPopUpBox, openRegisterPopUpBox} from '../../../Utils/PopUpBox/PopUpBox';
+import '../../../Utils/PopUpBox/PopUpBox.css';
 import '../Navbar.css';
 
 const SignedOutLinks = () => {
@@ -10,15 +11,11 @@ const SignedOutLinks = () => {
                 <LogoIcon className="navbarLogo"/>
             </div>
             <div className="navbarLinks">
-                <div className="divNavbar">
-                    <NavLink to='/sign_in'>
-                        Sign In
-                    </NavLink>
+                <div className="divNavbar" tabIndex={1} onClick={openSignInPopUpBox}>
+                    Sign In
                 </div>
-                <div className="divNavbar">
-                    <NavLink to='/register'>
-                        Register
-                    </NavLink>
+                <div className="divNavbar" tabIndex={2} onClick={openRegisterPopUpBox}>
+                    Register
                 </div>
             </div>
         </div>

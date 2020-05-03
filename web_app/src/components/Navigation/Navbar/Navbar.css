@@ -29,10 +29,11 @@
     display: flex;
 }
 
-.divNavbar a {
+.divNavbar {
     display: block;
     height: 100%;
     padding: 16px;
     text-decoration: none;
     color: #1cc8eb;
+    cursor: pointer;
 }

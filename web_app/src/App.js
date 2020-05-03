@@ -8,8 +8,6 @@ import Teams from './components/Teams/Teams';
 import Results from './components/Results/Results';
 import Navbar from './components/Navigation/Navbar/Navbar';
 import Sidebar from './components/Navigation/Sidebar/Sidebar';
-import Registration from './components/Auth/Registration';
-import SignIn from './components/Auth/SignIn';
 
 function App() {
 
@@ -37,11 +35,10 @@ function App() {
                                 <Route path='/clubs' component={Clubs}/>
                                 <Route path='/teams' component={Teams}/>
                                 <Route path='/results' component={Results}/>
-                                <Route path='/register' component={Registration}/>
-                                <Route path='/sign_in' component={SignIn}/>
                             </Switch>
                         </div>
                     </div>
+                    <PopupboxContainer {...popupboxConfig}/>
                 </div>
             </BrowserRouter>
         </>
