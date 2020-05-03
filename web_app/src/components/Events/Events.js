@@ -7,11 +7,25 @@ class Events extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            users: {},
             isLoading: true
         };
     }
 
+    componentDidMount() {
+        fetch('/api/v1/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+            .then(data => this.setState({users: data}));
+    }
+
     render() {
+        const {users} = this.state;
+        console.log(users);
+
         return <div className="main">
             <div>
                 <div className="eventsTableHead">

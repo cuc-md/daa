@@ -9,6 +9,10 @@ import Results from './components/Results/Results';
 import Navbar from './components/Navigation/Navbar/Navbar';
 import Sidebar from './components/Navigation/Sidebar/Sidebar';
 
+
+import SignUp from "./components/Auth/SignUp/SignUp";
+import SignIn from "./components/Auth/SignIn/SignIn";
+
 function App() {
 
     const popupboxConfig = {
@@ -35,6 +39,9 @@ function App() {
                                 <Route exact path='/clubs' component={Clubs}/>
                                 <Route exact path='/teams' component={Teams}/>
                                 <Route exact path='/results' component={Results}/>
+
+                                <Route path="/sign_up" component={SignUp}/>
+                                <Route path="/sign_in" component={SignIn}/>
                             </Switch>
                         </div>
                     </div>
