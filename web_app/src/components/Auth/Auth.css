@@ -1,0 +1,52 @@
+.divAccountForm {
+    width: 40%;
+    height: 40%;
+    margin: 0 auto;
+}
+
+.accountText {
+    text-align: center;
+    color: #9b9696;
+}
+
+.accountForm input[type="email"],
+.accountForm input[type="password"],
+.accountForm input[type="name"],
+.accountForm select {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 4%;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 2%;
+    color: #555;
+}
+
+.accountForm input[type="email"]:focus,
+.accountForm input[type="password"]:focus,
+.accountForm input[type="name"]:focus,
+.accountForm select:focus {
+    box-shadow: 0 0 5px #1cc8eb;
+    padding: 2%;
+    border: 1px solid #1cc8eb;
+}
+
+.accountButton {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 2%;
+    background: #1cc8eb;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}

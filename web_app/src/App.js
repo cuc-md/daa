@@ -8,8 +8,8 @@ import Teams from './components/Teams/Teams';
 import Results from './components/Results/Results';
 import Navbar from './components/Navigation/Navbar/Navbar';
 import Sidebar from './components/Navigation/Sidebar/Sidebar';
-import Registration from './components/Auth/Registration/Registration';
-import SignIn from './components/Auth/SignIn/SignIn';
+import Registration from './components/Auth/Registration';
+import SignIn from './components/Auth/SignIn';
 
 function App() {
 
