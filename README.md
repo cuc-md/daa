@@ -618,7 +618,7 @@ Payload:
 
 ### Authentication
 
-#### `POST /users/sign_up` - sign up as a user
+#### `POST /users` - sign up as a user
 Payload:
 ```json
 {
