@@ -8,6 +8,7 @@ class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: "",
             email: "",
             password: "",
             passwordConfirmation: ""
@@ -41,6 +42,14 @@ class Registration extends Component {
                         Create your account
                     </h3>
                     <br/>
+                    <input
+                        type="name"
+                        name='name'
+                        placeholder='Name'
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        required
+                    />
                     <input
                         type="email"
                         name='email'
