@@ -1,4 +1,5 @@
 import {PopupboxManager} from 'react-popupbox';
+import toaster from 'toasted-notes';
 
 export const registerFetch = (user) => {
     return dispatch => {
@@ -11,11 +12,8 @@ export const registerFetch = (user) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                if (data.message) {
-                    // Here you should have logic to handle invalid creation of a user.
-                    // This assumes your Rails API will return a JSON object with a key of
-                    // 'message' if there is an error with creating the user, i.e. invalid username
+                if (data.error) {
+                    toaster.notify(data.error.details, {duration: 3000, position: "bottom"});
                 } else {
                     localStorage.setItem("token", "token");
                     dispatch(signInUser(data.data));
@@ -36,11 +34,8 @@ export const signInFetch = (user) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                if (data.message) {
-                    // Here you should have logic to handle invalid login credentials.
-                    // This assumes your Rails API will return a JSON object with a key of
-                    // 'message' if there is an error
+                if (data.error) {
+                    toaster.notify(data.error.details, {duration: 3000, position: "bottom"});
                 } else {
                     localStorage.setItem("token", "token");
                     dispatch(signInUser(data.data));
