@@ -3,7 +3,7 @@ require "rails_helper"
 describe ApplicationController do
   controller do
     def index
-      raise ActiveRecord::RecordNotFound if params[:record]
+      QuestionPack.find(0) if params[:record]
     end
   end
 
@@ -14,7 +14,7 @@ describe ApplicationController do
       expect(response).to have_http_status(:not_found)
       expect(parsed_response).to eq(
         error: {
-          message: "Not found"
+          message: "Couldn't find QuestionPack with 'id'=0"
         }
       )
     end

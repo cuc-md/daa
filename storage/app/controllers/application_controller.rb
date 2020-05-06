@@ -1,12 +1,18 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::ParameterMissing, with: :parameter_missing
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  def record_not_found(error)
+    render status: :not_found, json: {
+      error: { message: error.message }
+    }
+  end
 
   def not_found
     render status: :not_found, json: {
-      error: { message: "Not found" }
+      error: { message: "Route #{request.fullpath} not found" }
     }
   end
 

@@ -43,6 +43,8 @@ class StorageService
 
   def document
     RestClient.get("#{Settings.storage_url}/api/v1/question_packs/#{params.delete(:id)}/document")
+  rescue RestClient::ExceptionWithResponse => e
+    JSON.parse(e.response.body)
   end
 
   private
