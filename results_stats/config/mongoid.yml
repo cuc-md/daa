@@ -1,0 +1,24 @@
+development:
+  clients:
+    default:
+      database: results_stats_development
+      hosts:
+        - localhost:27017
+        - results-database:27017
+      options:
+        user: mongoadmin
+        password: secret
+
+  options:
+    use_utc: true
+
+test:
+  clients:
+    default:
+      database: results_stats_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
