@@ -1,3 +1,7 @@
+.divAddTeams {
+    float: right;
+}
+
 .teamsTableHead {
     display: table;
     width: 100%;
@@ -42,8 +46,8 @@
 }
 
 .teamArrowIcon {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
 }
 
 .divTeamDetails {

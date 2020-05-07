@@ -1,3 +1,7 @@
+.divAddEvent {
+    float: right;
+}
+
 .eventsTableHead {
     display: table;
     width: 100%;
@@ -54,8 +58,8 @@
 }
 
 .eventArrowIcon {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
 }
 
 .divEventDetails {

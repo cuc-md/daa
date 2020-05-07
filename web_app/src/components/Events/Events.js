@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {openAddEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Event from './Event';
 import './Events.css';
 
@@ -27,6 +28,12 @@ class Events extends Component {
         console.log(users);
 
         return <div className="main">
+            <div className="divAddEvent">
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddEventPopUpBox()}>
+                    + Add Event
+                </button>
+            </div>
             <div>
                 <div className="eventsTableHead">
                     <div className="eventNumber"/>
