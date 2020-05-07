@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {registerFetch} from '../../store/actions/authActions';
-import './Auth.css';
+import '../Utils/Form/Form.css';
 
 class Registration extends Component {
 
@@ -35,10 +35,10 @@ class Registration extends Component {
 
     render() {
         return (
-            <div className="divAccountForm">
-                <form className="accountForm"
+            <div className="divForm">
+                <form className="form"
                       onSubmit={this.handleSubmit}>
-                    <h3 className="accountText">
+                    <h3 className="formText">
                         Create your account
                     </h3>
                     <br/>
@@ -75,7 +75,7 @@ class Registration extends Component {
                         required
                     />
                     <input type='submit'
-                           className="accountButton textFontStyle16"/>
+                           className="formButton textFontStyle16"/>
                 </form>
             </div>
         )

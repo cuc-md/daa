@@ -45,6 +45,7 @@ class SignedInLinks extends Component {
                 <div className="divNavbarProfile">
                     <Avatar name={meInfo.data.user.name}
                             size="45" round="4px"
+                            color="#ffb41f"
                             className="userAvatarNavbar"/>
                     <div className="divNavbarUserInfo">
                         <div>{meInfo.data.user.name}</div>

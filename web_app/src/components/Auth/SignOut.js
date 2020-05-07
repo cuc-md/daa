@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {PopupboxManager} from 'react-popupbox';
 import {signOutUser} from '../../store/actions/authActions';
-import './Auth.css';
+import '../Utils/Form/Form.css';
+import '../Utils/Button/Button.css';
 
 const SignOut = (props) => {
-    return <div className="divAccountForm">
-        <h3 className="accountText">Are you sure you want to sign out?</h3>
+    return <div className="divForm">
+        <h3 className="formText">Are you sure you want to sign out?</h3>
         <br/>
         <div className="center">
             <button className="choiceButton cancelButton textFontStyle16"
