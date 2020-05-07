@@ -37,3 +37,34 @@
     color: #1cc8eb;
     cursor: pointer;
 }
+
+.divNavbarProfile {
+    display: block;
+    float: left;
+    height: 100%;
+    width: 22%;
+    border-left: 1.5px solid #dcdcf7;
+}
+
+.userAvatarNavbar {
+    display: inline-block;
+    vertical-align: top !important;
+    margin-top: 6px;
+    margin-left: 5px;
+}
+
+.divNavbarUserInfo {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.navbarExitIcon {
+    display: block;
+    float: right;
+    margin-top: 23px;
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}

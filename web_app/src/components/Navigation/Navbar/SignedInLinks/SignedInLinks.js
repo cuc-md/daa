@@ -1,55 +1,57 @@
 import React, {Component} from 'react';
+import Avatar from 'react-avatar';
 import {openSignOutPopUpBox} from '../../../Utils/PopUpBox/PopUpBox';
 import {ReactComponent as LogoIcon} from '../../../../assets/icons/logo/logo.svg';
+import {ReactComponent as ExitIcon} from '../../../../assets/icons/navbar/exit.svg';
 import '../Navbar.css';
 
 class SignedInLinks extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            popupVisible: false
+            meInfo: {
+                "data": {
+                    "user": {
+                        "id": 1,
+                        "name": "name surname",
+                        "email": "email@email.com",
+                        "roles": ["manage_events", "manage_clubs"]
+                    }
+                }
+            },
+            isLoading: true
         };
-        this.handleClick = this.handleClick.bind(this);
-        this.handleOutsideClick = this.handleOutsideClick.bind(this);
-        this.logOut = this.logOut.bind(this);
     }
 
-    handleClick() {
-        if (!this.state.popupVisible) {
-            document.addEventListener('click', this.handleOutsideClick, false);
-        } else {
-            document.removeEventListener('click', this.handleOutsideClick, false);
-        }
-
-        this.setState(prevState => ({
-            popupVisible: !prevState.popupVisible,
-        }));
-    }
-
-    handleOutsideClick(e) {
-        if (this.node !== null && this.node.contains(e.target)) {
-            return;
-        }
-        this.handleClick();
-    }
-
-    logOut(e) {
-        e.preventDefault();
-        // Remove the token from localStorage
-        localStorage.removeItem("token");
-        // Remove the user object from the Redux store
-        this.props.signOutUser();
-    };
+    // componentDidMount() {
+    //     fetch('/api/v1/users/me', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => this.setState({meInfo: data, isLoading: false}))
+    // }
 
     render() {
-        console.log(this.props.currentUser);
+        const {meInfo} = this.state;
+
         return (
             <div className="navbar">
                 <div className="divNavbarLogo">
                     <LogoIcon className="navbarLogo"/>
                 </div>
-                <div className="divNavbar" tabIndex={3} onClick={openSignOutPopUpBox}>
-                    Sign Out
+                <div className="divNavbarProfile">
+                    <Avatar name={meInfo.data.user.name}
+                            size="45" round="4px"
+                            className="userAvatarNavbar"/>
+                    <div className="divNavbarUserInfo">
+                        <div>{meInfo.data.user.name}</div>
+                        <div>{meInfo.data.user.email}</div>
+                    </div>
+                    <ExitIcon className="navbarExitIcon"
+                              onClick={openSignOutPopUpBox}/>
                 </div>
             </div>
         );

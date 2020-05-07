@@ -3,8 +3,8 @@ import toaster from 'toasted-notes';
 
 export const registerFetch = (user) => {
     return dispatch => {
-        return fetch("/users", {
-            method: "POST",
+        return fetch('/users', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -25,8 +25,8 @@ export const registerFetch = (user) => {
 
 export const signInFetch = (user) => {
     return dispatch => {
-        return fetch("/users/sign_in", {
-            method: "POST",
+        return fetch('/users/sign_in', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },

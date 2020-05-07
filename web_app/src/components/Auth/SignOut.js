@@ -16,6 +16,7 @@ const SignOut = (props) => {
             <button className="choiceButton okButton textFontStyle16"
                     onClick={() => {
                         props.signOutUser();
+                        localStorage.removeItem("token");
                         PopupboxManager.close();
                     }}>
                 OK
