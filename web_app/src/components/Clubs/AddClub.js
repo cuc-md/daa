@@ -80,11 +80,11 @@ class AddClub extends Component {
                     onChange={this.handleChange}
                     required
                 />
-                {/*TODO check phone*/}
                 <input
-                    type="name"
+                    type="tel"
                     name="phone"
                     placeholder="Phone"
+                    pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}"
                     value={this.state.phone}
                     onChange={this.handleChange}
                     required

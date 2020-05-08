@@ -10,12 +10,11 @@ class AddTeam extends Component {
             captain: '',
             phone: '',
         };
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        this.setState({[e.target.name]: e.target.value});
     };
 
     render() {
@@ -28,25 +27,24 @@ class AddTeam extends Component {
                 <br/>
                 <input
                     type="name"
-                    name='name'
-                    placeholder='Team name'
+                    name="name"
+                    placeholder="Team name"
                     value={this.state.name}
                     onChange={this.handleChange}
                     required
                 />
                 <input
                     type="name"
-                    name='captain'
-                    placeholder='Captain'
+                    name="captain"
+                    placeholder="Captain"
                     value={this.state.captain}
                     onChange={this.handleChange}
                     required
                 />
-                {/*TODO check phone*/}
                 <input
-                    type='name'
-                    name='phone'
-                    placeholder='Phone'
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
                     value={this.state.phone}
                     onChange={this.handleChange}
                     required
