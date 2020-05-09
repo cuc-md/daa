@@ -7,9 +7,9 @@ describe "Api::V1::Clubs" do
     it "returns a list of clubs" do
       get api_v1_clubs_path, headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          clubs: []
+          clubs: [anything]
         }
       )
     end
@@ -36,7 +36,7 @@ describe "Api::V1::Clubs" do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(parsed_response).to eq(data: { club: {} })
+        expect(parsed_response).to match(data: { club: anything })
       end
     end
 
@@ -58,9 +58,9 @@ describe "Api::V1::Clubs" do
     it "returns an club clubs" do
       get api_v1_club_path(id: 1), headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          club: {}
+          club: anything
         }
       )
     end
@@ -99,9 +99,9 @@ describe "Api::V1::Clubs" do
           club: {}
         }
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            club: {}
+            club: anything
           }
         )
       end
@@ -135,9 +135,9 @@ describe "Api::V1::Clubs" do
 
         delete api_v1_club_path(id: 1), headers: auth_headers(headers, user)
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            club: {}
+            club: anything
           }
         )
       end

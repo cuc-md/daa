@@ -4,7 +4,18 @@ class Api::V1::ClubsController < ApplicationController
   def index
     render json: {
       data: {
-        clubs: []
+        clubs: [
+          {
+            id:       123,
+            city:     "Chisinau",
+            address:  "Chisinau, some street",
+            contacts: {
+              representative: "John Doe",
+              phone:          "+123456789",
+              email:          "foo@bar.baz"
+            },
+          }
+        ]
       }
     }
   end
@@ -33,7 +44,20 @@ class Api::V1::ClubsController < ApplicationController
   def render_club
     render json: {
       data: {
-        club: {}
+        club: {
+          id:           123,
+          city:         "Chisinau",
+          address:      "Chisinau, some street",
+          founded_on:   "2010-10-10",
+          description:  "very long description + html",
+          active_teams: 10,
+          total_teams:   50,
+          contacts:     {
+            representative: "John Doe",
+            phone:          "+123456789",
+            email:          "foo@bar.baz"
+          }
+        }
       }
     }
   end
