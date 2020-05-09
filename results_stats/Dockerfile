@@ -1,9 +1,10 @@
-FROM maven:3-openjdk-14-slim AS build
-COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean package
+FROM ruby:2.6
+RUN apt-get update -qq && apt-get install -y mongodb-dev
+RUN mkdir /app
+WORKDIR /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN bundle install
+ADD . /app
 
-FROM openjdk:14-alpine
-COPY --from=build /usr/src/app/target/results_stats-0.0.1-SNAPSHOT.jar /usr/app/results_stats-0.0.1-SNAPSHOT.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/app/results_stats-0.0.1-SNAPSHOT.jar"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
