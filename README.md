@@ -1,5 +1,9 @@
 # DAA project
 
+## Overview
+
+![](daa.png)
+
 ## Installation & usage
 
 To run in a container, please install `docker` and `docker-compose`.
