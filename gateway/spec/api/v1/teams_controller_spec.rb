@@ -7,22 +7,22 @@ describe "Api::V1::Teams" do
     it "returns a list of teams" do
       get api_v1_teams_path, headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          teams: []
+          teams: [anything]
         }
       )
     end
   end
 
   describe "POST #create" do
-    it "raises 401 Unauthorized" do
+    it "creates a team" do
       post api_v1_teams_path, headers: headers, params: {
         team: {}
       }
 
       expect(response).to have_http_status(:ok)
-      expect(parsed_response).to eq(data: { team: {} })
+      expect(parsed_response).to match(data: { team: anything })
     end
   end
 
@@ -30,9 +30,9 @@ describe "Api::V1::Teams" do
     it "returns an team events" do
       get api_v1_team_path(id: 1), headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          team: {}
+          team: anything
         }
       )
     end
@@ -71,9 +71,9 @@ describe "Api::V1::Teams" do
           team: {}
         }
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            team: {}
+            team: anything
           }
         )
       end
@@ -107,9 +107,9 @@ describe "Api::V1::Teams" do
 
         delete api_v1_team_path(id: 1), headers: auth_headers(headers, user)
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            team: {}
+            team: anything
           }
         )
       end

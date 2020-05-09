@@ -56,7 +56,7 @@ Response:
       "founded_on":   "2010-10-10",
       "description":  "very long description + html",
       "active_teams": 10,
-      "total_teams:   50,
+      "total_teams":   50,
       "contacts":     {
         "representative": "John Doe",
         "phone":          "+123456789",
@@ -158,11 +158,11 @@ Response:
       {
         "id":          123,
         "name":        "World championship",
-        "long_name:    "World championship 2020",
+        "long_name":    "World championship 2020",
         "description": "description",
         "cover_photo": "/api/v1/photos/1234",
         "dates": {
-          "start_date": "2010-01-01 10:00"
+          "start_date": "2010-01-01 10:00",
           "end_date": "2010-01-01 15:00"
         },
         "registration": {
@@ -185,11 +185,11 @@ Response:
     "event": {
       "id":          123,
       "name":        "World championship",
-      "long_name:    "World championship 2020",
+      "long_name":    "World championship 2020",
       "description": "description",
       "cover_photo": "/api/v1/photos/1234",
       "dates": {
-        "start_date": "2010-01-01 10:00"
+        "start_date": "2010-01-01 10:00",
         "end_date":   "2010-01-01 15:00"
       },
       "registration": {
@@ -199,7 +199,7 @@ Response:
       },
       "teams": [
         {
-          "id:    456,
+          "id":    456,
           "name": "Echipa Racheta"
         }
       ]
@@ -208,17 +208,17 @@ Response:
 }
 ```
 
-`POST /api/v1/events` - create an event
+#### `POST /api/v1/events` - create an event
 Payload:
 ```json
 {
   "event": {
     "name":        "World championship",
-    "long_name:    "World championship 2020",
+    "long_name":    "World championship 2020",
     "description": "description",
     "cover_photo": "/api/v1/photos/1234",
     "dates": {
-      "start_date": "2010-01-01 10:00"
+      "start_date": "2010-01-01 10:00",
       "end_date":   "2010-01-01 15:00"
     },
     "registration": {
@@ -237,11 +237,11 @@ Response:
     "event": {
       "id":          123,
       "name":        "World championship",
-      "long_name:    "World championship 2020",
+      "long_name":    "World championship 2020",
       "description": "description",
       "cover_photo": "/api/v1/photos/1234",
       "dates": {
-        "start_date": "2010-01-01 10:00"
+        "start_date": "2010-01-01 10:00",
         "end_date":   "2010-01-01 15:00"
       },
       "registration": {
@@ -261,11 +261,11 @@ Payload:
 {
   "event": {
     "name":        "World championship",
-    "long_name:    "World championship 2020",
+    "long_name":    "World championship 2020",
     "description": "description",
     "cover_photo": "/api/v1/photos/1234",
     "dates": {
-      "start_date": "2010-01-01 10:00"
+      "start_date": "2010-01-01 10:00",
       "end_date":   "2010-01-01 15:00"
     },
     "registration": {
@@ -284,11 +284,11 @@ Response:
     "event": {
       "id":          123,
       "name":        "World championship",
-      "long_name:    "World championship 2020",
+      "long_name":    "World championship 2020",
       "description": "description",
       "cover_photo": "/api/v1/photos/1234",
       "dates": {
-        "start_date": "2010-01-01 10:00"
+        "start_date": "2010-01-01 10:00",
         "end_date":   "2010-01-01 15:00"
       },
       "registration": {
@@ -347,7 +347,7 @@ Response:
   "data": {
     "team": {
       "name": "Echipa Racheta",
-      "captain: "John Doe",
+      "captain": "John Doe",
       "phone": "+123456789"
     }
   }
@@ -360,7 +360,7 @@ Payload:
 {
   "team": {
     "name":   "Echipa Racheta",
-    "captain: "John Doe",
+    "captain": "John Doe",
     "phone":  "+123456789"
   }
 }
@@ -372,7 +372,7 @@ Response:
   "data": {
     "team": {
       "name": "Echipa Racheta",
-      "captain: "John Doe",
+      "captain": "John Doe",
       "phone": "+123456789"
     }
   }
@@ -386,7 +386,7 @@ Payload:
 {
   "team": {
     "name":   "Echipa Racheta",
-    "captain: "John Doe",
+    "captain": "John Doe",
     "phone":  "+123456789"
   }
 }
@@ -398,7 +398,7 @@ Response:
   "data": {
     "team": {
       "name": "Echipa Racheta",
-      "captain: "John Doe",
+      "captain": "John Doe",
       "phone": "+123456789"
     }
   }
@@ -467,7 +467,6 @@ Payload:
      "user_id": "123"
   }
 }
-
 ```
 
 #### `DELETE /api/v1/question_packs/:id` - remove a pack of questions
@@ -486,9 +485,21 @@ Payload:
 }
 ```
 
+#### `POST /api/v1/photos` - save a photo
+Payload:
+```json
+{
+  "photo": {
+    "title": "some title",
+    "blob": "Base64(binary)"
+  }
+}
+```
+
+#### `GET /api/v1/photos/1` - get a photo thumbnail
 
 ### Results (results & stats microservice)
-#### `GET /results/:id` - all results for an event
+#### `GET /api/v1/results/:id` - all results for an event
 Response:
 ```json
 {
@@ -497,16 +508,17 @@ Response:
         {
           "team_name": "team1",
           "total_score": 3,
-           "score": [
-             { "round": 1, "count": 0},
-             { "round": 2, "count": 3}
-           ]
+          "score": [
+            { "round": 1, "count": 0},
+            { "round": 2, "count": 3}
+          ]
         }
      ]
   }
 }
 ```
-#### `GET /results/:id/details` - detailed results/stats e.g. answers for each question
+
+#### `GET /api/v1/results/:id/details` - detailed results/stats e.g. answers for each question
 Response:
 
 ```json
@@ -526,7 +538,7 @@ Response:
 }
 ```
 
-####`POST /results` - create results
+#### `POST /api/v1/results` - create results
 Payload:
 ```json
 {
@@ -541,7 +553,7 @@ Payload:
   ]
 }
 ```
-####`DELETE /results/:id` - delete results for some event
+#### `DELETE /api/v1/results/:id` - delete results for some event
 
 
 ### User management
