@@ -96,7 +96,7 @@ Response:
       "founded_on":   "2010-10-10",
       "description":  "very long description + html",
       "active_teams": 10,
-      "total_teams:   50,
+      "total_teams":   50,
       "contacts":     {
         "representative": "John Doe",
         "phone":          "+123456789",
@@ -137,7 +137,7 @@ Response:
       "founded_on":   "2010-10-10",
       "description":  "very long description + html",
       "active_teams": 10,
-      "total_teams:   50,
+      "total_teams":   50,
       "contacts":     {
         "representative": "John Doe",
         "phone":          "+123456789",
@@ -309,7 +309,7 @@ Payload:
 {
   "team": {
     "name":   "Echipa Racheta",
-    "captain: "John Doe",
+    "captain": "John Doe",
     "phone":  "+123456789"
   }
 }
@@ -490,13 +490,16 @@ Payload:
 ```json
 {
   "photo": {
-    "title": "some title",
-    "blob": "Base64(binary)"
+    "blob": "Base64(binary)",
+    "event_name": "Super Cup",
+    "event_id": "12345",
+    "user_id": "123"
   }
 }
 ```
 
-#### `GET /api/v1/photos/1` - get a photo thumbnail
+#### `GET /api/v1/photos/1` - get a photo
+#### `DELETE /api/v1/photos/1` - delete a photo
 
 ### Results (results & stats microservice)
 #### `GET /api/v1/results/:id` - all results for an event

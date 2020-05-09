@@ -27,6 +27,7 @@ Rails.application.routes.draw do
           get :random, on: :collection
           get :document, on: :member
         end
+        resources :photos, only: [:create, :show, :destroy]
       end
     end
   end
