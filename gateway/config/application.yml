@@ -4,6 +4,7 @@ defaults: &defaults
 development:
   <<: *defaults
   storage_url: <%= ENV.fetch("CONTAINER") { false } ? "storage:5000" : "localhost:5000" %>
+  results_url: <%= ENV.fetch("CONTAINER") { false } ? "results_stats:9000" : "localhost:9000" %>
 
 test:
   <<: *defaults
