@@ -36,7 +36,7 @@
 .eventName {
     display: table-cell;
     vertical-align: middle;
-    width: 40%;
+    width: 30%;
 }
 
 .eventDate {
@@ -51,13 +51,28 @@
     width: 35%;
 }
 
+.eventEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.eventDelete {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
 .eventArrow {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
+    cursor: pointer;
 }
 
-.eventArrowIcon {
+.eventIcon {
     height: 15px;
     width: 15px;
 }

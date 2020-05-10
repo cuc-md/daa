@@ -3,6 +3,8 @@ import {UncontrolledCollapse} from 'reactstrap';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import './Events.css';
+import editIcon from "../../assets/icons/base/edit.svg";
+import deleteIcon from "../../assets/icons/base/delete.svg";
 
 class Event extends Component {
 
@@ -26,9 +28,7 @@ class Event extends Component {
         const {isOpen} = this.state;
 
         return <div className="eventsTableRow" key={this.props.keyItem}>
-            <div className="divEventsTableRow"
-                 id={this.props.divItemId}
-                 onClick={this.changeCollapseState}>
+            <div className="divEventsTableRow">
                 <div className="eventNumber">
                     {this.props.eventNumber}
                 </div>
@@ -41,9 +41,21 @@ class Event extends Component {
                 <div className="eventLocation">
                     {this.props.eventLocation}
                 </div>
+                <div className="eventEdit">
+                    <img src={editIcon}
+                         className="eventIcon" alt=""
+                         onClick={() => console.log("edit event")}/>
+                </div>
+                <div className="eventDelete">
+                    <img src={deleteIcon}
+                         className="eventIcon" alt=""
+                         onClick={() => console.log("delete event")}/>
+                </div>
                 <div className="eventArrow">
                     <img src={this.getArrowForChallenge(isOpen)}
-                         className="eventArrowIcon" alt=""/>
+                         className="eventIcon" alt=""
+                         onClick={this.changeCollapseState}
+                         id={this.props.divItemId}/>
                 </div>
             </div>
 

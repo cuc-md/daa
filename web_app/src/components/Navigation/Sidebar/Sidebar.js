@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
+import {checkUserManageUsersRole} from '../../Utils/Helpers/UserHelper';
 import {ReactComponent as HomeIcon} from '../../../assets/icons/sidebar/home.svg';
 import {ReactComponent as EventIcon} from '../../../assets/icons/sidebar/event.svg';
 import {ReactComponent as ClubIcon} from '../../../assets/icons/sidebar/club.svg';
 import {ReactComponent as TeamIcon} from '../../../assets/icons/sidebar/team.svg';
 import {ReactComponent as ResultsIcon} from '../../../assets/icons/sidebar/results.svg';
+import {ReactComponent as UsersIcon} from '../../../assets/icons/sidebar/users.svg';
 import './Sidebar.css';
 
 class Sidebar extends Component {
@@ -43,6 +45,14 @@ class Sidebar extends Component {
                     <ResultsIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
+            {/*{(JSON.stringify(this.props.user) !== '{}' &&*/}
+            {/*    checkUserManageUsersRole(this.props.user.roles)) ?*/}
+            {/*    <div className="divSidebar">*/}
+            {/*        <NavLink activeClassName="active" className="" to='/users'>*/}
+            {/*            <UsersIcon className="sidebarIcon"/>*/}
+            {/*        </NavLink>*/}
+            {/*    </div> : null*/}
+            {/*}*/}
         </div>
     }
 }

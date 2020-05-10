@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
+import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
+import editIcon from '../../assets/icons/base/edit.svg';
+import deleteIcon from '../../assets/icons/base/delete.svg';
 import './Clubs.css';
-import LoaderSpinner from "../Utils/LoaderSpinner/LoaderSpinner";
 
 class Club extends Component {
 
@@ -53,9 +56,7 @@ class Club extends Component {
         const {clubDetails, isLoading, isOpen} = this.state;
 
         return <div className="clubsTableRow" key={this.props.keyItem}>
-            <div className="divClubsTableRow"
-                 id={this.props.divItemId}
-                 onClick={this.changeCollapseState}>
+            <div className="divClubsTableRow">
                 <div className="clubNumber">
                     {this.props.keyItem + 1}
                 </div>
@@ -69,12 +70,39 @@ class Club extends Component {
                     {this.props.club.address}
                 </div>
                 <div className="clubContacts">
-                    {/*{this.props.club.contacts}*/}
-                    contacts
+                    <div className="clubContactsTable">
+                        <div className="divClubContactsUserAvatar">
+                            <Avatar name={this.props.club.contacts.representative}
+                                    size="30" round="30"
+                                    color="#9be8e2"
+                                    className="clubContactsUserAvatar"
+                            />
+                        </div>
+                        <div className="divClubContactsUserName">
+                            {this.props.club.contacts.representative}
+                        </div>
+                        <div className="divClubContactsUserEmail">
+                            {this.props.club.contacts.phone}
+                            <br/>
+                            {this.props.club.contacts.email}
+                        </div>
+                    </div>
+                </div>
+                <div className="clubEdit">
+                    <img src={editIcon}
+                         className="clubIcon" alt=""
+                         onClick={() => console.log("edit club")}/>
+                </div>
+                <div className="clubDelete">
+                    <img src={deleteIcon}
+                         className="clubIcon" alt=""
+                         onClick={() => console.log("delete club")}/>
                 </div>
                 <div className="clubArrow">
                     <img src={this.getArrowForChallenge(isOpen)}
-                         className="clubArrowIcon" alt=""/>
+                         className="clubIcon" alt=""
+                         onClick={this.changeCollapseState}
+                         id={this.props.divItemId}/>
                 </div>
             </div>
 

@@ -36,16 +36,31 @@
 .teamName {
     display: table-cell;
     vertical-align: middle;
-    width: 90%;
+    width: 80%;
+}
+
+.teamEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.teamDelete {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .teamArrow {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
+    cursor: pointer;
 }
 
-.teamArrowIcon {
+.teamIcon {
     height: 15px;
     width: 15px;
 }

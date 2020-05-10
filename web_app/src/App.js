@@ -6,6 +6,7 @@ import Events from './components/Events/Events';
 import Clubs from './components/Clubs/Clubs';
 import Teams from './components/Teams/Teams';
 import Results from './components/Results/Results';
+import UsersRedux from './components/Users/UsersRedux';
 import Navbar from './components/Navigation/Navbar/Navbar';
 import Sidebar from './components/Navigation/Sidebar/Sidebar';
 
@@ -35,6 +36,7 @@ function App() {
                                 <Route path='/clubs' component={Clubs}/>
                                 <Route path='/teams' component={Teams}/>
                                 <Route path='/results' component={Results}/>
+                                <Route path='/users' component={UsersRedux}/>
                             </Switch>
                         </div>
                     </div>
