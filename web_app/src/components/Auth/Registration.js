@@ -8,19 +8,17 @@ class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            email: "",
-            password: "",
-            passwordConfirmation: ""
+            name: '',
+            email: '',
+            password: '',
+            passwordConfirmation: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        this.setState({[e.target.name]: e.target.value});
     };
 
     handleSubmit(e) {
@@ -44,37 +42,37 @@ class Registration extends Component {
                     <br/>
                     <input
                         type="name"
-                        name='name'
-                        placeholder='Name'
+                        name="name"
+                        placeholder="Name"
                         value={this.state.name}
                         onChange={this.handleChange}
                         required
                     />
                     <input
                         type="email"
-                        name='email'
-                        placeholder='Email'
+                        name="email"
+                        placeholder="Email"
                         value={this.state.email}
                         onChange={this.handleChange}
                         required
                     />
                     <input
-                        type='password'
-                        name='password'
-                        placeholder='Password'
+                        type="password"
+                        name="password"
+                        placeholder="Password"
                         value={this.state.password}
                         onChange={this.handleChange}
                         required
                     />
                     <input
-                        type='password'
-                        name='passwordConfirmation'
-                        placeholder='Confirm Password'
+                        type="password"
+                        name="passwordConfirmation"
+                        placeholder="Confirm Password"
                         value={this.state.passwordConfirmation}
                         onChange={this.handleChange}
                         required
                     />
-                    <input type='submit'
+                    <input type="submit"
                            className="formButton textFontStyle16"/>
                 </form>
             </div>

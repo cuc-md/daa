@@ -13,19 +13,19 @@ class Events extends Component {
         };
     }
 
-    componentDidMount() {
-        fetch('/api/v1/users', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => response.json())
-            .then(data => this.setState({users: data}));
-    }
+    // componentDidMount() {
+    //     fetch('/api/v1/users', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }).then(response => response.json())
+    //         .then(data => this.setState({users: data}));
+    // }
 
     render() {
-        const {users} = this.state;
-        console.log(users);
+        // const {users} = this.state;
+        // console.log(users);
 
         return <div className="main">
             <div className="divAddEvent">

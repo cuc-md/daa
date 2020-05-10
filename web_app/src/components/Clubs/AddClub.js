@@ -10,7 +10,7 @@ class AddClub extends Component {
         this.state = {
             name: '',
             city: '',
-            foundedOn: new Date(),
+            foundedOn: null,
             description: '',
             representative: '',
             phone: '',
@@ -61,8 +61,9 @@ class AddClub extends Component {
                     selected={this.state.foundedOn}
                     onChange={this.handleDateChange}
                     className="inputDatepicker"
-                    placeholder="Representative"
+                    placeholderText="Founded on"
                     dateFormat="yyyy-MM-dd"
+                    required={true}
                 />
                 <input
                     type="name"
