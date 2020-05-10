@@ -1,46 +1,19 @@
-import React, {Component} from 'react';
-import {ReactComponent as LogoIcon} from '../../../assets/icons/logo/logo.svg';
+import React from 'react';
+import {connect} from 'react-redux';
+import SignedInLinks from './SignedInLinks/SignedInLinks';
+import SignedOutLinks from './SignedOutLinks/SignedOutLinks';
 import './Navbar.css';
 
-class Navbar extends Component {
+const Navbar = (props) => {
+    return props.token !== null ?
+        <SignedInLinks token={props.token}/> :
+        <SignedOutLinks/>;
+};
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            popupVisible: false
-        };
-        this.handleClick = this.handleClick.bind(this);
-        this.handleOutsideClick = this.handleOutsideClick.bind(this);
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
     }
+};
 
-    handleClick() {
-        if (!this.state.popupVisible) {
-            document.addEventListener('click', this.handleOutsideClick, false);
-        } else {
-            document.removeEventListener('click', this.handleOutsideClick, false);
-        }
-
-        this.setState(prevState => ({
-            popupVisible: !prevState.popupVisible,
-        }));
-    }
-
-    handleOutsideClick(e) {
-        if (this.node !== null && this.node.contains(e.target)) {
-            return;
-        }
-        this.handleClick();
-    }
-
-    render() {
-        return (
-            <div className="navbar">
-                <div className="divNavbarLogo">
-                    <LogoIcon className="navbarLogo"/>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default Navbar;
+export default connect(mapStateToProps)(Navbar);

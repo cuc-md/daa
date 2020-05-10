@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {openAddTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Team from './Team';
 import './Teams.css';
 
@@ -13,6 +14,12 @@ class Teams extends Component {
 
     render() {
         return <div className="main">
+            <div className="divAddTeams">
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddTeamPopUpBox()}>
+                    + Add Team
+                </button>
+            </div>
             <div>
                 <div className="teamsTableHead">
                     <div className="teamNumber"/>

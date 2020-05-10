@@ -31,13 +31,14 @@ function App() {
                         <div className="col-sm-11">
                             <Switch>
                                 <Route exact path='/' component={Home}/>
-                                <Route exact path='/events' component={Events}/>
-                                <Route exact path='/clubs' component={Clubs}/>
-                                <Route exact path='/teams' component={Teams}/>
-                                <Route exact path='/results' component={Results}/>
+                                <Route path='/events' component={Events}/>
+                                <Route path='/clubs' component={Clubs}/>
+                                <Route path='/teams' component={Teams}/>
+                                <Route path='/results' component={Results}/>
                             </Switch>
                         </div>
                     </div>
+                    <PopupboxContainer {...popupboxConfig}/>
                 </div>
             </BrowserRouter>
         </>

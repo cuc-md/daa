@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import {openAddClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Club from './Club';
+import '../Utils/Button/Button.css';
 import './Clubs.css';
 
 class Clubs extends Component {
@@ -7,35 +10,98 @@ class Clubs extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            clubs: {
+                "data": {
+                    "clubs": [
+                        {
+                            "id": 123,
+                            "name": "Club 1",
+                            "city": "Chisinau",
+                            "address": "Chisinau, some street",
+                            "contacts": {
+                                "representative": "John Doe",
+                                "phone": "+123456789",
+                                "email": "foo@bar.baz"
+                            },
+                        },
+                        {
+                            "id": 123,
+                            "name": "Club 2",
+                            "city": "Chisinau",
+                            "address": "Chisinau, some street",
+                            "contacts": {
+                                "representative": "John Doe",
+                                "phone": "+123456789",
+                                "email": "foo@bar.baz"
+                            }
+                        },
+                        {
+                            "id": 123,
+                            "name": "Club 3",
+                            "city": "Chisinau",
+                            "address": "Chisinau, some street",
+                            "contacts": {
+                                "representative": "John Doe",
+                                "phone": "+123456789",
+                                "email": "foo@bar.baz"
+                            }
+                        }
+                    ]
+                }
+            },
             isLoading: true
         };
     }
 
+    // componentDidMount() {
+    //     fetch('/api/v1/clubs')
+    //         .then(response => response.json())
+    //         .then(data => this.setState({clubs: data, isLoading: false}))
+    // }
+
     render() {
+        const {clubs, isLoading} = this.state;
+
+        // if (isLoading) {
+        //     return <div className="main center"><LoaderSpinner/></div>;
+        // }
+
+        let clubsList = clubs.data.clubs.map((club, i) => {
+            let divItemId = "id" + i;
+            let divItemIdToggler = "#" + divItemId;
+
+            return <Club keyItem={i}
+                         divItemId={divItemId}
+                         divItemIdToggler={divItemIdToggler}
+                         clubId={club.id}
+                         club={club}/>
+        });
+
         return <div className="main">
+            <div className="divAddClub">
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddClubPopUpBox()}>
+                    + Add Club
+                </button>
+            </div>
             <div>
                 <div className="clubsTableHead">
                     <div className="clubNumber"/>
                     <div className="clubName">
                         Club
                     </div>
+                    <div className="clubCity">
+                        City
+                    </div>
+                    <div className="clubAddress">
+                        Address
+                    </div>
+                    <div className="clubContacts">
+                        Contacts
+                    </div>
                     <div className="clubArrow"/>
                 </div>
-                <Club keyItem={1}
-                      divItemId="id1"
-                      divItemIdToggler="#id1"
-                      clubNumber={1}
-                      clubName="Club1"/>
-                <Club keyItem={2}
-                      divItemId="id2"
-                      divItemIdToggler="#id2"
-                      clubNumber={2}
-                      clubName="Club2"/>
-                <Club keyItem={3}
-                      divItemId="id3"
-                      divItemIdToggler="#id3"
-                      clubNumber={3}
-                      clubName="Club3"/>
+                {clubsList}
             </div>
         </div>
     }

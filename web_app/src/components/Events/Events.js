@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {openAddEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Event from './Event';
 import './Events.css';
 
@@ -7,12 +8,32 @@ class Events extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            users: {},
             isLoading: true
         };
     }
 
+    // componentDidMount() {
+    //     fetch('/api/v1/users', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }).then(response => response.json())
+    //         .then(data => this.setState({users: data}));
+    // }
+
     render() {
+        // const {users} = this.state;
+        // console.log(users);
+
         return <div className="main">
+            <div className="divAddEvent">
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddEventPopUpBox()}>
+                    + Add Event
+                </button>
+            </div>
             <div>
                 <div className="eventsTableHead">
                     <div className="eventNumber"/>

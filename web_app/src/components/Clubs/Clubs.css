@@ -1,8 +1,12 @@
+.divAddClub {
+    float: right;
+}
+
 .clubsTableHead {
     display: table;
     width: 100%;
     height: 30px;
-    color: #a7b1b2;
+    color: #9b9696;
 }
 
 .clubsTableRow {
@@ -12,7 +16,7 @@
     margin-top: 10px;
     border-radius: 4px;
     background-color: #fefefe;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .divClubsTableRow {
@@ -26,13 +30,31 @@
     vertical-align: middle;
     width: 5%;
     padding-left: 16px;
-    color: #a7b1b2;
+    color: #9b9696;
 }
 
 .clubName {
     display: table-cell;
     vertical-align: middle;
-    width: 90%;
+    width: 15%;
+}
+
+.clubCity {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.clubAddress {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.clubContacts {
+    display: table-cell;
+    vertical-align: middle;
+    width: 40%;
 }
 
 .clubArrow {
@@ -42,8 +64,8 @@
 }
 
 .clubArrowIcon {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
 }
 
 .divClubDetails {
