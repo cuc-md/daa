@@ -107,12 +107,45 @@ class Club extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {isLoading ?
-                    <div className="center"><LoaderSpinner/></div> :
-                    <div className="divClubDetails">
-                        Details
+                {/*{isLoading ?*/}
+                {/*    <div className="center"><LoaderSpinner/></div> :*/}
+                <div className="divClubDetails">
+                    <div className="clubsTableHead">
+                        <div className="clubNumber"/>
+                        <div className="clubFoundedOn">
+                            Founded on
+                        </div>
+                        <div className="clubActiveTeams">
+                            Active teams
+                        </div>
+                        <div className="clubTotalTeams">
+                            Total teams
+                        </div>
+                        <div className="clubDescription">
+                            Description
+                        </div>
+                        <div className="clubEmpty"/>
                     </div>
-                }
+                    <div className="clubsDescriptionTableRow">
+                        <div className="divClubsTableRow">
+                            <div className="clubNumber"/>
+                            <div className="clubFoundedOn">
+                                {clubDetails.data.club.founded_on}
+                            </div>
+                            <div className="clubActiveTeams">
+                                {clubDetails.data.club.active_teams}
+                            </div>
+                            <div className="clubTotalTeams">
+                                {clubDetails.data.club.total_teams}
+                            </div>
+                            <div className="clubDescription">
+                                {clubDetails.data.club.description}
+                            </div>
+                            <div className="clubEmpty"/>
+                        </div>
+                    </div>
+                </div>
+                {/*}*/}
             </UncontrolledCollapse>
         </div>
     }

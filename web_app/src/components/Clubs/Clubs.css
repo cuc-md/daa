@@ -108,6 +108,38 @@
 
 .divClubDetails {
     width: 100%;
-    height: 160px;
-    display: table;
+}
+
+.clubsDescriptionTableRow {
+    margin-top: 0;
+}
+
+.clubFoundedOn {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.clubActiveTeams {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.clubTotalTeams {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.clubDescription {
+    display: table-cell;
+    vertical-align: middle;
+    width: 30%;
+}
+
+.clubEmpty {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
 }
