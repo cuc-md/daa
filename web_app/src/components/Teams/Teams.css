@@ -67,6 +67,30 @@
 
 .divTeamDetails {
     width: 100%;
-    height: 160px;
-    display: table;
+}
+
+.teamsDescriptionTableRow {
+    margin-top: 0;
+}
+
+.teamCaptainAvatar {
+    margin-right: 15px;
+}
+
+.teamCaptain {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.teamCaptainPhone {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.teamEmpty {
+    display: table-cell;
+    vertical-align: middle;
+    width: 55%;
 }

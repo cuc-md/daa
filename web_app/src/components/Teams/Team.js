@@ -1,20 +1,38 @@
 import React, {Component} from 'react';
+import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
+import {openDeleteTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
+import editIcon from '../../assets/icons/base/edit.svg';
+import deleteIcon from '../../assets/icons/base/delete.svg';
 import './Teams.css';
-import editIcon from "../../assets/icons/base/edit.svg";
-import deleteIcon from "../../assets/icons/base/delete.svg";
 
 class Team extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            teamDetails: {
+                "data": {
+                    "team": {
+                        "name": "Echipa Racheta",
+                        "captain": "John Doe",
+                        "phone": "+123456789"
+                    }
+                }
+            },
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
     }
+
+    // componentDidMount() {
+    //     fetch('/api/v1/teams/' + this.props.teamId)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({teamDetails: data, isLoading: false}))
+    // }
+
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
@@ -25,15 +43,15 @@ class Team extends Component {
     }
 
     render() {
-        const {isOpen} = this.state;
+        const {teamDetails, isOpen} = this.state;
 
         return <div className="teamsTableRow" key={this.props.keyItem}>
             <div className="divTeamsTableRow">
                 <div className="teamNumber">
-                    {this.props.teamNumber}
+                    {this.props.keyItem + 1}
                 </div>
                 <div className="teamName">
-                    {this.props.teamName}
+                    {this.props.team.name}
                 </div>
                 <div className="teamEdit">
                     <img src={editIcon}
@@ -43,7 +61,7 @@ class Team extends Component {
                 <div className="teamDelete">
                     <img src={deleteIcon}
                          className="teamIcon" alt=""
-                         onClick={() => console.log("delete team")}/>
+                         onClick={() => openDeleteTeamPopUpBox(this.props.teamId, this.props.team.name)}/>
                 </div>
                 <div className="teamArrow">
                     <img src={this.getArrowForChallenge(isOpen)}
@@ -54,9 +72,37 @@ class Team extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+                {/*{isLoading ?*/}
+                {/*    <div className="center"><LoaderSpinner/></div> :*/}
                 <div className="divTeamDetails">
-                    Details
+                    <div className="teamsTableHead">
+                        <div className="teamNumber"/>
+                        <div className="teamCaptain">
+                            Captain
+                        </div>
+                        <div className="teamCaptainPhone">
+                            Phone
+                        </div>
+                        <div className="teamEmpty"/>
+                    </div>
+                    <div className="teamsDescriptionTableRow">
+                        <div className="divTeamsTableRow">
+                            <div className="teamNumber"/>
+                            <div className="teamCaptain">
+                                <Avatar name={teamDetails.data.team.captain}
+                                        size="30" round="30"
+                                        color="#9be8e2"
+                                        className="teamCaptainAvatar"/>
+                                {teamDetails.data.team.captain}
+                            </div>
+                            <div className="teamCaptainPhone">
+                                {teamDetails.data.team.phone}
+                            </div>
+                            <div className="teamEmpty"/>
+                        </div>
+                    </div>
                 </div>
+                {/*}*/}
             </UncontrolledCollapse>
         </div>
     }
