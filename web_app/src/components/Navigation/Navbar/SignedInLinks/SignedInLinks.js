@@ -1,62 +1,55 @@
 import React, {Component} from 'react';
 import Avatar from 'react-avatar';
+import {connect} from 'react-redux';
+import {meFetch as meFetchFunction} from '../../../../store/actions/userActions';
 import {openSignOutPopUpBox} from '../../../Utils/PopUpBox/PopUpBox';
 import {ReactComponent as LogoIcon} from '../../../../assets/icons/logo/logo.svg';
 import {ReactComponent as ExitIcon} from '../../../../assets/icons/navbar/exit.svg';
 import '../Navbar.css';
 
 class SignedInLinks extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            meInfo: {
-                "data": {
-                    "user": {
-                        "id": 1,
-                        "name": "name surname",
-                        "email": "email@email.com",
-                        "roles": ["manage_events", "manage_clubs"]
-                    }
-                }
-            },
-            isLoading: true
-        };
+
+    componentDidMount() {
+        if (this.props.token !== null) {
+            this.props.meFetch(this.props.token);
+        }
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/users/me', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => this.setState({meInfo: data, isLoading: false}))
-    // }
-
     render() {
-        const {meInfo} = this.state;
-
         return (
             <div className="navbar">
                 <div className="divNavbarLogo">
                     <LogoIcon className="navbarLogo"/>
                 </div>
-                <div className="divNavbarProfile">
-                    <Avatar name={meInfo.data.user.name}
-                            size="45" round="4px"
-                            color="#ffb41f"
-                            className="userAvatarNavbar"/>
-                    <div className="divNavbarUserInfo">
-                        <div>{meInfo.data.user.name}</div>
-                        <div>{meInfo.data.user.email}</div>
-                    </div>
-                    <ExitIcon className="navbarExitIcon"
-                              onClick={openSignOutPopUpBox}/>
-                </div>
+                {this.props.user !== undefined ?
+                    <div className="divNavbarProfile">
+                        <Avatar name={this.props.user.name}
+                                size="45" round="4px"
+                                color="#ffb41f"
+                                className="userAvatarNavbar"/>
+                        <div className="divNavbarUserInfo">
+                            <div>{this.props.user.name}</div>
+                            <div>{this.props.user.email}</div>
+                        </div>
+                        <ExitIcon className="navbarExitIcon"
+                                  onClick={openSignOutPopUpBox}/>
+                    </div> : null
+                }
             </div>
         );
     }
 }
 
-export default SignedInLinks;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        meFetch: (token) => dispatch(meFetchFunction(token)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignedInLinks);

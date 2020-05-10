@@ -1,4 +1,5 @@
 import {PopupboxManager} from 'react-popupbox';
+import toaster from 'toasted-notes';
 
 export const registerFetch = (user) => {
     return dispatch => {
@@ -11,9 +12,17 @@ export const registerFetch = (user) => {
         })
             .then(response => response.headers.get('authorization'))
             .then(data => {
-                localStorage.setItem("token", data);
-                dispatch(signInUser(data));
-                PopupboxManager.close();
+                if (data === undefined || data === null) {
+                    toaster.notify("Error sign in",
+                        {duration: 3000, position: "bottom"});
+                } else {
+                    localStorage.setItem("token", data);
+                    dispatch({
+                        type: 'SIGN_IN_USER',
+                        token: data
+                    });
+                    PopupboxManager.close();
+                }
             })
     }
 };
@@ -29,17 +38,20 @@ export const signInFetch = (user) => {
         })
             .then(response => response.headers.get('authorization'))
             .then(data => {
-                localStorage.setItem("token", data);
-                dispatch(signInUser(data));
-                PopupboxManager.close();
+                if (data === undefined || data === null) {
+                    toaster.notify("Error sign in",
+                        {duration: 3000, position: "bottom"});
+                } else {
+                    localStorage.setItem("token", data);
+                    dispatch({
+                        type: 'SIGN_IN_USER',
+                        token: data
+                    });
+                    PopupboxManager.close();
+                }
             })
     }
 };
-
-const signInUser = (token) => ({
-    type: 'SIGN_IN_USER',
-    token: token
-});
 
 export const signOutUser = () => ({
     type: 'SIGN_OUT_USER'

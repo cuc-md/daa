@@ -1,11 +1,11 @@
-const initialState = {};
+const initialState = null;
 
-export default function reducer(state = initialState, action) {
-    switch (action.type) {
+export default function reducer(state = initialState, {type, token}) {
+    switch (type) {
         case 'SIGN_IN_USER':
-            return action.token;
+            return token;
         case 'SIGN_OUT_USER':
-            return {};
+            return null;
         default:
             return state;
     }
