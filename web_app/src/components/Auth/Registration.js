@@ -11,7 +11,7 @@ class Registration extends Component {
             name: '',
             email: '',
             password: '',
-            passwordConfirmation: ''
+            password_сonfirmation: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -68,7 +68,7 @@ class Registration extends Component {
                         type="password"
                         name="passwordConfirmation"
                         placeholder="Confirm Password"
-                        value={this.state.passwordConfirmation}
+                        value={this.state.password_сonfirmation}
                         onChange={this.handleChange}
                         required
                     />

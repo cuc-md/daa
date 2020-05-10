@@ -7,14 +7,14 @@ class AddEvent extends Component {
         super(props);
         this.state = {
             name: '',
-            longName: '',
+            long_name: '',
             description: '',
-            coverPhoto: '',
-            startDate: null,
-            endDate: null,
-            registrationStatus: '',
-            registrationFee: '',
-            registrationEnd: null
+            cover_photo: '',
+            start_date: null,
+            end_date: null,
+            status: '',
+            fee: '',
+            registration_end: null
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -63,7 +63,7 @@ class AddEvent extends Component {
                     type="name"
                     name="longName"
                     placeholder="Event long name"
-                    value={this.state.longName}
+                    value={this.state.long_name}
                     onChange={this.handleChange}
                     required
                 />
@@ -81,13 +81,13 @@ class AddEvent extends Component {
                         name="coverPhoto"
                         title="Cover photo"
                         accept="image/png, image/jpeg"
-                        value={this.state.coverPhoto}
+                        value={this.state.cover_photo}
                         onChange={this.handleChange}
                         required
                     />
                 </label>
                 <DatePicker
-                    selected={this.state.startDate}
+                    selected={this.state.start_date}
                     onChange={this.handleStartDateChange}
                     className="inputDatepicker"
                     placeholderText="Start date"
@@ -95,7 +95,7 @@ class AddEvent extends Component {
                     required={true}
                 />
                 <DatePicker
-                    selected={this.state.endDate}
+                    selected={this.state.end_date}
                     onChange={this.handleEndDateChange}
                     className="inputDatepicker"
                     placeholderText="End date"
@@ -106,7 +106,7 @@ class AddEvent extends Component {
                     type="name"
                     name="registrationStatus"
                     placeholder="Registration status"
-                    value={this.state.registrationStatus}
+                    value={this.state.status}
                     onChange={this.handleChange}
                     required
                 />
@@ -114,12 +114,12 @@ class AddEvent extends Component {
                     type="name"
                     name="registrationFee"
                     placeholder="Registration fee"
-                    value={this.state.registrationFee}
+                    value={this.state.fee}
                     onChange={this.handleChange}
                     required
                 />
                 <DatePicker
-                    selected={this.state.registrationEnd}
+                    selected={this.state.registration_end}
                     onChange={this.handleRegistrationEndDateChange}
                     className="inputDatepicker"
                     placeholderText="Registration end date"

@@ -10,7 +10,7 @@ class AddClub extends Component {
         this.state = {
             name: '',
             city: '',
-            foundedOn: null,
+            founded_on: null,
             description: '',
             representative: '',
             phone: '',
