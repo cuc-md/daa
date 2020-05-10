@@ -3,7 +3,7 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'SIGN_IN_USER':
-            return action.payload;
+            return action.token;
         case 'SIGN_OUT_USER':
             return {};
         default:
