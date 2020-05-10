@@ -25,7 +25,7 @@ class Clubs extends Component {
                             },
                         },
                         {
-                            "id": 123,
+                            "id": 124,
                             "name": "Club 2",
                             "city": "Chisinau",
                             "address": "Chisinau, some street",
@@ -36,7 +36,7 @@ class Clubs extends Component {
                             }
                         },
                         {
-                            "id": 123,
+                            "id": 125,
                             "name": "Club 3",
                             "city": "Chisinau",
                             "address": "Chisinau, some street",

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {UncontrolledCollapse} from 'reactstrap';
+import {openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
+import editIcon from '../../assets/icons/base/edit.svg';
+import deleteIcon from '../../assets/icons/base/delete.svg';
 import './Events.css';
-import editIcon from "../../assets/icons/base/edit.svg";
-import deleteIcon from "../../assets/icons/base/delete.svg";
 
 class Event extends Component {
 
@@ -49,7 +50,7 @@ class Event extends Component {
                 <div className="eventDelete">
                     <img src={deleteIcon}
                          className="eventIcon" alt=""
-                         onClick={() => console.log("delete event")}/>
+                         onClick={() => openDeleteEventPopUpBox(this.props.eventId)}/>
                 </div>
                 <div className="eventArrow">
                     <img src={this.getArrowForChallenge(isOpen)}

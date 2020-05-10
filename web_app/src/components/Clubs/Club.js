@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
+import {openDeleteClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
@@ -74,9 +75,7 @@ class Club extends Component {
                         <div className="divClubContactsUserAvatar">
                             <Avatar name={this.props.club.contacts.representative}
                                     size="30" round="30"
-                                    color="#9be8e2"
-                                    className="clubContactsUserAvatar"
-                            />
+                                    color="#9be8e2"/>
                         </div>
                         <div className="divClubContactsUserName">
                             {this.props.club.contacts.representative}
@@ -96,7 +95,7 @@ class Club extends Component {
                 <div className="clubDelete">
                     <img src={deleteIcon}
                          className="clubIcon" alt=""
-                         onClick={() => console.log("delete club")}/>
+                         onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
                 </div>
                 <div className="clubArrow">
                     <img src={this.getArrowForChallenge(isOpen)}
