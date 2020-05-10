@@ -1,38 +1,6 @@
-class StorageService
-  attr_reader :params
-
+class StorageService < BaseService
   def initialize(params)
-    @params = params
-  end
-
-  def create
-    json do
-      RestClient.post("#{Settings.storage_url}/api/v1/question_packs", params)
-    end
-  end
-
-  def index
-    json do
-      RestClient.get("#{Settings.storage_url}/api/v1/question_packs")
-    end
-  end
-
-  def show
-    json do
-      RestClient.get("#{Settings.storage_url}/api/v1/question_packs/#{params.delete(:id)}")
-    end
-  end
-
-  def destroy
-    json do
-      RestClient.delete("#{Settings.storage_url}/api/v1/question_packs/#{params.delete(:id)}")
-    end
-  end
-
-  def update
-    json do
-      RestClient.patch("#{Settings.storage_url}/api/v1/question_packs/#{params.delete(:id)}", params)
-    end
+    super(Settings.storage_url, :question_packs, params)
   end
 
   def random
@@ -43,14 +11,6 @@ class StorageService
 
   def document
     RestClient.get("#{Settings.storage_url}/api/v1/question_packs/#{params.delete(:id)}/document")
-  rescue RestClient::ExceptionWithResponse => e
-    JSON.parse(e.response.body)
-  end
-
-  private
-
-  def json(&block)
-    JSON.parse(block.call).deep_symbolize_keys
   rescue RestClient::ExceptionWithResponse => e
     JSON.parse(e.response.body)
   end

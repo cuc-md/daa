@@ -7,9 +7,9 @@ describe Api::V1::EventsController do
     it "returns a list of events" do
       get api_v1_events_path, headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          events: []
+          events: [anything]
         }
       )
     end
@@ -36,7 +36,7 @@ describe Api::V1::EventsController do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(parsed_response).to eq(data: { event: {} })
+        expect(parsed_response).to match(data: { event: anything })
       end
     end
 
@@ -58,9 +58,9 @@ describe Api::V1::EventsController do
     it "returns an event events" do
       get api_v1_event_path(id: 1), headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          event: {}
+          event: anything
         }
       )
     end
@@ -99,9 +99,9 @@ describe Api::V1::EventsController do
           event: {}
         }
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            event: {}
+            event: anything
           }
         )
       end
@@ -135,9 +135,9 @@ describe Api::V1::EventsController do
 
         delete api_v1_event_path(id: 1), headers: auth_headers(headers, user)
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            event: {}
+            event: anything
           }
         )
       end

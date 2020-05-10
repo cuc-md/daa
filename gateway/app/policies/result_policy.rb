@@ -4,10 +4,10 @@ class ResultPolicy < ApplicationPolicy
   end
 
   def update?
-    user.has_role?(User::MANAGE_EVENTS)
+    create?
   end
 
   def destroy?
-    user.has_role?(User::MANAGE_EVENTS)
+    create?
   end
 end

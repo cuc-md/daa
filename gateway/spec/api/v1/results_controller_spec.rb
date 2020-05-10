@@ -3,18 +3,6 @@ require 'rails_helper'
 describe "Api::V1::Results" do
   let(:headers) { { 'Accept' => 'application/json', 'Content-Type' => 'application/json' } }
 
-  describe "GET #index" do
-    it "returns a list of results" do
-      get api_v1_results_path, headers: headers
-
-      expect(parsed_response).to eq(
-        data: {
-          results: []
-        }
-      )
-    end
-  end
-
   describe "POST #create" do
     context "without JWT" do
       it "raises 401 Unauthorized" do
@@ -36,7 +24,7 @@ describe "Api::V1::Results" do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(parsed_response).to eq(data: { result: {} })
+        expect(parsed_response).to match(data: { result: anything })
       end
     end
 
@@ -58,9 +46,9 @@ describe "Api::V1::Results" do
     it "returns an result events" do
       get api_v1_result_path(id: 1), headers: headers
 
-      expect(parsed_response).to eq(
+      expect(parsed_response).to match(
         data: {
-          result: {}
+          result: anything
         }
       )
     end
@@ -99,9 +87,9 @@ describe "Api::V1::Results" do
           result: {}
         }
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            result: {}
+            result: anything
           }
         )
       end
@@ -135,9 +123,9 @@ describe "Api::V1::Results" do
 
         delete api_v1_result_path(id: 1), headers: auth_headers(headers, user)
 
-        expect(parsed_response).to eq(
+        expect(parsed_response).to match(
           data: {
-            result: {}
+            result: anything
           }
         )
       end

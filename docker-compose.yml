@@ -23,10 +23,6 @@ services:
       - gateway/.env
     stdin_open: true
     tty: true
-  results_stats:
-    build: ./results_stats
-    ports:
-      - "8000:8080"
   storage:
     build: ./storage
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 5000 -b '0.0.0.0'"
@@ -34,6 +30,21 @@ services:
       - ./storage:/app
     ports:
       - "5000:5000"
+  results_stats:
+    build: ./results_stats
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 9000 -b '0.0.0.0'"
+    volumes:
+      - ./results_stats:/app
+    ports:
+      - "9000:9000"
+  results-db:
+    image: mongo:3
+    volumes:
+      - results-database:/data/db
+    env_file:
+      - results_stats/db.env
+
 
 volumes:
   gateway-database:
+  results-database:

@@ -4,7 +4,12 @@ class Api::V1::TeamsController < ApplicationController
   def index
     render json: {
       data: {
-        teams: []
+        teams: [
+          {
+            id:   123,
+            name: "Echipa Racheta"
+          }
+        ]
       }
     }
   end
@@ -32,7 +37,11 @@ class Api::V1::TeamsController < ApplicationController
   def render_team
     render json: {
       data: {
-        team: {}
+        team: {
+          name: "Echipa Racheta",
+          captain: "John Doe",
+          phone: "+123456789"
+        }
       }
     }
   end
