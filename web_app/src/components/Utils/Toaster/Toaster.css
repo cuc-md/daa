@@ -1,0 +1,49 @@
+.Toaster__alert {
+    background-color: rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    max-width: 650px;
+    position: relative;
+    border-radius: 0.4rem;
+    display: flex;
+    padding: 1rem 48px 1rem 1rem;
+    box-shadow: rgba(52, 58, 64, 0.15) 0 1px 10px 0,
+    rgba(52, 58, 64, 0.1) 0 6px 12px 0,
+    rgba(52, 58, 64, 0.12) 0 6px 15px -2px;
+}
+
+.Toaster__alert_text {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    line-height: 28px;
+    color: #525256;
+    -webkit-font-smoothing: none;
+    margin: 0;
+}
+
+.Toaster__alert_close {
+    padding: 12px;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    position: absolute;
+    top: 7px;
+    right: 4px;
+    border-radius: 0.4rem;
+    border: 0;
+    -webkit-appearance: none;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.5;
+    color: #525256;
+}
+
+.Toaster__alert_close:focus {
+    box-shadow: rgba(52, 58, 64, 0.15) 0 0 0 3px;
+}
+
+.Toaster__message-wrapper {
+    padding: 8px;
+}
