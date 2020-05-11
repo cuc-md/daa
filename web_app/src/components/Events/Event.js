@@ -22,7 +22,7 @@ class Event extends Component {
                         "name": "World championship",
                         "long_name": "World championship 2020",
                         "description": "description",
-                        "cover_photo": "/api/v1/photos/1234",
+                        "cover_photo": "/api/v1/photos/1234.png",
                         "dates": {
                             "start_date": "2010-01-01 10:00",
                             "end_date": "2010-01-01 15:00"
@@ -107,7 +107,7 @@ class Event extends Component {
                 <div className="eventEdit">
                     <img src={editIcon}
                          className="eventIcon" alt=""
-                         onClick={() => openEditEventPopUpBox(this.props.eventId, this.props.event)}/>
+                         onClick={() => openEditEventPopUpBox(this.props.eventId, eventDetails.data.event)}/>
                 </div>
                 <div className="eventDelete">
                     <img src={deleteIcon}

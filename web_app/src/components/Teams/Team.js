@@ -62,7 +62,7 @@ class Team extends Component {
                 <div className="teamEdit">
                     <img src={editIcon}
                          className="teamIcon" alt=""
-                         onClick={() => openEditTeamPopUpBox(this.props.teamId, this.props.team)}/>
+                         onClick={() => openEditTeamPopUpBox(this.props.teamId, teamDetails.data.team)}/>
                 </div>
                 <div className="teamDelete">
                     <img src={deleteIcon}

@@ -95,7 +95,7 @@ class Club extends Component {
                 <div className="clubEdit">
                     <img src={editIcon}
                          className="clubIcon" alt=""
-                         onClick={() => openEditClubPopUpBox(this.props.clubId, this.props.club)}/>
+                         onClick={() => openEditClubPopUpBox(this.props.clubId, clubDetails.data.club)}/>
                 </div>
                 <div className="clubDelete">
                     <img src={deleteIcon}
