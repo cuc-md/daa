@@ -1,7 +1,29 @@
 import React, {Component} from 'react';
 import {PopupboxManager} from 'react-popupbox';
+import toaster from 'toasted-notes';
 
 class DeleteClub extends Component {
+
+    deleteClub() {
+        fetch('/api/v1/clubs/' + this.props.clubId, {
+            method: 'DELETE'
+        }).then(response => {
+            if (!response.ok) {
+                toaster.notify("Error", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+            } else {
+                toaster.notify("Club was successfully deleted", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+                PopupboxManager.close();
+                return response.json();
+            }
+        })
+    };
+
     render() {
         return <div className="divForm">
             <h3 className="formText">Are you sure you want to delete {this.props.clubName}?</h3>
@@ -13,7 +35,7 @@ class DeleteClub extends Component {
                 </button>
                 <button className="choiceButton okButton textFontStyle16"
                         onClick={() => {
-                            console.log("DELETE CLUB");
+                            this.deleteClub();
                             PopupboxManager.close();
                         }}>
                     OK

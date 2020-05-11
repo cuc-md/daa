@@ -1,7 +1,29 @@
 import React, {Component} from 'react';
 import {PopupboxManager} from 'react-popupbox';
+import toaster from 'toasted-notes';
 
 class DeleteEvent extends Component {
+
+    deleteEvent() {
+        fetch('/api/v1/events/' + this.props.eventId, {
+            method: 'DELETE'
+        }).then(response => {
+            if (!response.ok) {
+                toaster.notify("Error", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+            } else {
+                toaster.notify("Event was successfully deleted", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+                PopupboxManager.close();
+                return response.json();
+            }
+        })
+    };
+
     render() {
         return <div className="divForm">
             <h3 className="formText">Are you sure you want to delete {this.props.eventName}?</h3>
@@ -13,7 +35,7 @@ class DeleteEvent extends Component {
                 </button>
                 <button className="choiceButton okButton textFontStyle16"
                         onClick={() => {
-                            console.log("DELETE EVENT");
+                            this.deleteEvent();
                             PopupboxManager.close();
                         }}>
                     OK
