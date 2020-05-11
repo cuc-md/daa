@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
+import toaster from 'toasted-notes';
 import DatePicker from 'react-datepicker';
+import {PopupboxManager} from 'react-popupbox';
+import 'react-datepicker/dist/react-datepicker.css';
+import '../Utils/Toaster/Toaster.css';
+import '../Utils/Form/Form.css';
 
 class AddEvent extends Component {
 
@@ -20,6 +25,7 @@ class AddEvent extends Component {
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleRegistrationEndDateChange = this.handleRegistrationEndDateChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
@@ -38,10 +44,30 @@ class AddEvent extends Component {
         this.setState({registrationEnd: date});
     };
 
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //     this.props.signInFetch(this.state)
-    // };
+    handleSubmit(e) {
+        e.preventDefault();
+        fetch('/api/v1/events', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        }).then(response => {
+            if (!response.ok) {
+                toaster.notify("Error", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+            } else {
+                toaster.notify("Event was successfully added", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+                PopupboxManager.close();
+                return response.json();
+            }
+        })
+    };
 
     render() {
         return <div className="divForm">

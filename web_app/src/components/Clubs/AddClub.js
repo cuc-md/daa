@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import toaster from 'toasted-notes';
 import DatePicker from "react-datepicker";
+import {PopupboxManager} from 'react-popupbox';
 import 'react-datepicker/dist/react-datepicker.css';
+import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
 class AddClub extends Component {
@@ -18,6 +21,7 @@ class AddClub extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
@@ -28,10 +32,30 @@ class AddClub extends Component {
         this.setState({foundedOn: date});
     };
 
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //     this.props.signInFetch(this.state)
-    // };
+    handleSubmit(e) {
+        e.preventDefault();
+        fetch('/api/v1/clubs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        }).then(response => {
+            if (!response.ok) {
+                toaster.notify("Error", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+            } else {
+                toaster.notify("Club was successfully added", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+                PopupboxManager.close();
+                return response.json();
+            }
+        })
+    };
 
     render() {
         return <div className="divForm">

@@ -1,5 +1,6 @@
 import {PopupboxManager} from 'react-popupbox';
 import toaster from 'toasted-notes';
+import '../../components/Utils/Toaster/Toaster.css';
 
 export const registerFetch = (user) => {
     return dispatch => {

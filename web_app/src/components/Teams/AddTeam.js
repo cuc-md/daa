@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import toaster from 'toasted-notes';
+import {PopupboxManager} from 'react-popupbox';
+import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
 class AddTeam extends Component {
@@ -11,10 +14,37 @@ class AddTeam extends Component {
             phone: '',
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value});
+    };
+
+    handleSubmit(e) {
+        e.preventDefault();
+        fetch('/api/v1/teams', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        }).then(response => {
+            if (!response.ok) {
+                toaster.notify("Error", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+            } else {
+                toaster.notify("Team was successfully added", {
+                    duration: 3000,
+                    position: "bottom"
+                });
+                PopupboxManager.close();
+                return response.json();
+            }
+        })
     };
 
     render() {
