@@ -85,7 +85,7 @@ class AddClub extends Component {
                     type="tel"
                     name="phone"
                     placeholder="Phone"
-                    pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}"
+                    pattern="^\+?\d{0,13}"
                     value={this.state.phone}
                     onChange={this.handleChange}
                     required

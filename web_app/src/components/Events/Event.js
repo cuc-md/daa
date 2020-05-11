@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import {Image} from 'react-bootstrap';
 import {UncontrolledCollapse} from 'reactstrap';
 import {openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import event_default from '../../assets/icons/default/event_default.svg';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
@@ -12,10 +15,56 @@ class Event extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            eventDetails: {
+                "data": {
+                    "event": {
+                        "id": 123,
+                        "name": "World championship",
+                        "long_name": "World championship 2020",
+                        "description": "description",
+                        "cover_photo": "/api/v1/photos/1234",
+                        "dates": {
+                            "start_date": "2010-01-01 10:00",
+                            "end_date": "2010-01-01 15:00"
+                        },
+                        "registration": {
+                            "status": "open",
+                            "fee": "10 MDL/person",
+                            "registation_end": "2010-01-01 09:00"
+                        },
+                        "teams": [
+                            {
+                                "id": 456,
+                                "name": "Echipa Racheta"
+                            },
+                            {
+                                "id": 457,
+                                "name": "Echipa Racheta 1"
+                            },
+                            {
+                                "id": 458,
+                                "name": "Echipa Racheta 2"
+                            }
+                        ]
+                    }
+                }
+            },
+            isLoading: true,
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
     }
+
+    // componentDidMount() {
+    //     fetch('/api/v1/teams/' + this.props.eventId, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => this.setState({eventDetails: data, isLoading: false}))
+    // }
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
@@ -26,21 +75,34 @@ class Event extends Component {
     }
 
     render() {
-        const {isOpen} = this.state;
+        const {eventDetails, isLoading, isOpen} = this.state;
+
+        let eventTeamsList = "";
+        eventDetails.data.event.teams.map(team => {
+            return eventTeamsList += team.name + ", ";
+        });
+        eventTeamsList = eventTeamsList.substring(0, eventTeamsList.length - 2);
 
         return <div className="eventsTableRow" key={this.props.keyItem}>
             <div className="divEventsTableRow">
                 <div className="eventNumber">
-                    {this.props.eventNumber}
+                    {this.props.keyItem + 1}
                 </div>
                 <div className="eventName">
-                    {this.props.eventName}
+                    {/*{this.props.event.cover_photo}*/}
+                    <Image src={event_default}
+                           className="eventCoverPhoto" alt=""
+                           rounded/>
+                    {this.props.event.long_name}
                 </div>
                 <div className="eventDate">
-                    {this.props.eventDate}
+                    {this.props.event.dates.start_date}
                 </div>
-                <div className="eventLocation">
-                    {this.props.eventLocation}
+                <div className="eventDate">
+                    {this.props.event.dates.end_date}
+                </div>
+                <div className="eventRegistration">
+                    {this.props.event.registration.status}
                 </div>
                 <div className="eventEdit">
                     <img src={editIcon}
@@ -61,9 +123,45 @@ class Event extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+                {/*{isLoading ?*/}
+                {/*    <div className="center"><LoaderSpinner/></div> :*/}
                 <div className="divEventDetails">
-                    Details
+                    <div className="eventsTableHead">
+                        <div className="eventNumber"/>
+                        <div className="eventTeams">
+                            Teams
+                        </div>
+                        <div className="eventRegistrationFee">
+                            Registration fee
+                        </div>
+                        <div className="eventRegistrationEnd">
+                            Registration end
+                        </div>
+                        <div className="eventDescription">
+                            Description
+                        </div>
+                        <div className="eventEmpty"/>
+                    </div>
+                    <div className="eventsDescriptionTableRow">
+                        <div className="divEventsTableRow">
+                            <div className="eventNumber"/>
+                            <div className="eventTeams">
+                                {eventTeamsList}
+                            </div>
+                            <div className="eventRegistrationFee">
+                                {this.props.event.registration.fee}
+                            </div>
+                            <div className="eventRegistrationEnd">
+                                {this.props.event.registration.registation_end}
+                            </div>
+                            <div className="eventDescription">
+                                {eventDetails.data.event.description}
+                            </div>
+                            <div className="eventEmpty"/>
+                        </div>
+                    </div>
                 </div>
+                {/*}*/}
             </UncontrolledCollapse>
         </div>
     }

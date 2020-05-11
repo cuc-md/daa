@@ -32,7 +32,12 @@ class Teams extends Component {
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/teams')
+    //     fetch('/api/v1/teams', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
     //         .then(response => response.json())
     //         .then(data => this.setState({teams: data, isLoading: false}))
     // }

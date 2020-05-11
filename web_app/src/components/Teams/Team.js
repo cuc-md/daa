@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
 import {openDeleteTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
@@ -22,17 +23,22 @@ class Team extends Component {
                     }
                 }
             },
+            isLoading: true,
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/teams/' + this.props.teamId)
+    //     fetch('/api/v1/teams/' + this.props.teamId, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
     //         .then(response => response.json())
     //         .then(data => this.setState({teamDetails: data, isLoading: false}))
     // }
-
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
@@ -43,7 +49,7 @@ class Team extends Component {
     }
 
     render() {
-        const {teamDetails, isOpen} = this.state;
+        const {teamDetails, isLoading, isOpen} = this.state;
 
         return <div className="teamsTableRow" key={this.props.keyItem}>
             <div className="divTeamsTableRow">

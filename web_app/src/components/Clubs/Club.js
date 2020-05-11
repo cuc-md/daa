@@ -40,7 +40,12 @@ class Club extends Component {
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/clubs/' + this.props.clubId)
+    //     fetch('/api/v1/clubs/' + this.props.clubId, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
     //         .then(response => response.json())
     //         .then(data => this.setState({clubDetails: data, isLoading: false}))
     // }

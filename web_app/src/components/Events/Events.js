@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import {openAddEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Event from './Event';
 import './Events.css';
@@ -8,24 +9,91 @@ class Events extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: {},
+            events: {
+                "data": {
+                    "events": [
+                        {
+                            "id": 123,
+                            "name": "World championship",
+                            "long_name": "World championship 2020",
+                            "description": "description",
+                            "cover_photo": "/api/v1/photos/1234",
+                            "dates": {
+                                "start_date": "2010-01-01 10:00",
+                                "end_date": "2010-01-01 15:00"
+                            },
+                            "registration": {
+                                "status": "open",
+                                "fee": "10 MDL/person",
+                                "registation_end": "2010-01-01 09:00"
+                            }
+                        },
+                        {
+                            "id": 124,
+                            "name": "World championship 2",
+                            "long_name": "World championship 2022",
+                            "description": "description",
+                            "cover_photo": "/api/v1/photos/1234",
+                            "dates": {
+                                "start_date": "2010-01-01 10:00",
+                                "end_date": "2010-01-01 15:00"
+                            },
+                            "registration": {
+                                "status": "open",
+                                "fee": "10 MDL/person",
+                                "registation_end": "2010-01-01 09:00"
+                            }
+                        },
+                        {
+                            "id": 125,
+                            "name": "World championship 3",
+                            "long_name": "World championship 2023",
+                            "description": "description",
+                            "cover_photo": "/api/v1/photos/1234",
+                            "dates": {
+                                "start_date": "2010-01-01 10:00",
+                                "end_date": "2010-01-01 15:00"
+                            },
+                            "registration": {
+                                "status": "open",
+                                "fee": "10 MDL/person",
+                                "registation_end": "2010-01-01 09:00"
+                            }
+                        }
+                    ]
+                }
+            },
             isLoading: true
         };
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/users', {
+    //     fetch('/api/v1/events', {
     //         method: 'GET',
     //         headers: {
     //             'Content-Type': 'application/json'
     //         }
     //     }).then(response => response.json())
-    //         .then(data => this.setState({users: data}));
+    //         .then(data => this.setState({events: data, isLoading: false}));
     // }
 
     render() {
-        // const {users} = this.state;
-        // console.log(users);
+        const {events, isLoading} = this.state;
+
+        // if (isLoading) {
+        //     return <div className="main center"><LoaderSpinner/></div>;
+        // }
+
+        let eventsList = events.data.events.map((event, i) => {
+            let divItemId = "id" + i;
+            let divItemIdToggler = "#" + divItemId;
+
+            return <Event keyItem={i}
+                          divItemId={divItemId}
+                          divItemIdToggler={divItemIdToggler}
+                          eventId={event.id}
+                          event={event}/>
+        });
 
         return <div className="main">
             <div className="divAddEvent">
@@ -41,36 +109,19 @@ class Events extends Component {
                         Event
                     </div>
                     <div className="eventDate">
-                        Date
+                        Start Date
                     </div>
-                    <div className="eventLocation">
-                        Location
+                    <div className="eventDate">
+                        End Date
+                    </div>
+                    <div className="eventRegistration">
+                        Status
                     </div>
                     <div className="eventEdit"/>
                     <div className="eventDelete"/>
                     <div className="eventArrow"/>
                 </div>
-                <Event keyItem={1}
-                       divItemId="id1"
-                       divItemIdToggler="#id1"
-                       eventNumber={1}
-                       eventName="Event1"
-                       eventDate=" 12.06.2020"
-                       eventLocation="Chisinau"/>
-                <Event keyItem={2}
-                       divItemId="id2"
-                       divItemIdToggler="#id2"
-                       eventNumber={2}
-                       eventName="Event2"
-                       eventDate=" 12.07.2020"
-                       eventLocation="Chisinau"/>
-                <Event keyItem={3}
-                       divItemId="id3"
-                       divItemIdToggler="#id3"
-                       eventNumber={3}
-                       eventName="Event3"
-                       eventDate=" 12.08.2020"
-                       eventLocation="Chisinau"/>
+                {eventsList}
             </div>
         </div>
     }
