@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image} from 'react-bootstrap';
 import {UncontrolledCollapse} from 'reactstrap';
-import {openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import {openEditEventPopUpBox, openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import event_default from '../../assets/icons/default/event_default.svg';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
@@ -107,12 +107,12 @@ class Event extends Component {
                 <div className="eventEdit">
                     <img src={editIcon}
                          className="eventIcon" alt=""
-                         onClick={() => console.log("edit event")}/>
+                         onClick={() => openEditEventPopUpBox(this.props.eventId, this.props.event)}/>
                 </div>
                 <div className="eventDelete">
                     <img src={deleteIcon}
                          className="eventIcon" alt=""
-                         onClick={() => openDeleteEventPopUpBox(this.props.eventId)}/>
+                         onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
                 </div>
                 <div className="eventArrow">
                     <img src={this.getArrowForChallenge(isOpen)}

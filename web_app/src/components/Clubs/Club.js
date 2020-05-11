@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
-import {openDeleteClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import {openEditClubPopUpBox, openDeleteClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
@@ -95,7 +95,7 @@ class Club extends Component {
                 <div className="clubEdit">
                     <img src={editIcon}
                          className="clubIcon" alt=""
-                         onClick={() => console.log("edit club")}/>
+                         onClick={() => openEditClubPopUpBox(this.props.clubId, this.props.club)}/>
                 </div>
                 <div className="clubDelete">
                     <img src={deleteIcon}

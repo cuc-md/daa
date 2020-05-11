@@ -9,6 +9,9 @@ import AddTeam from '../../Teams/AddTeam';
 import DeleteTeam from '../../Teams/DeleteTeam';
 import DeleteEvent from '../../Events/DeleteEvent';
 import DeleteClub from '../../Clubs/DeleteClub';
+import EditTeam from '../../Teams/EditTeam';
+import EditEvent from '../../Events/EditEvent';
+import EditClub from '../../Clubs/EditClub';
 
 export const openSignInPopUpBox = () => {
     let content = (<SignIn/>);
@@ -30,6 +33,11 @@ export const openAddClubPopUpBox = () => {
     PopupboxManager.open({content})
 };
 
+export const openEditClubPopUpBox = (clubId, club) => {
+    let content = (<EditClub clubId={clubId} club={club}/>);
+    PopupboxManager.open({content})
+};
+
 export const openDeleteClubPopUpBox = (clubId, clubName) => {
     let content = (<DeleteClub clubId={clubId} clubName={clubName}/>);
     PopupboxManager.open({content})
@@ -40,6 +48,11 @@ export const openAddEventPopUpBox = () => {
     PopupboxManager.open({content})
 };
 
+export const openEditEventPopUpBox = (eventId, event) => {
+    let content = (<EditEvent eventId={eventId} event={event}/>);
+    PopupboxManager.open({content})
+};
+
 export const openDeleteEventPopUpBox = (eventId, eventName) => {
     let content = (<DeleteEvent eventId={eventId} eventName={eventName}/>);
     PopupboxManager.open({content})
@@ -47,6 +60,11 @@ export const openDeleteEventPopUpBox = (eventId, eventName) => {
 
 export const openAddTeamPopUpBox = () => {
     let content = (<AddTeam/>);
+    PopupboxManager.open({content})
+};
+
+export const openEditTeamPopUpBox = (teamId, team) => {
+    let content = (<EditTeam teamId={teamId} team={team}/>);
     PopupboxManager.open({content})
 };
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
-import {openDeleteTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import {openEditTeamPopUpBox, openDeleteTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
@@ -62,7 +62,7 @@ class Team extends Component {
                 <div className="teamEdit">
                     <img src={editIcon}
                          className="teamIcon" alt=""
-                         onClick={() => console.log("edit team")}/>
+                         onClick={() => openEditTeamPopUpBox(this.props.teamId, this.props.team)}/>
                 </div>
                 <div className="teamDelete">
                     <img src={deleteIcon}
