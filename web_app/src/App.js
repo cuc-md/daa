@@ -32,10 +32,10 @@ function App() {
                         <div className="col-sm-11">
                             <Switch>
                                 <Route exact path='/' component={Home}/>
-                                <Route path='/events' component={Events}/>
+                                <Route exact path='/events' component={Events}/>
+                                <Route path='/events/:eventId/results' component={Results}/>
                                 <Route path='/clubs' component={Clubs}/>
                                 <Route path='/teams' component={Teams}/>
-                                <Route path='/results' component={Results}/>
                                 <Route path='/users' component={UsersRedux}/>
                             </Switch>
                         </div>

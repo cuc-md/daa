@@ -42,7 +42,7 @@
 .eventName {
     display: table-cell;
     vertical-align: middle;
-    width: 40%;
+    width: 35%;
 }
 
 .eventDate {
@@ -55,6 +55,12 @@
     display: table-cell;
     vertical-align: middle;
     width: 10%;
+}
+
+.eventResults{
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
 }
 
 .eventEdit {
@@ -94,7 +100,7 @@
 .eventTeams {
     display: table-cell;
     vertical-align: middle;
-    width: 40%;
+    width: 35%;
 }
 
 .eventRegistrationFee {
@@ -118,5 +124,5 @@
 .eventEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 15%;
+    width: 20%;
 }

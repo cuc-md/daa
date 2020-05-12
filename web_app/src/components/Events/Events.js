@@ -117,6 +117,7 @@ class Events extends Component {
                     <div className="eventRegistration">
                         Status
                     </div>
+                    <div className="eventResults"/>
                     <div className="eventEdit"/>
                     <div className="eventDelete"/>
                     <div className="eventArrow"/>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {Image} from 'react-bootstrap';
 import {UncontrolledCollapse} from 'reactstrap';
 import {openEditEventPopUpBox, openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
@@ -8,6 +9,7 @@ import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
 import deleteIcon from '../../assets/icons/base/delete.svg';
+import resultsIcon from '../../assets/icons/sidebar/results.svg';
 import './Events.css';
 
 class Event extends Component {
@@ -103,6 +105,12 @@ class Event extends Component {
                 </div>
                 <div className="eventRegistration">
                     {this.props.event.registration.status}
+                </div>
+                <div className="eventResults">
+                    <Link to={`/events/${this.props.event.id}/results`}>
+                        <img src={resultsIcon}
+                             className="eventIcon" alt=""/>
+                    </Link>
                 </div>
                 <div className="eventEdit">
                     <img src={editIcon}
