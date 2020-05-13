@@ -18,6 +18,10 @@ class Api::V1::PhotosController < ApplicationController
   private
 
   def service
-    @service ||= PhotoService.new(params)
+    @service ||= if current_user
+      PhotoService.new(params.as_json.deep_merge!("photo" => { "user_id" => current_user.id }))
+    else
+      PhotoService.new(params)
+    end
   end
 end

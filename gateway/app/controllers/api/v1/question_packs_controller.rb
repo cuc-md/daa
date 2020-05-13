@@ -35,6 +35,10 @@ class Api::V1::QuestionPacksController < ApplicationController
   private
 
   def service
-    @service ||= StorageService.new(params)
+    @service ||= if current_user
+      StorageService.new(params.as_json.deep_merge!("question_pack" => { "user_id" => current_user.id }))
+    else
+      StorageService.new(params)
+    end
   end
 end
