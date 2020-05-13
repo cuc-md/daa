@@ -72,7 +72,7 @@ class Event extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    getArrowForChallenge(isOpen) {
+    getArrow(isOpen) {
         return isOpen ? arrow_up : arrow_down;
     }
 
@@ -107,7 +107,12 @@ class Event extends Component {
                     {this.props.event.registration.status}
                 </div>
                 <div className="eventResults">
-                    <Link to={`/events/${this.props.event.id}/results`}>
+                    <Link to={{
+                        pathname: `/events/${this.props.event.id}/results`,
+                        state: {
+                            eventName: this.props.event.long_name
+                        }
+                    }}>
                         <img src={resultsIcon}
                              className="eventIcon" alt=""/>
                     </Link>
@@ -123,7 +128,7 @@ class Event extends Component {
                          onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
                 </div>
                 <div className="eventArrow">
-                    <img src={this.getArrowForChallenge(isOpen)}
+                    <img src={this.getArrow(isOpen)}
                          className="eventIcon" alt=""
                          onClick={this.changeCollapseState}
                          id={this.props.divItemId}/>

@@ -54,7 +54,7 @@ class Club extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    getArrowForChallenge(isOpen) {
+    getArrow(isOpen) {
         return isOpen ? arrow_up : arrow_down;
     }
 
@@ -103,7 +103,7 @@ class Club extends Component {
                          onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
                 </div>
                 <div className="clubArrow">
-                    <img src={this.getArrowForChallenge(isOpen)}
+                    <img src={this.getArrow(isOpen)}
                          className="clubIcon" alt=""
                          onClick={this.changeCollapseState}
                          id={this.props.divItemId}/>
