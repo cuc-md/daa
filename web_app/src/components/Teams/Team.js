@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openEditTeamPopUpBox, openDeleteTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
@@ -59,16 +61,25 @@ class Team extends Component {
                 <div className="teamName">
                     {this.props.team.name}
                 </div>
-                <div className="teamEdit">
-                    <img src={editIcon}
-                         className="teamIcon" alt=""
-                         onClick={() => openEditTeamPopUpBox(this.props.teamId, teamDetails.data.team)}/>
-                </div>
-                <div className="teamDelete">
-                    <img src={deleteIcon}
-                         className="teamIcon" alt=""
-                         onClick={() => openDeleteTeamPopUpBox(this.props.teamId, this.props.team.name)}/>
-                </div>
+                {(JSON.stringify(this.props.user) !== '{}' &&
+                    checkUserManageEventsRole(this.props.user.roles)) ?
+                    <>
+                        <div className="teamEdit">
+                            <img src={editIcon}
+                                 className="teamIcon" alt=""
+                                 onClick={() => openEditTeamPopUpBox(this.props.teamId, teamDetails.data.team)}/>
+                        </div>
+                        <div className="teamDelete">
+                            <img src={deleteIcon}
+                                 className="teamIcon" alt=""
+                                 onClick={() => openDeleteTeamPopUpBox(this.props.teamId, this.props.team.name)}/>
+                        </div>
+                    </> :
+                    <>
+                        <div className="teamEdit"/>
+                        <div className="teamDelete"/>
+                    </>
+                }
                 <div className="teamArrow">
                     <img src={this.getArrow(isOpen)}
                          className="teamIcon" alt=""
@@ -114,4 +125,10 @@ class Team extends Component {
     }
 }
 
-export default Team;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Team);

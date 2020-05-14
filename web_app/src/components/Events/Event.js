@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Image} from 'react-bootstrap';
 import {UncontrolledCollapse} from 'reactstrap';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openEditEventPopUpBox, openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import event_default from '../../assets/icons/default/event_default.svg';
@@ -117,16 +119,25 @@ class Event extends Component {
                              className="eventIcon" alt=""/>
                     </Link>
                 </div>
-                <div className="eventEdit">
-                    <img src={editIcon}
-                         className="eventIcon" alt=""
-                         onClick={() => openEditEventPopUpBox(this.props.eventId, eventDetails.data.event)}/>
-                </div>
-                <div className="eventDelete">
-                    <img src={deleteIcon}
-                         className="eventIcon" alt=""
-                         onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
-                </div>
+                {(JSON.stringify(this.props.user) !== '{}' &&
+                    checkUserManageEventsRole(this.props.user.roles)) ?
+                    <>
+                        <div className="eventEdit">
+                            <img src={editIcon}
+                                 className="eventIcon" alt=""
+                                 onClick={() => openEditEventPopUpBox(this.props.eventId, eventDetails.data.event)}/>
+                        </div>
+                        <div className="eventDelete">
+                            <img src={deleteIcon}
+                                 className="eventIcon" alt=""
+                                 onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
+                        </div>
+                    </> :
+                    <>
+                        <div className="eventEdit"/>
+                        <div className="eventDelete"/>
+                    </>
+                }
                 <div className="eventArrow">
                     <img src={this.getArrow(isOpen)}
                          className="eventIcon" alt=""
@@ -180,4 +191,10 @@ class Event extends Component {
     }
 }
 
-export default Event;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Event);

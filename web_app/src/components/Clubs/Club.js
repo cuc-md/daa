@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
+import {checkUserManageClubsRole} from '../Utils/Helpers/UserHelper';
 import {openEditClubPopUpBox, openDeleteClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
@@ -92,16 +94,25 @@ class Club extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="clubEdit">
-                    <img src={editIcon}
-                         className="clubIcon" alt=""
-                         onClick={() => openEditClubPopUpBox(this.props.clubId, clubDetails.data.club)}/>
-                </div>
-                <div className="clubDelete">
-                    <img src={deleteIcon}
-                         className="clubIcon" alt=""
-                         onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
-                </div>
+                {(JSON.stringify(this.props.user) !== '{}' &&
+                    checkUserManageClubsRole(this.props.user.roles)) ?
+                    <>
+                        <div className="clubEdit">
+                            <img src={editIcon}
+                                 className="clubIcon" alt=""
+                                 onClick={() => openEditClubPopUpBox(this.props.clubId, clubDetails.data.club)}/>
+                        </div>
+                        <div className="clubDelete">
+                            <img src={deleteIcon}
+                                 className="clubIcon" alt=""
+                                 onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
+                        </div>
+                    </> :
+                    <>
+                        <div className="clubEdit"/>
+                        <div className="clubDelete"/>
+                    </>
+                }
                 <div className="clubArrow">
                     <img src={this.getArrow(isOpen)}
                          className="clubIcon" alt=""
@@ -155,4 +166,10 @@ class Club extends Component {
     }
 }
 
-export default Club;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Club);

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openAddEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Event from './Event';
 import './Events.css';
@@ -96,12 +98,15 @@ class Events extends Component {
         });
 
         return <div className="main">
-            <div className="divAddEvent">
-                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                        onClick={() => openAddEventPopUpBox()}>
-                    + Add Event
-                </button>
-            </div>
+            {(JSON.stringify(this.props.user) !== '{}' &&
+                checkUserManageEventsRole(this.props.user.roles)) ?
+                <div className="divAddEvent">
+                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                            onClick={() => openAddEventPopUpBox()}>
+                        + Add Event
+                    </button>
+                </div> : null
+            }
             <div>
                 <div className="eventsTableHead">
                     <div className="eventNumber"/>
@@ -128,4 +133,10 @@ class Events extends Component {
     }
 }
 
-export default Events;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Events);

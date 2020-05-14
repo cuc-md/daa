@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import {openAddTeamPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Team from './Team';
@@ -61,12 +63,15 @@ class Teams extends Component {
         });
 
         return <div className="main">
-            <div className="divAddTeams">
-                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                        onClick={() => openAddTeamPopUpBox()}>
-                    + Add Team
-                </button>
-            </div>
+            {(JSON.stringify(this.props.user) !== '{}' &&
+                checkUserManageEventsRole(this.props.user.roles)) ?
+                <div className="divAddTeams">
+                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                            onClick={() => openAddTeamPopUpBox()}>
+                        + Add Team
+                    </button>
+                </div> : null
+            }
             <div>
                 <div className="teamsTableHead">
                     <div className="teamNumber"/>
@@ -83,4 +88,10 @@ class Teams extends Component {
     }
 }
 
-export default Teams;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Teams);

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import {checkUserManageClubsRole} from '../Utils/Helpers/UserHelper';
 import {openAddClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Club from './Club';
 import '../Utils/Button/Button.css';
@@ -83,12 +85,15 @@ class Clubs extends Component {
         });
 
         return <div className="main">
-            <div className="divAddClub">
-                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                        onClick={() => openAddClubPopUpBox()}>
-                    + Add Club
-                </button>
-            </div>
+            {(JSON.stringify(this.props.user) !== '{}' &&
+                checkUserManageClubsRole(this.props.user.roles)) ?
+                <div className="divAddClub">
+                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                            onClick={() => openAddClubPopUpBox()}>
+                        + Add Club
+                    </button>
+                </div> : null
+            }
             <div>
                 <div className="clubsTableHead">
                     <div className="clubNumber"/>
@@ -114,4 +119,10 @@ class Clubs extends Component {
     }
 }
 
-export default Clubs;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Clubs);
