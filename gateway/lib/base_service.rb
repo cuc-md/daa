@@ -1,5 +1,5 @@
 class BaseService
-  attr_reader :params, :base_url, :resources, :headers
+  attr_reader :params, :base_url, :resources, :headers, :status
 
   def initialize(base_url, resources, params)
     @params, @base_url, @resources = params, base_url, resources
@@ -39,8 +39,11 @@ class BaseService
   protected
 
   def json(&block)
-    JSON.parse(block.call).deep_symbolize_keys
+    result = block.call
+    @status = result.code
+    JSON.parse(result).deep_symbolize_keys
   rescue RestClient::ExceptionWithResponse => e
+    @status = e.response.code
     JSON.parse(e.response.body)
   end
 end

@@ -3,16 +3,16 @@ class Api::V1::PhotosController < ApplicationController
 
   def create
     authorize :photo
-    render json: service.create
+    render json: service.create, status: service.status
   end
 
   def show
-    send_data service.show
+    send_data service.show, status: service.status
   end
 
   def destroy
     authorize :photo
-    render json: service.destroy
+    render json: service.destroy, status: service.status
   end
 
   private
