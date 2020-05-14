@@ -1,0 +1,74 @@
+.questionPacksTableHead {
+    display: table;
+    width: 100%;
+    height: 30px;
+    color: #9b9696;
+}
+
+.questionPacksTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: #fefefe;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.divQuestionPacksTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+}
+
+.questionPackNumber {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    padding-left: 16px;
+    color: #9b9696;
+}
+
+.questionPackEventName {
+    display: table-cell;
+    vertical-align: middle;
+    width: 30%;
+}
+
+.questionPackDifficulty {
+    display: table-cell;
+    vertical-align: middle;
+    width: 60%;
+}
+
+.questionPackArrow {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.questionPackIcon {
+    height: 15px;
+    width: 15px;
+}
+
+.divQuestionPackDetails {
+    width: 100%;
+}
+
+.questionPacksDescriptionTableRow {
+    margin-top: 0;
+}
+
+.questionPackAuthor {
+    display: table-cell;
+    vertical-align: middle;
+    width: 30%;
+}
+
+.questionPackEmpty {
+    display: table-cell;
+    vertical-align: middle;
+    width: 65%;
+}

@@ -17,7 +17,6 @@ export const registerFetch = (user) => {
                     toaster.notify("Error sign in",
                         {duration: 3000, position: "bottom"});
                 } else {
-                    localStorage.setItem("token", data);
                     dispatch({
                         type: 'SIGN_IN_USER',
                         token: data
@@ -43,7 +42,6 @@ export const signInFetch = (user) => {
                     toaster.notify("Error sign in",
                         {duration: 3000, position: "bottom"});
                 } else {
-                    localStorage.setItem("token", data);
                     dispatch({
                         type: 'SIGN_IN_USER',
                         token: data
@@ -54,6 +52,16 @@ export const signInFetch = (user) => {
     }
 };
 
-export const signOutUser = () => ({
-    type: 'SIGN_OUT_USER'
-});
+export const signOutUser = () => {
+    return dispatch => {
+        return fetch('/users/sign_out', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(dispatch({
+                type: 'SIGN_OUT_USER'
+            })
+        )
+    }
+};
