@@ -1,58 +1,72 @@
 class Api::V1::ResultsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :details]
+  before_action :authenticate_user!, except: [:index, :show, :details, :sample]
 
   def create
     authorize :result
-    render_result
+    params[:result] = team_results
+    render json: service.create, status: service.status
   end
 
   def show
-    render_result
+    render json: service.show, status: service.status
   end
 
   def update
     authorize :result
-    render_result
+    render json: service.update, status: service.status
   end
 
   def destroy
     authorize :result
-    render_result
+    render json: service.destroy, status: service.status
   end
 
   def details
-    render json: {
-      data: {
-        result: [
-            {
-              team_name:   "team1",
-              total_score: 3,
-              score:       [
-                { round: 1, count: 0, score: [0,0,0,0,0,0,0,0,0,0]},
-                { round: 2, count: 3, score: [0,1,0,0,0,0,0,1,0,1]}
-              ]
-            }
-         ]
-      }
-    }
+    render json: service.details, status: service.status
+  end
+
+  def sample
+    xlsx = RubyXL::Workbook.new
+    sheet = xlsx[0]
+    sheet.sheet_name = "Results"
+    sheet.add_cell(0, 0, "Teams")
+    40.times do |question|
+        sheet.add_cell(0, 1 + question, "Q#{1 + question}")
+    end
+    send_data xlsx.stream, filename: "sample-form.xlsx", type: "application/vnd.ms-excel"
   end
 
   private
 
-  def render_result
-    render json: {
-      data: {
-        result: [
-            {
-              team_name:   "team1",
-              total_score: 3,
-              score:       [
-                { round: 1, count: 0 },
-                { round: 2, count: 3 }
-              ]
-            }
-         ]
-      }
-    }
+  def service
+    @service ||= if current_user
+      ResultsService.new(params.as_json.deep_merge!("result" => { "user_id" => current_user.id }))
+    else
+      ResultsService.new(params)
+    end
+  end
+
+  def blob_io
+    @blob_io ||= StringIO.new(Base64.strict_decode64(blob))
+  end
+
+  def blob
+    @blob ||= params.dig(:result, :blob)
+  end
+
+  def team_results
+    xlsx  = RubyXL::Parser.parse_buffer(blob_io)
+    sheet = xlsx["Results"]
+
+    row = 1
+    team_results = {}
+    while sheet[row] && sheet[row][0]
+      team = sheet[row][0].value
+      results = (1..41).map { |column| sheet[row][column].value rescue "0" }
+      team_results[team] = results
+      row += 1
+    end
+
+    team_results
   end
 end

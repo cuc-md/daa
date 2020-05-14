@@ -556,6 +556,9 @@ Payload:
 
 #### `DELETE /api/v1/results/:id` - delete results for some event
 
+#### `GET /api/v1/results/sample` - get a sample Excel file for results to complete
+Response: Excel `.xlsx` file
+
 ### User management
 #### `GET /api/v1/users` - list of users
 Response:
