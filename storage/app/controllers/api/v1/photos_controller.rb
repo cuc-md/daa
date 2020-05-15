@@ -31,8 +31,6 @@ class Api::V1::PhotosController < ApplicationController
 
   def blob_io
     @blob_io ||= StringIO.new(Base64.strict_decode64(blob))
-  rescue ArgumentError
-    raise ActiveRecord::ValidationFailed
   end
 
   def blob
@@ -44,7 +42,6 @@ class Api::V1::PhotosController < ApplicationController
       data: {
         photo: {
           id:         photo.id,
-          user_id:    photo.user_id,
           event_name: photo.event_name,
           event_id:   photo.event_id
         }

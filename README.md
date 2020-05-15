@@ -168,7 +168,7 @@ Response:
         "registration": {
           "status":          "open",
           "fee":             "10 MDL/person",
-          "registation_end": "2010-01-01 09:  00"
+          "registation_end": "2010-01-01 09:00"
         }
       }
     ]
@@ -451,7 +451,7 @@ Response:
 }
 ```
 
-#### `GET /api/v1/question_packs/:id/blob` - get a pack of questions.
+#### `GET /api/v1/question_packs/:id/document` - get a pack of questions.
 Response: binary doc or PDF
 
 #### `POST /api/v1/question_packs` - store the pack of questions
@@ -545,19 +545,19 @@ Response:
 Payload:
 ```json
 {
-  "result": [
-    {
-      "team_name": "team1",
-      "score": [
-         { "round": 1, "score": [0,0,0,0,0,0,0,0,0,0]},
-         { "round": 2, "score": [0,1,0,0,0,0,0,1,0,1]}
-       ]
-    }
-  ]
+  "result": {
+    "blob": "Base64(binary)",
+    "event_name": "Super Cup",
+    "event_id": "12345",
+    "user_id": "123"
+  }
 }
 ```
+
 #### `DELETE /api/v1/results/:id` - delete results for some event
 
+#### `GET /api/v1/results/sample` - get a sample Excel file for results to complete
+Response: Excel `.xlsx` file
 
 ### User management
 #### `GET /api/v1/users` - list of users

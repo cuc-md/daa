@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :teams,   except: [:edit, :new]
         resources :results, except: [:edit, :new, :index] do
           get :details, on: :member
+          get :sample, on: :collection
         end
         resources :users, except: [:create] do
           get :me, on: :collection

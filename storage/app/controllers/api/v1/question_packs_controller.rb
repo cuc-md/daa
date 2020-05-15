@@ -54,8 +54,6 @@ class Api::V1::QuestionPacksController < ApplicationController
 
   def blob_io
     @blob_io ||= StringIO.new(Base64.strict_decode64(blob))
-  rescue ArgumentError
-    raise ActiveRecord::ValidationFailed
   end
 
   def blob
@@ -67,7 +65,6 @@ class Api::V1::QuestionPacksController < ApplicationController
       data: {
         question_pack: {
           id:         pack.id,
-          user_id:    pack.user_id,
           event_name: pack.event_name,
           event_id:   pack.event_id,
           difficulty: pack.difficulty,
