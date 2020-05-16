@@ -15,7 +15,8 @@ class Api::V1::ResultsController < ApplicationController
 
   def update
     authorize :result
-    params[:result] = team_results
+    params[:result][:teams] = team_results
+    params[:result].delete(:blob)
     params[:result][:user_id] = current_user.id
     render json: service.update, status: service.status
   end
