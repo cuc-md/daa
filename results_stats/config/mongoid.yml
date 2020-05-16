@@ -3,11 +3,9 @@ development:
     default:
       database: results_stats_development
       hosts:
-        - localhost:27017
-        - results-database:27017
+        - results-db:27017
       options:
-        user: mongoadmin
-        password: secret
+        server_selection_timeout: 1
 
   options:
     use_utc: true

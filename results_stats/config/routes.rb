@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :results
   namespace :api do
     namespace :v1 do
       resources :results, only: [:create, :update, :show, :destroy] do

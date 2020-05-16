@@ -1,18 +1,24 @@
 class Api::V1::ResultsController < ApplicationController
+  before_action :set_result
+
   def create
     render_result
   end
 
   def update
-    render_result
+    if @result.update(result_params)
+      render json: @result
+    else
+      render json: @result.errors, status: :unprocessable_entity
+    end
   end
 
   def show
-    render_result
+    render json: @result
   end
 
   def destroy
-    render_result
+    @result.destroy
   end
 
   def details
@@ -49,5 +55,12 @@ class Api::V1::ResultsController < ApplicationController
          ]
       }
     }
+
+  def set_result
+    @result = Result.find_or_create(params[:id])
+  end
+
+  def result_params
+    params.require(:result).permit(:event_id, :event_name)
   end
 end
