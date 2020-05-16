@@ -3,10 +3,11 @@ class ApplicationController < ActionController::API
 
   rescue_from ActionController::ParameterMissing, with: :parameter_missing
   rescue_from ArgumentError, with: :argument_error
+  rescue_from Mongoid::Errors::DocumentNotFound, with: :record_not_found
 
   def record_not_found(error)
     render status: :not_found, json: {
-      error: { message: error.message }
+      error: { message: error.problem }
     }
   end
 

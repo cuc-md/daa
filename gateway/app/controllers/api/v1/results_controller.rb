@@ -3,7 +3,9 @@ class Api::V1::ResultsController < ApplicationController
 
   def create
     authorize :result
-    params[:result] = team_results
+    params[:result][:teams] = team_results
+    params[:result].delete(:blob)
+    params[:result][:user_id] = current_user.id
     render json: service.create, status: service.status
   end
 
@@ -13,6 +15,8 @@ class Api::V1::ResultsController < ApplicationController
 
   def update
     authorize :result
+    params[:result] = team_results
+    params[:result][:user_id] = current_user.id
     render json: service.update, status: service.status
   end
 
@@ -39,11 +43,7 @@ class Api::V1::ResultsController < ApplicationController
   private
 
   def service
-    @service ||= if current_user
-      ResultsService.new(params.as_json.deep_merge!("result" => { "user_id" => current_user.id }))
-    else
-      ResultsService.new(params)
-    end
+    @service ||= ResultsService.new(params)
   end
 
   def blob_io
@@ -62,7 +62,7 @@ class Api::V1::ResultsController < ApplicationController
     team_results = {}
     while sheet[row] && sheet[row][0]
       team = sheet[row][0].value
-      results = (1..41).map { |column| sheet[row][column].value rescue "0" }
+      results = (1..41).map { |column| sheet[row][column].value.to_i rescue 0 }
       team_results[team] = results
       row += 1
     end

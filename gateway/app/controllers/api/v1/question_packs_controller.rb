@@ -3,6 +3,7 @@ class Api::V1::QuestionPacksController < ApplicationController
 
   def create
     authorize :question_pack
+    params[:question_pack][:user_id] = current_user.id
     render json: service.create, status: service.status
   end
 
@@ -21,6 +22,7 @@ class Api::V1::QuestionPacksController < ApplicationController
 
   def update
     authorize :question_pack
+    params[:question_pack][:user_id] = current_user.id
     render json: service.update, status: service.status
   end
 
@@ -35,10 +37,6 @@ class Api::V1::QuestionPacksController < ApplicationController
   private
 
   def service
-    @service ||= if current_user
-      StorageService.new(params.as_json.deep_merge!("question_pack" => { "user_id" => current_user.id }))
-    else
-      StorageService.new(params)
-    end
+    @service ||= StorageService.new(params)
   end
 end

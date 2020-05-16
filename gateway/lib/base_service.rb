@@ -8,7 +8,7 @@ class BaseService
 
   def create
     json do
-      RestClient.post("#{base_url}/api/v1/#{resources}", params, headers)
+      RestClient.post("#{base_url}/api/v1/#{resources}", params.to_json, headers)
     end
   end
 
@@ -32,7 +32,7 @@ class BaseService
 
   def update
     json do
-      RestClient.patch("#{base_url}/api/v1/#{resources}/#{params.delete(:id)}", params, headers)
+      RestClient.patch("#{base_url}/api/v1/#{resources}/#{params.delete(:id)}", params.to_json, headers)
     end
   end
 
