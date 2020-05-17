@@ -12,6 +12,9 @@ import DeleteClub from '../../Clubs/DeleteClub';
 import EditTeam from '../../Teams/EditTeam';
 import EditEvent from '../../Events/EditEvent';
 import EditClub from '../../Clubs/EditClub';
+import EditUser from '../../Users/EditUser';
+import DeleteUser from '../../Users/DeleteUser';
+import UserRoles from '../../Users/UserRoles';
 
 export const openSignInPopUpBox = () => {
     let content = (<SignIn/>);
@@ -70,5 +73,20 @@ export const openEditTeamPopUpBox = (teamId, team) => {
 
 export const openDeleteTeamPopUpBox = (teamId, teamName) => {
     let content = (<DeleteTeam teamId={teamId} teamName={teamName}/>);
+    PopupboxManager.open({content})
+};
+
+export const openUserRolesPopUpBox = (userId, user) => {
+    let content = (<UserRoles userId={userId} user={user}/>);
+    PopupboxManager.open({content})
+};
+
+export const openEditUserPopUpBox = (userId, user) => {
+    let content = (<EditUser userId={userId} user={user}/>);
+    PopupboxManager.open({content})
+};
+
+export const openDeleteUserPopUpBox = (userId, userName) => {
+    let content = (<DeleteUser userId={userId} userName={userName}/>);
     PopupboxManager.open({content})
 };

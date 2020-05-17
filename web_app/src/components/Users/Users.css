@@ -29,29 +29,20 @@
     color: #9b9696;
 }
 
+.userAvatarInfo {
+    margin-right: 15px;
+}
+
 .userName {
-    display: table-cell;
-    vertical-align: middle;
-    width: 20%;
-}
-
-.userEmail {
-    display: table-cell;
-    vertical-align: middle;
-    width: 20%;
-}
-
-.userRoles {
     display: table-cell;
     vertical-align: middle;
     width: 40%;
 }
 
-.userRolesEdit {
+.userEmail {
     display: table-cell;
     vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
+    width: 40%;
 }
 
 .userEdit {
@@ -68,7 +59,42 @@
     cursor: pointer;
 }
 
+.userArrow {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
 .userIcon {
     height: 15px;
     width: 15px;
+}
+
+.divUserDetails {
+    width: 100%;
+}
+
+.usersDescriptionTableRow {
+    margin-top: 0;
+    height: 80px;
+}
+
+.userRoles {
+    display: table-cell;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.userRolesActions {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.userEmpty {
+    display: table-cell;
+    vertical-align: middle;
+    width: 90%;
 }
