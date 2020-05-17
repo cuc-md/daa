@@ -568,7 +568,7 @@ Response:
 {
   "data": {
     "users": [
-      { "id": 1, "name": "name", "email": "email@email.com", "roles": [] }
+      { "id": 1, "name": "name", "email": "email@email.com" }
     ]
 }
 ```
