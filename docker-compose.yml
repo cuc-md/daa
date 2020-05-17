@@ -37,13 +37,12 @@ services:
       - ./results_stats:/app
     ports:
       - "9000:9000"
+    depends_on:
+      - results-db
   results-db:
     image: mongo:3
     volumes:
       - results-database:/data/db
-    env_file:
-      - results_stats/db.env
-
 
 volumes:
   gateway-database:

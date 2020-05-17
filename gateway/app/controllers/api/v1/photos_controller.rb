@@ -3,6 +3,7 @@ class Api::V1::PhotosController < ApplicationController
 
   def create
     authorize :photo
+    params[:photo][:user_id] = current_user.id
     render json: service.create, status: service.status
   end
 
@@ -18,10 +19,6 @@ class Api::V1::PhotosController < ApplicationController
   private
 
   def service
-    @service ||= if current_user
-      PhotoService.new(params.as_json.deep_merge!("photo" => { "user_id" => current_user.id }))
-    else
-      PhotoService.new(params)
-    end
+    @service ||= PhotoService.new(params)
   end
 end

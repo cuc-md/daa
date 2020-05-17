@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         end
         resources :clubs,   except: [:edit, :new]
         resources :teams,   except: [:edit, :new]
-        resources :results, except: [:edit, :new, :index] do
+        resources :results, only: [:create, :show, :update, :destroy] do
           get :details, on: :member
           get :sample, on: :collection
         end

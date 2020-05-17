@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do
+  namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       resources :results, only: [:create, :update, :show, :destroy] do
         get :details, on: :member

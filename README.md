@@ -507,6 +507,7 @@ Response:
 ```json
 {
   "data": {
+    "event_name": "Super Cup",
     "result": [
         {
           "team_name": "team1",
@@ -527,6 +528,7 @@ Response:
 ```json
 {
   "data": {
+    "event_name": "Super Cup",
     "result": [
         {
           "team_name": "team1",
