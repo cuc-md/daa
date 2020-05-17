@@ -45,7 +45,7 @@ class Api::V1::EventsController < ApplicationController
     render_event
   end
 
-  def register
+  def registration
     render json: {
       data: {
         registered: true
