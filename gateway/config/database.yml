@@ -13,7 +13,7 @@ development:
 test:
   <<: *default
   database: gateway_test
-  host:     <%= ENV.fetch("CONTAINER") { false } ? "gateway-db" : "localhost" %>
+  host:     <%= ENV.fetch("CONTAINER") { false } ? "gateway-db" : ENV["CI"] ? "postgres" : "localhost" %>
 
 production:
   <<: *default
