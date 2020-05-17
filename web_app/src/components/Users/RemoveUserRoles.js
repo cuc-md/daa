@@ -29,15 +29,15 @@ class RemoveUserRoles extends Component {
     };
 
     handleSubmit(e) {
-        let userRolesToAdd = [];
-        if (!this.state.manage_events) {
-            userRolesToAdd.push("manage_events" && checkUserManageEventsRole(this.props.userRoles))
+        let userRolesToRemove = [];
+        if (!this.state.manage_events && checkUserManageEventsRole(this.props.userRoles)) {
+            userRolesToRemove.push("manage_events")
         }
         if (!this.state.manage_clubs && checkUserManageClubsRole(this.props.userRoles)) {
-            userRolesToAdd.push("manage_clubs")
+            userRolesToRemove.push("manage_clubs")
         }
         if (!this.state.manage_users && checkUserManageUsersRole(this.props.userRoles)) {
-            userRolesToAdd.push("manage_users")
+            userRolesToRemove.push("manage_users")
         }
 
         e.preventDefault();
@@ -47,7 +47,7 @@ class RemoveUserRoles extends Component {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             },
-            body: JSON.stringify({roles: userRolesToAdd})
+            body: JSON.stringify({roles: userRolesToRemove})
         }).then(response => {
             if (!response.ok) {
                 toaster.notify("Error", {
