@@ -4,7 +4,11 @@ import {Link} from 'react-router-dom';
 import {Image} from 'react-bootstrap';
 import {UncontrolledCollapse} from 'reactstrap';
 import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
-import {openEditEventPopUpBox, openDeleteEventPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import {
+    openEditEventPopUpBox,
+    openDeleteEventPopUpBox,
+    openRegisterTeamForEventPopUpBox
+} from '../Utils/PopUpBox/PopUpBox';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import event_default from '../../assets/icons/default/event_default.svg';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
@@ -12,6 +16,7 @@ import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
 import deleteIcon from '../../assets/icons/base/delete.svg';
 import resultsIcon from '../../assets/icons/sidebar/results.svg';
+import team_register from '../../assets/icons/base/team_register.svg';
 import './Events.css';
 
 class Event extends Component {
@@ -108,6 +113,12 @@ class Event extends Component {
                 <div className="eventRegistration">
                     {this.props.event.registration.status}
                 </div>
+                <div className="eventTeamRegister">
+                    <img src={team_register}
+                         className="eventIcon" alt=""
+                         title="register team for event"
+                         onClick={() => openRegisterTeamForEventPopUpBox(this.props.eventId)}/>
+                </div>
                 <div className="eventResults">
                     <Link to={{
                         pathname: `/events/${this.props.event.id}/results`,
@@ -116,6 +127,7 @@ class Event extends Component {
                         }
                     }}>
                         <img src={resultsIcon}
+                             title="results"
                              className="eventIcon" alt=""/>
                     </Link>
                 </div>
@@ -125,11 +137,13 @@ class Event extends Component {
                         <div className="eventEdit">
                             <img src={editIcon}
                                  className="eventIcon" alt=""
+                                 title="edit"
                                  onClick={() => openEditEventPopUpBox(this.props.eventId, eventDetails.data.event)}/>
                         </div>
                         <div className="eventDelete">
                             <img src={deleteIcon}
                                  className="eventIcon" alt=""
+                                 title="delete"
                                  onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
                         </div>
                     </> :

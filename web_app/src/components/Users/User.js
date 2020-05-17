@@ -69,14 +69,15 @@ class User extends Component {
                 <div className="userEdit">
                     <img src={editIcon}
                          className="userIcon" alt=""
+                         title="edit"
                          onClick={() => openEditUserPopUpBox(this.props.userId, this.props.user)}/>
                 </div>
                 <div className="userDelete">
                     <img src={deleteIcon}
                          className="userIcon" alt=""
+                         title="delete"
                          onClick={() => {
-                             openDeleteUserPopUpBox(this.props.userId, this.props.user.name);
-
+                             openDeleteUserPopUpBox(this.props.userId, this.props.user.name)
                          }}/>
                 </div>
                 <div className="userArrow">
@@ -111,12 +112,14 @@ class User extends Component {
                                 <div className="userRolesActions">
                                     <img src={addIcon}
                                          className="userRoleIcon" alt=""
+                                         title="add roles"
                                          onClick={() => openUserAddRolesPopUpBox(
                                              this.props.userId, userRoles.data.roles)}/>
                                 </div>
                                 <div className="userRolesActions">
                                     <img src={removeIcon}
                                          className="userRoleIcon" alt=""
+                                         title="remove roles"
                                          onClick={() => openUserRemoveRolesPopUpBox(this.props.userId, userRoles.data.roles)}/>
                                 </div>
                             </div>
