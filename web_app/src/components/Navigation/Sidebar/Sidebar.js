@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import {checkUserManageUsersRole} from '../../Utils/Helpers/UserHelper';
 import {ReactComponent as HomeIcon} from '../../../assets/icons/sidebar/home.svg';
@@ -45,16 +46,22 @@ class Sidebar extends Component {
                     <QuestionStoreIcon className="sidebarIcon"/>
                 </NavLink>
             </div>
-            {/*{(JSON.stringify(this.props.user) !== '{}' &&*/}
-            {/*    checkUserManageUsersRole(this.props.user.roles)) ?*/}
-            {/*    <div className="divSidebar">*/}
-            {/*        <NavLink activeClassName="active" className="" to='/users'>*/}
-            {/*            <UsersIcon className="sidebarIcon"/>*/}
-            {/*        </NavLink>*/}
-            {/*    </div> : null*/}
-            {/*}*/}
+            {(JSON.stringify(this.props.user) !== '{}' &&
+                checkUserManageUsersRole(this.props.user.roles)) ?
+                <div className="divSidebar">
+                    <NavLink activeClassName="active" className="" to='/users'>
+                        <UsersIcon className="sidebarIcon"/>
+                    </NavLink>
+                </div> : null
+            }
         </div>
     }
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null, undefined, {pure: false})(Sidebar);

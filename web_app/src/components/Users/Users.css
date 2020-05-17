@@ -1,0 +1,74 @@
+.usersTableHead {
+    display: table;
+    width: 100%;
+    height: 30px;
+    color: #9b9696;
+}
+
+.usersTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: #fefefe;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.divUsersTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+}
+
+.userNumber {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    padding-left: 16px;
+    color: #9b9696;
+}
+
+.userName {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.userEmail {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.userRoles {
+    display: table-cell;
+    vertical-align: middle;
+    width: 40%;
+}
+
+.userRolesEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.userEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.userDelete {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.userIcon {
+    height: 15px;
+    width: 15px;
+}

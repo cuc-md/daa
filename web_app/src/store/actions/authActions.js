@@ -14,7 +14,7 @@ export const registerFetch = (user) => {
             .then(response => response.headers.get('authorization'))
             .then(data => {
                 if (data === undefined || data === null) {
-                    toaster.notify("Error sign in",
+                    toaster.notify("Error registration",
                         {duration: 3000, position: "bottom"});
                 } else {
                     dispatch({

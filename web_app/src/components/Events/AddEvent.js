@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import DatePicker from 'react-datepicker';
 import {PopupboxManager} from 'react-popupbox';
@@ -49,7 +50,8 @@ class AddEvent extends Component {
         fetch('/api/v1/events', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             },
             body: JSON.stringify(this.state)
         }).then(response => {
@@ -159,4 +161,10 @@ class AddEvent extends Component {
     }
 }
 
-export default AddEvent;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
+    }
+};
+
+export default connect(mapStateToProps, null)(AddEvent);
