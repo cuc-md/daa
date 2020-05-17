@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe StorageService do
+xdescribe StorageService do
   describe "#create" do
     it "makes request to create question pack" do
       expect(RestClient).to receive(:post).with(

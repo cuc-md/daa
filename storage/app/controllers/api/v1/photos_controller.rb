@@ -26,7 +26,7 @@ class Api::V1::PhotosController < ApplicationController
   end
 
   def photo
-    @photo ||= Photo.find(params[:id])
+    @photo ||= Photo.find_by(event_id: params[:id])
   end
 
   def blob_io

@@ -1,0 +1,28 @@
+image: ruby:2.6
+
+services:
+  - postgres:9.3
+
+variables:
+  CI: "true"
+  RAILS_ENV: "test"
+  POSTGRES_DB: database
+  POSTGRES_USER: gateway_user
+  POSTGRES_PASSWORD: "123456"
+  POSTGRES_HOST_AUTH_METHOD: trust
+
+before_script:
+  - cd gateway
+  - ruby -v
+  - bundle install -j $(nproc) --path vendor/ruby
+  - bundle exec rails db:create db:migrate
+
+test:
+  script:
+  - bundle exec rspec
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/ruby
+
