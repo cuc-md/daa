@@ -83,7 +83,7 @@
 .userRoles {
     display: table-cell;
     vertical-align: middle;
-    width: 90%;
+    width: 80%;
 }
 
 .userRolesActions {
@@ -93,8 +93,7 @@
     cursor: pointer;
 }
 
-.userEmpty {
-    display: table-cell;
-    vertical-align: middle;
-    width: 90%;
+.userRoleIcon{
+    height: 25px;
+    width: 25px;
 }

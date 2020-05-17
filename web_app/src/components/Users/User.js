@@ -6,9 +6,11 @@ import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import {
     openEditUserPopUpBox,
     openDeleteUserPopUpBox,
-    openUserRolesPopUpBox
+    openUserAddRolesPopUpBox,
+    openUserRemoveRolesPopUpBox
 } from '../Utils/PopUpBox/PopUpBox';
-import rolesIcon from '../../assets/icons/base/role.svg';
+import addIcon from '../../assets/icons/base/add.svg';
+import removeIcon from '../../assets/icons/base/remove.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
 import deleteIcon from '../../assets/icons/base/delete.svg';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
@@ -94,25 +96,29 @@ class User extends Component {
                             <div className="userRoles">
                                 Roles
                             </div>
-                            <div className="userEmpty"/>
+                            <div className="userRolesActions"/>
+                            <div className="userRolesActions"/>
                         </div>
                         <div className="usersDescriptionTableRow">
                             <div className="divUsersTableRow">
                                 <div className="userNumber"/>
                                 <div className="userRoles">
                                     {userRoles.data.roles.length === 0 ?
-                                        "No roles"
-                                        :
-                                        userRoles.data.roles.map(role => {
+                                        "No roles" : userRoles.data.roles.map(role => {
                                             return <>{role}<br/></>;
                                         })}
                                 </div>
                                 <div className="userRolesActions">
-                                    <img src={rolesIcon}
-                                         className="userIcon" alt=""
-                                         onClick={() => openUserRolesPopUpBox(this.props.userId, this.props.user)}/>
+                                    <img src={addIcon}
+                                         className="userRoleIcon" alt=""
+                                         onClick={() => openUserAddRolesPopUpBox(
+                                             this.props.userId, userRoles.data.roles)}/>
                                 </div>
-                                <div className="userEmpty"/>
+                                <div className="userRolesActions">
+                                    <img src={removeIcon}
+                                         className="userRoleIcon" alt=""
+                                         onClick={() => openUserRemoveRolesPopUpBox(this.props.userId, userRoles.data.roles)}/>
+                                </div>
                             </div>
                         </div>
                     </div>
