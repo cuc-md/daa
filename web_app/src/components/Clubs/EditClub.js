@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import DatePicker from "react-datepicker";
 import {PopupboxManager} from 'react-popupbox';
@@ -37,7 +38,8 @@ class EditClub extends Component {
         fetch('/api/v1/clubs/' + this.props.clubId, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             },
             body: JSON.stringify(this.state)
         }).then(response => {
@@ -129,4 +131,10 @@ class EditClub extends Component {
     }
 }
 
-export default EditClub;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(EditClub);

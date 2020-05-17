@@ -23,7 +23,7 @@ class Result extends Component {
     }
 
     render() {
-        const {resultDetails, isOpen} = this.state;
+        const {isOpen} = this.state;
 
         let maxTableCellEmptyWidth = 64;
         let resultsRoundNumber = 0;

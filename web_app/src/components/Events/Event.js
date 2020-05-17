@@ -31,7 +31,7 @@ class Event extends Component {
                         "name": "World championship",
                         "long_name": "World championship 2020",
                         "description": "description",
-                        "cover_photo": "/api/v1/photos/1234.png",
+                        "cover_photo": "/api/v1/photos/1234",
                         "dates": {
                             "start_date": "2010-01-01 10:00",
                             "end_date": "2010-01-01 15:00"
@@ -45,14 +45,6 @@ class Event extends Component {
                             {
                                 "id": 456,
                                 "name": "Echipa Racheta"
-                            },
-                            {
-                                "id": 457,
-                                "name": "Echipa Racheta 1"
-                            },
-                            {
-                                "id": 458,
-                                "name": "Echipa Racheta 2"
                             }
                         ]
                     }
@@ -65,10 +57,11 @@ class Event extends Component {
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/teams/' + this.props.eventId, {
+    //     fetch('/api/v1/events/' + this.props.eventId, {
     //         method: 'GET',
     //         headers: {
-    //             'Content-Type': 'application/json'
+    //             'Content-Type': 'application/json',
+    //             'Authorization': this.props.token
     //         }
     //     })
     //         .then(response => response.json())
@@ -163,42 +156,42 @@ class Event extends Component {
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
                 {/*{isLoading ?*/}
                 {/*    <div className="center"><LoaderSpinner/></div> :*/}
-                <div className="divEventDetails">
-                    <div className="eventsTableHead">
-                        <div className="eventNumber"/>
-                        <div className="eventTeams">
-                            Teams
-                        </div>
-                        <div className="eventRegistrationFee">
-                            Registration fee
-                        </div>
-                        <div className="eventRegistrationEnd">
-                            Registration end
-                        </div>
-                        <div className="eventDescription">
-                            Description
-                        </div>
-                        <div className="eventEmpty"/>
-                    </div>
-                    <div className="eventsDescriptionTableRow">
-                        <div className="divEventsTableRow">
+                    <div className="divEventDetails">
+                        <div className="eventsTableHead">
                             <div className="eventNumber"/>
                             <div className="eventTeams">
-                                {eventTeamsList}
+                                Teams
                             </div>
                             <div className="eventRegistrationFee">
-                                {this.props.event.registration.fee}
+                                Registration fee
                             </div>
                             <div className="eventRegistrationEnd">
-                                {this.props.event.registration.registation_end}
+                                Registration end
                             </div>
                             <div className="eventDescription">
-                                {eventDetails.data.event.description}
+                                Description
                             </div>
                             <div className="eventEmpty"/>
                         </div>
+                        <div className="eventsDescriptionTableRow">
+                            <div className="divEventsTableRow">
+                                <div className="eventNumber"/>
+                                <div className="eventTeams">
+                                    {eventTeamsList}
+                                </div>
+                                <div className="eventRegistrationFee">
+                                    {this.props.event.registration.fee}
+                                </div>
+                                <div className="eventRegistrationEnd">
+                                    {this.props.event.registration.registation_end}
+                                </div>
+                                <div className="eventDescription">
+                                    {eventDetails.data.event.description}
+                                </div>
+                                <div className="eventEmpty"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 {/*}*/}
             </UncontrolledCollapse>
         </div>
@@ -207,6 +200,7 @@ class Event extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

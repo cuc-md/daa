@@ -11,45 +11,29 @@ class Teams extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teams: {
-                "data": {
-                    "teams": [
-                        {
-                            "id": 123,
-                            "name": "Echipa Racheta"
-                        },
-                        {
-                            "id": 124,
-                            "name": "Echipa Racheta 1"
-                        },
-                        {
-                            "id": 125,
-                            "name": "Echipa Racheta 2"
-                        }
-                    ]
-                }
-            },
+            teams: {},
             isLoading: true
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/teams', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => this.setState({teams: data, isLoading: false}))
-    // }
+    componentDidMount() {
+        fetch('/api/v1/teams', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        })
+            .then(response => response.json())
+            .then(data => this.setState({teams: data, isLoading: false}))
+    }
 
     render() {
         const {teams, isLoading} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         let teamsList = teams.data.teams.map((team, i) => {
             let divItemId = "id" + i;
@@ -90,6 +74,7 @@ class Teams extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

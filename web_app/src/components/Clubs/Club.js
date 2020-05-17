@@ -16,41 +16,24 @@ class Club extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clubDetails: {
-                "data": {
-                    "club": {
-                        "id": 123,
-                        "name": "Club 1",
-                        "city": "Chisinau",
-                        "address": "Chisinau, some street",
-                        "founded_on": "2010-10-10",
-                        "description": "very long description + html",
-                        "active_teams": 10,
-                        "total_teams": 50,
-                        "contacts": {
-                            "representative": "John Doe",
-                            "phone": "+123456789",
-                            "email": "foo@bar.baz"
-                        }
-                    }
-                }
-            },
+            clubDetails: {},
             isLoading: true,
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/clubs/' + this.props.clubId, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => this.setState({clubDetails: data, isLoading: false}))
-    // }
+    componentDidMount() {
+        fetch('/api/v1/clubs/' + this.props.clubId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        })
+            .then(response => response.json())
+            .then(data => this.setState({clubDetails: data, isLoading: false}))
+    }
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
@@ -124,45 +107,44 @@ class Club extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {/*{isLoading ?*/}
-                {/*    <div className="center"><LoaderSpinner/></div> :*/}
-                <div className="divClubDetails">
-                    <div className="clubsTableHead">
-                        <div className="clubNumber"/>
-                        <div className="clubFoundedOn">
-                            Founded on
-                        </div>
-                        <div className="clubActiveTeams">
-                            Active teams
-                        </div>
-                        <div className="clubTotalTeams">
-                            Total teams
-                        </div>
-                        <div className="clubDescription">
-                            Description
-                        </div>
-                        <div className="clubEmpty"/>
-                    </div>
-                    <div className="clubsDescriptionTableRow">
-                        <div className="divClubsTableRow">
+                {isLoading ? <div className="center"><LoaderSpinner/></div> :
+                    <div className="divClubDetails">
+                        <div className="clubsTableHead">
                             <div className="clubNumber"/>
                             <div className="clubFoundedOn">
-                                {clubDetails.data.club.founded_on}
+                                Founded on
                             </div>
                             <div className="clubActiveTeams">
-                                {clubDetails.data.club.active_teams}
+                                Active teams
                             </div>
                             <div className="clubTotalTeams">
-                                {clubDetails.data.club.total_teams}
+                                Total teams
                             </div>
                             <div className="clubDescription">
-                                {clubDetails.data.club.description}
+                                Description
                             </div>
                             <div className="clubEmpty"/>
                         </div>
+                        <div className="clubsDescriptionTableRow">
+                            <div className="divClubsTableRow">
+                                <div className="clubNumber"/>
+                                <div className="clubFoundedOn">
+                                    {clubDetails.data.club.founded_on}
+                                </div>
+                                <div className="clubActiveTeams">
+                                    {clubDetails.data.club.active_teams}
+                                </div>
+                                <div className="clubTotalTeams">
+                                    {clubDetails.data.club.total_teams}
+                                </div>
+                                <div className="clubDescription">
+                                    {clubDetails.data.club.description}
+                                </div>
+                                <div className="clubEmpty"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                {/*}*/}
+                }
             </UncontrolledCollapse>
         </div>
     }
@@ -170,6 +152,7 @@ class Club extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

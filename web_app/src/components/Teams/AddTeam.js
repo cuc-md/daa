@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import {PopupboxManager} from 'react-popupbox';
 import '../Utils/Toaster/Toaster.css';
@@ -26,7 +27,8 @@ class AddTeam extends Component {
         fetch('/api/v1/teams', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             },
             body: JSON.stringify(this.state)
         }).then(response => {
@@ -86,4 +88,10 @@ class AddTeam extends Component {
     }
 }
 
-export default AddTeam;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(AddTeam);

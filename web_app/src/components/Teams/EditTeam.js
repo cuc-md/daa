@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import {PopupboxManager} from 'react-popupbox';
 import '../Utils/Toaster/Toaster.css';
@@ -27,7 +28,8 @@ class EditTeam extends Component {
         fetch('/api/v1/teams/' + this.props.teamId, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             },
             body: JSON.stringify(this.state)
         }).then(response => {
@@ -87,4 +89,10 @@ class EditTeam extends Component {
     }
 }
 
-export default EditTeam;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(EditTeam);

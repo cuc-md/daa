@@ -20,7 +20,8 @@ class Events extends Component {
         fetch('/api/v1/events', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             }
         }).then(response => response.json())
             .then(data => this.setState({events: data, isLoading: false}));
@@ -83,6 +84,7 @@ class Events extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

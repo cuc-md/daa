@@ -12,66 +12,29 @@ class Clubs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clubs: {
-                "data": {
-                    "clubs": [
-                        {
-                            "id": 123,
-                            "name": "Club 1",
-                            "city": "Chisinau",
-                            "address": "Chisinau, some street",
-                            "contacts": {
-                                "representative": "John Doe",
-                                "phone": "+123456789",
-                                "email": "foo@bar.baz"
-                            },
-                        },
-                        {
-                            "id": 124,
-                            "name": "Club 2",
-                            "city": "Chisinau",
-                            "address": "Chisinau, some street",
-                            "contacts": {
-                                "representative": "John Doe",
-                                "phone": "+123456789",
-                                "email": "foo@bar.baz"
-                            }
-                        },
-                        {
-                            "id": 125,
-                            "name": "Club 3",
-                            "city": "Chisinau",
-                            "address": "Chisinau, some street",
-                            "contacts": {
-                                "representative": "John Doe",
-                                "phone": "+123456789",
-                                "email": "foo@bar.baz"
-                            }
-                        }
-                    ]
-                }
-            },
+            clubs: {},
             isLoading: true
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/clubs', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => this.setState({clubs: data, isLoading: false}))
-    // }
+    componentDidMount() {
+        fetch('/api/v1/clubs', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        })
+            .then(response => response.json())
+            .then(data => this.setState({clubs: data, isLoading: false}))
+    }
 
     render() {
         const {clubs, isLoading} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         let clubsList = clubs.data.clubs.map((club, i) => {
             let divItemId = "id" + i;
@@ -121,6 +84,7 @@ class Clubs extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

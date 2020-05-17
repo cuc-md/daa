@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image} from 'react-bootstrap';
+import {connect} from 'react-redux';
 import {UncontrolledCollapse} from 'reactstrap';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
@@ -11,18 +11,7 @@ class QuestionPack extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionPack: {
-                "data": {
-                    "question_pack": {
-                        "id": 1,
-                        "author": "anonymous",
-                        "event_name": "Super Cup",
-                        "event_id": "12345",
-                        "difficulty": "medium",
-                        "user_id": "123"
-                    }
-                }
-            },
+            questionPack: {},
             isLoading: true,
             isOpen: false
         };
@@ -33,7 +22,8 @@ class QuestionPack extends Component {
         fetch('/api/v1/question_packs/' + this.props.packId, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             }
         }).then(response => response.json())
             .then(data => this.setState({results: data, isLoading: false}));
@@ -50,9 +40,9 @@ class QuestionPack extends Component {
     render() {
         const {questionPack, isLoading, isOpen} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         return <div className="questionPacksTableRow" key={this.props.keyItem}>
             <div className="divQuestionPacksTableRow">
@@ -74,28 +64,34 @@ class QuestionPack extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {/*{isLoading ?*/}
-                {/*    <div className="center"><LoaderSpinner/></div> :*/}
-                <div className="divQuestionPackDetails">
-                    <div className="questionPacksTableHead">
-                        <div className="questionPackNumber"/>
-                        <div className="questionPackAuthor">
-                            Author
+                {isLoading ?
+                    <div className="center"><LoaderSpinner/></div> :
+                    <div className="divQuestionPackDetails">
+                        <div className="questionPacksTableHead">
+                            <div className="questionPackNumber"/>
+                            <div className="questionPackAuthor">
+                                Author
+                            </div>
+                            <div className="questionPackEmpty"/>
                         </div>
-                        <div className="questionPackEmpty"/>
-                    </div>
-                    <div className="questionPacksTableRow">
-                        <div className="questionPackNumber"/>
-                        <div className="questionPackAuthor">
-                            {questionPack.data.question_pack.author}
+                        <div className="questionPacksTableRow">
+                            <div className="questionPackNumber"/>
+                            <div className="questionPackAuthor">
+                                {questionPack.data.question_pack.author}
+                            </div>
+                            <div className="questionPackEmpty"/>
                         </div>
-                        <div className="questionPackEmpty"/>
                     </div>
-                </div>
-                {/*}*/}
+                }
             </UncontrolledCollapse>
         </div>
     }
 }
 
-export default QuestionPack;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(QuestionPack);

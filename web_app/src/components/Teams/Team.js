@@ -16,31 +16,24 @@ class Team extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamDetails: {
-                "data": {
-                    "team": {
-                        "name": "Echipa Racheta",
-                        "captain": "John Doe",
-                        "phone": "+123456789"
-                    }
-                }
-            },
+            teamDetails: {},
             isLoading: true,
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/teams/' + this.props.teamId, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => this.setState({teamDetails: data, isLoading: false}))
-    // }
+    componentDidMount() {
+        fetch('/api/v1/teams/' + this.props.teamId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        })
+            .then(response => response.json())
+            .then(data => this.setState({teamDetails: data, isLoading: false}))
+    }
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
@@ -91,8 +84,8 @@ class Team extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {/*{isLoading ?*/}
-                {/*    <div className="center"><LoaderSpinner/></div> :*/}
+                {isLoading ?
+                    <div className="center"><LoaderSpinner/></div> :
                 <div className="divTeamDetails">
                     <div className="teamsTableHead">
                         <div className="teamNumber"/>
@@ -121,7 +114,7 @@ class Team extends Component {
                         </div>
                     </div>
                 </div>
-                {/*}*/}
+                }
             </UncontrolledCollapse>
         </div>
     }
@@ -129,6 +122,7 @@ class Team extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

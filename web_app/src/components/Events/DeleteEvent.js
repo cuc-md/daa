@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {PopupboxManager} from 'react-popupbox';
 import toaster from 'toasted-notes';
 
@@ -6,7 +7,11 @@ class DeleteEvent extends Component {
 
     deleteEvent() {
         fetch('/api/v1/events/' + this.props.eventId, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            },
         }).then(response => {
             if (!response.ok) {
                 toaster.notify("Error", {
@@ -45,4 +50,10 @@ class DeleteEvent extends Component {
     }
 }
 
-export default DeleteEvent;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(DeleteEvent);
