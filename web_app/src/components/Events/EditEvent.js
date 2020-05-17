@@ -5,6 +5,7 @@ import {PopupboxManager} from 'react-popupbox';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
+import {connect} from "react-redux";
 
 class EditEvent extends Component {
 
@@ -50,7 +51,8 @@ class EditEvent extends Component {
         fetch('/api/v1/events/' + this.props.eventId, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
             },
             body: JSON.stringify(this.state)
         }).then(response => {
@@ -160,4 +162,10 @@ class EditEvent extends Component {
     }
 }
 
-export default EditEvent;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
+    }
+};
+
+export default connect(mapStateToProps, null)(EditEvent);

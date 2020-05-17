@@ -42,7 +42,7 @@
 .eventName {
     display: table-cell;
     vertical-align: middle;
-    width: 35%;
+    width: 30%;
 }
 
 .eventDate {
@@ -57,7 +57,14 @@
     width: 10%;
 }
 
-.eventResults{
+.eventTeamRegister {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.eventResults {
     display: table-cell;
     vertical-align: middle;
     width: 5%;

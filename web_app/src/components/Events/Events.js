@@ -11,80 +11,28 @@ class Events extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            events: {
-                "data": {
-                    "events": [
-                        {
-                            "id": 123,
-                            "name": "World championship",
-                            "long_name": "World championship 2020",
-                            "description": "description",
-                            "cover_photo": "/api/v1/photos/1234.png",
-                            "dates": {
-                                "start_date": "2010-01-01 10:00",
-                                "end_date": "2010-01-01 15:00"
-                            },
-                            "registration": {
-                                "status": "open",
-                                "fee": "10 MDL/person",
-                                "registation_end": "2010-01-01 09:00"
-                            }
-                        },
-                        {
-                            "id": 124,
-                            "name": "World championship 2",
-                            "long_name": "World championship 2022",
-                            "description": "description",
-                            "cover_photo": "/api/v1/photos/1234.png",
-                            "dates": {
-                                "start_date": "2010-01-01 10:00",
-                                "end_date": "2010-01-01 15:00"
-                            },
-                            "registration": {
-                                "status": "open",
-                                "fee": "10 MDL/person",
-                                "registation_end": "2010-01-01 09:00"
-                            }
-                        },
-                        {
-                            "id": 125,
-                            "name": "World championship 3",
-                            "long_name": "World championship 2023",
-                            "description": "description",
-                            "cover_photo": "/api/v1/photos/1234.png",
-                            "dates": {
-                                "start_date": "2010-01-01 10:00",
-                                "end_date": "2010-01-01 15:00"
-                            },
-                            "registration": {
-                                "status": "open",
-                                "fee": "10 MDL/person",
-                                "registation_end": "2010-01-01 09:00"
-                            }
-                        }
-                    ]
-                }
-            },
+            events: {},
             isLoading: true
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/events', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }).then(response => response.json())
-    //         .then(data => this.setState({events: data, isLoading: false}));
-    // }
+    componentDidMount() {
+        fetch('/api/v1/events', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        }).then(response => response.json())
+            .then(data => this.setState({events: data, isLoading: false}));
+    }
 
     render() {
         const {events, isLoading} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         let eventsList = events.data.events.map((event, i) => {
             let divItemId = "id" + i;
@@ -122,6 +70,7 @@ class Events extends Component {
                     <div className="eventRegistration">
                         Status
                     </div>
+                    <div className="eventTeamRegister"/>
                     <div className="eventResults"/>
                     <div className="eventEdit"/>
                     <div className="eventDelete"/>
@@ -135,6 +84,7 @@ class Events extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         user: state.user
     }
 };

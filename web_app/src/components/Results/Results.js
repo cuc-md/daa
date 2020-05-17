@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import Result from './Result';
 import './Results.css';
@@ -8,56 +9,28 @@ class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: {
-                "data": {
-                    "result": [
-                        {
-                            "team_name": "team1",
-                            "total_score": 3,
-                            "score": [
-                                {"round": 1, "count": 0, "score": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                {"round": 2, "count": 3, "score": [0, 1, 0, 0, 0, 0, 0, 1, 0, 1]}
-                            ]
-                        },
-                        {
-                            "team_name": "team2",
-                            "total_score": 4,
-                            "score": [
-                                {"round": 1, "count": 1, "score": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]},
-                                {"round": 2, "count": 3, "score": [0, 1, 0, 0, 0, 0, 0, 1, 0, 1]}
-                            ]
-                        },
-                        {
-                            "team_name": "team3",
-                            "total_score": 5,
-                            "score": [
-                                {"round": 1, "count": 2, "score": [0, 0, 1, 0, 0, 0, 0, 0, 1, 0]},
-                                {"round": 2, "count": 3, "score": [0, 1, 0, 0, 0, 0, 0, 1, 0, 1]}
-                            ]
-                        }
-                    ]
-                }
-            },
+            results: {},
             isLoading: true
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }).then(response => response.json())
-    //         .then(data => this.setState({results: data, isLoading: false}));
-    // }
+    componentDidMount() {
+        fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        }).then(response => response.json())
+            .then(data => this.setState({results: data, isLoading: false}));
+    }
 
     render() {
         const {results, isLoading} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         let resultsList = results.data.result.map((result, i) => {
             let divItemId = "id" + i;
@@ -103,4 +76,10 @@ class Results extends Component {
     }
 }
 
-export default Results;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(Results);

@@ -5,14 +5,13 @@ import {PopupboxManager} from 'react-popupbox';
 import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
-class EditTeam extends Component {
+class EditUser extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.team.name,
-            captain: this.props.team.captain,
-            phone: this.props.team.phone,
+            name: this.props.user.name,
+            email: this.props.user.email,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +24,7 @@ class EditTeam extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch('/api/v1/teams/' + this.props.teamId, {
+        fetch('/api/v1/users/' + this.props.userId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +38,7 @@ class EditTeam extends Component {
                     position: "bottom"
                 });
             } else {
-                toaster.notify("Team was successfully edited", {
+                toaster.notify("User was successfully edited", {
                     duration: 3000,
                     position: "bottom"
                 });
@@ -54,31 +53,22 @@ class EditTeam extends Component {
             <form className="form"
                   onSubmit={this.handleSubmit}>
                 <h3 className="formText">
-                    Edit team
+                    Edit user
                 </h3>
                 <br/>
                 <input
                     type="name"
                     name="name"
-                    placeholder="Team name"
+                    placeholder="Name"
                     value={this.state.name}
                     onChange={this.handleChange}
                     required
                 />
                 <input
-                    type="name"
-                    name="captain"
-                    placeholder="Captain"
-                    value={this.state.captain}
-                    onChange={this.handleChange}
-                    required
-                />
-                <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone"
-                    pattern="^\+?\d{0,13}"
-                    value={this.state.phone}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={this.state.email}
                     onChange={this.handleChange}
                     required
                 />
@@ -95,4 +85,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, null)(EditTeam);
+export default connect(mapStateToProps, null)(EditUser);

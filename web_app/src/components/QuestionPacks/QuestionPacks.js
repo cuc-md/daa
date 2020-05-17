@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import QuestionPack from './QuestionPack';
 import './QuestionPacks.css';
@@ -8,50 +9,28 @@ class QuestionPacks extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionPacks: {
-                "data": {
-                    "question_packs": [
-                        {
-                            "id": 1,
-                            "event_name": "Super Cup",
-                            "event_id": "12345",
-                            "difficulty": "medium"
-                        },
-                        {
-                            "id": 1,
-                            "event_name": "Super Cup1",
-                            "event_id": "12346",
-                            "difficulty": "medium"
-                        },
-                        {
-                            "id": 1,
-                            "event_name": "Super Cup3",
-                            "event_id": "12347",
-                            "difficulty": "medium"
-                        }
-                    ]
-                }
-            },
+            questionPacks: {},
             isLoading: true
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/question_packs', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }).then(response => response.json())
-    //         .then(data => this.setState({questionPacks: data, isLoading: false}));
-    // }
+    componentDidMount() {
+        fetch('/api/v1/question_packs', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        }).then(response => response.json())
+            .then(data => this.setState({questionPacks: data, isLoading: false}));
+    }
 
     render() {
         const {questionPacks, isLoading} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         let questionPacksList = questionPacks.data.question_packs.map((pack, i) => {
             let divItemId = "id" + i;
@@ -82,4 +61,10 @@ class QuestionPacks extends Component {
     }
 }
 
-export default QuestionPacks;
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, null)(QuestionPacks);

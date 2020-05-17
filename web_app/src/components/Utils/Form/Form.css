@@ -32,6 +32,10 @@
     color: #555;
 }
 
+.form input[type="checkbox"] {
+    margin-right: 15px;
+}
+
 .form input[type="email"]:focus,
 .form input[type="password"]:focus,
 .form input[type="name"]:focus,
