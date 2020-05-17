@@ -33,10 +33,16 @@
     color: #9b9696;
 }
 
+.eventCoverPhoto {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
 .eventName {
     display: table-cell;
     vertical-align: middle;
-    width: 40%;
+    width: 35%;
 }
 
 .eventDate {
@@ -45,25 +51,78 @@
     width: 15%;
 }
 
-.eventLocation {
+.eventRegistration {
     display: table-cell;
     vertical-align: middle;
-    width: 35%;
+    width: 10%;
+}
+
+.eventResults{
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+}
+
+.eventEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.eventDelete {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .eventArrow {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
+    cursor: pointer;
 }
 
-.eventArrowIcon {
+.eventIcon {
     height: 15px;
     width: 15px;
 }
 
 .divEventDetails {
     width: 100%;
-    height: 160px;
-    display: table;
+}
+
+.eventsDescriptionTableRow {
+    margin-top: 0;
+}
+
+.eventTeams {
+    display: table-cell;
+    vertical-align: middle;
+    width: 35%;
+}
+
+.eventRegistrationFee {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.eventRegistrationEnd {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.eventDescription {
+    display: table-cell;
+    vertical-align: middle;
+    width: 10%;
+}
+
+.eventEmpty {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
 }

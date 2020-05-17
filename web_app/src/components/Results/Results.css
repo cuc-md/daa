@@ -1,0 +1,99 @@
+.divResultEventName {
+    color: #9b9696;
+    border-bottom: solid 3px #1cc8eb;
+    width: 29%;
+    margin-bottom: 25px;
+}
+
+.resultsTableHead {
+    display: table;
+    width: 100%;
+    height: 30px;
+    color: #9b9696;
+}
+
+.resultsTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: #fefefe;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.divResultsTableRow {
+    display: table;
+    width: 100%;
+    height: 70px;
+}
+
+.resultNumber {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    padding-left: 16px;
+    color: #9b9696;
+}
+
+.resultTeam {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+}
+
+.resultTotalScore {
+    display: table-cell;
+    vertical-align: middle;
+    width: 11%;
+}
+
+.resultRound {
+    display: table-cell;
+    vertical-align: middle;
+    width: 8%;
+}
+
+.resultEmpty {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.resultArrow {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.resultIcon {
+    height: 15px;
+    width: 15px;
+}
+
+.divResultDetails {
+    border-top: 1.5px solid #dcdcf7;
+    width: 100%;
+}
+
+.resultsDescriptionTableRow {
+    display: table;
+    width: 100%;
+    height: 50px;
+}
+
+.eventRoundNumber {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+    border-right: 1.5px solid #dcdcf7;
+}
+
+.eventScorePoint {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.blue {
+    color: #1cc8eb;
+}

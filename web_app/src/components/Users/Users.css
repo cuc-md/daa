@@ -1,15 +1,11 @@
-.divAddTeams {
-    float: right;
-}
-
-.teamsTableHead {
+.usersTableHead {
     display: table;
     width: 100%;
     height: 30px;
     color: #9b9696;
 }
 
-.teamsTableRow {
+.usersTableRow {
     display: table;
     width: 100%;
     height: 70px;
@@ -19,13 +15,13 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-.divTeamsTableRow {
+.divUsersTableRow {
     display: table;
     width: 100%;
     height: 70px;
 }
 
-.teamNumber {
+.userNumber {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
@@ -33,64 +29,46 @@
     color: #9b9696;
 }
 
-.teamName {
+.userName {
     display: table-cell;
     vertical-align: middle;
-    width: 80%;
+    width: 20%;
 }
 
-.teamEdit {
+.userEmail {
+    display: table-cell;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.userRoles {
+    display: table-cell;
+    vertical-align: middle;
+    width: 40%;
+}
+
+.userRolesEdit {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
     cursor: pointer;
 }
 
-.teamDelete {
+.userEdit {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
     cursor: pointer;
 }
 
-.teamArrow {
+.userDelete {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
     cursor: pointer;
 }
 
-.teamIcon {
+.userIcon {
     height: 15px;
     width: 15px;
-}
-
-.divTeamDetails {
-    width: 100%;
-}
-
-.teamsDescriptionTableRow {
-    margin-top: 0;
-}
-
-.teamCaptainAvatar {
-    margin-right: 15px;
-}
-
-.teamCaptain {
-    display: table-cell;
-    vertical-align: middle;
-    width: 20%;
-}
-
-.teamCaptainPhone {
-    display: table-cell;
-    vertical-align: middle;
-    width: 20%;
-}
-
-.teamEmpty {
-    display: table-cell;
-    vertical-align: middle;
-    width: 55%;
 }

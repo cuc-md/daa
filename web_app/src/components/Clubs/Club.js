@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Avatar from 'react-avatar';
 import {UncontrolledCollapse} from 'reactstrap';
+import {checkUserManageClubsRole} from '../Utils/Helpers/UserHelper';
+import {openEditClubPopUpBox, openDeleteClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
+import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
+import editIcon from '../../assets/icons/base/edit.svg';
+import deleteIcon from '../../assets/icons/base/delete.svg';
 import './Clubs.css';
-import LoaderSpinner from "../Utils/LoaderSpinner/LoaderSpinner";
 
 class Club extends Component {
 
@@ -36,7 +42,12 @@ class Club extends Component {
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/clubs/' + this.props.clubId)
+    //     fetch('/api/v1/clubs/' + this.props.clubId, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
     //         .then(response => response.json())
     //         .then(data => this.setState({clubDetails: data, isLoading: false}))
     // }
@@ -45,7 +56,7 @@ class Club extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    getArrowForChallenge(isOpen) {
+    getArrow(isOpen) {
         return isOpen ? arrow_up : arrow_down;
     }
 
@@ -53,9 +64,7 @@ class Club extends Component {
         const {clubDetails, isLoading, isOpen} = this.state;
 
         return <div className="clubsTableRow" key={this.props.keyItem}>
-            <div className="divClubsTableRow"
-                 id={this.props.divItemId}
-                 onClick={this.changeCollapseState}>
+            <div className="divClubsTableRow">
                 <div className="clubNumber">
                     {this.props.keyItem + 1}
                 </div>
@@ -69,25 +78,98 @@ class Club extends Component {
                     {this.props.club.address}
                 </div>
                 <div className="clubContacts">
-                    {/*{this.props.club.contacts}*/}
-                    contacts
+                    <div className="clubContactsTable">
+                        <div className="divClubContactsUserAvatar">
+                            <Avatar name={this.props.club.contacts.representative}
+                                    size="30" round="30"
+                                    color="#9be8e2"/>
+                        </div>
+                        <div className="divClubContactsUserName">
+                            {this.props.club.contacts.representative}
+                        </div>
+                        <div className="divClubContactsUserEmail">
+                            {this.props.club.contacts.phone}
+                            <br/>
+                            {this.props.club.contacts.email}
+                        </div>
+                    </div>
                 </div>
+                {(JSON.stringify(this.props.user) !== '{}' &&
+                    checkUserManageClubsRole(this.props.user.roles)) ?
+                    <>
+                        <div className="clubEdit">
+                            <img src={editIcon}
+                                 className="clubIcon" alt=""
+                                 onClick={() => openEditClubPopUpBox(this.props.clubId, clubDetails.data.club)}/>
+                        </div>
+                        <div className="clubDelete">
+                            <img src={deleteIcon}
+                                 className="clubIcon" alt=""
+                                 onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
+                        </div>
+                    </> :
+                    <>
+                        <div className="clubEdit"/>
+                        <div className="clubDelete"/>
+                    </>
+                }
                 <div className="clubArrow">
-                    <img src={this.getArrowForChallenge(isOpen)}
-                         className="clubArrowIcon" alt=""/>
+                    <img src={this.getArrow(isOpen)}
+                         className="clubIcon" alt=""
+                         onClick={this.changeCollapseState}
+                         id={this.props.divItemId}/>
                 </div>
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {isLoading ?
-                    <div className="center"><LoaderSpinner/></div> :
-                    <div className="divClubDetails">
-                        Details
+                {/*{isLoading ?*/}
+                {/*    <div className="center"><LoaderSpinner/></div> :*/}
+                <div className="divClubDetails">
+                    <div className="clubsTableHead">
+                        <div className="clubNumber"/>
+                        <div className="clubFoundedOn">
+                            Founded on
+                        </div>
+                        <div className="clubActiveTeams">
+                            Active teams
+                        </div>
+                        <div className="clubTotalTeams">
+                            Total teams
+                        </div>
+                        <div className="clubDescription">
+                            Description
+                        </div>
+                        <div className="clubEmpty"/>
                     </div>
-                }
+                    <div className="clubsDescriptionTableRow">
+                        <div className="divClubsTableRow">
+                            <div className="clubNumber"/>
+                            <div className="clubFoundedOn">
+                                {clubDetails.data.club.founded_on}
+                            </div>
+                            <div className="clubActiveTeams">
+                                {clubDetails.data.club.active_teams}
+                            </div>
+                            <div className="clubTotalTeams">
+                                {clubDetails.data.club.total_teams}
+                            </div>
+                            <div className="clubDescription">
+                                {clubDetails.data.club.description}
+                            </div>
+                            <div className="clubEmpty"/>
+                        </div>
+                    </div>
+                </div>
+                {/*}*/}
             </UncontrolledCollapse>
         </div>
     }
 }
 
-export default Club;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Club);

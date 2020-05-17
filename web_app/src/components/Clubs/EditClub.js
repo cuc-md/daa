@@ -6,18 +6,18 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
-class AddClub extends Component {
+class EditClub extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            city: '',
-            founded_on: null,
-            description: '',
-            representative: '',
-            phone: '',
-            email: '',
+            name: this.props.club.name,
+            city: this.props.club.city,
+            founded_on: new Date(this.props.club.founded_on),
+            description: this.props.club.description,
+            representative: this.props.club.contacts.representative,
+            phone: this.props.club.contacts.phone,
+            email: this.props.club.contacts.email,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
@@ -34,8 +34,8 @@ class AddClub extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch('/api/v1/clubs', {
-            method: 'POST',
+        fetch('/api/v1/clubs/' + this.props.clubId, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -47,7 +47,7 @@ class AddClub extends Component {
                     position: "bottom"
                 });
             } else {
-                toaster.notify("Club was successfully added", {
+                toaster.notify("Club was successfully edited", {
                     duration: 3000,
                     position: "bottom"
                 });
@@ -62,7 +62,7 @@ class AddClub extends Component {
             <form className="form"
                   onSubmit={this.handleSubmit}>
                 <h3 className="formText">
-                    Add club
+                    Edit club
                 </h3>
                 <br/>
                 <input
@@ -129,4 +129,4 @@ class AddClub extends Component {
     }
 }
 
-export default AddClub;
+export default EditClub;

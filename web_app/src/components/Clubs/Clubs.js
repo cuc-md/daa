@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import {checkUserManageClubsRole} from '../Utils/Helpers/UserHelper';
 import {openAddClubPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Club from './Club';
 import '../Utils/Button/Button.css';
@@ -25,7 +27,7 @@ class Clubs extends Component {
                             },
                         },
                         {
-                            "id": 123,
+                            "id": 124,
                             "name": "Club 2",
                             "city": "Chisinau",
                             "address": "Chisinau, some street",
@@ -36,7 +38,7 @@ class Clubs extends Component {
                             }
                         },
                         {
-                            "id": 123,
+                            "id": 125,
                             "name": "Club 3",
                             "city": "Chisinau",
                             "address": "Chisinau, some street",
@@ -54,7 +56,12 @@ class Clubs extends Component {
     }
 
     // componentDidMount() {
-    //     fetch('/api/v1/clubs')
+    //     fetch('/api/v1/clubs', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
     //         .then(response => response.json())
     //         .then(data => this.setState({clubs: data, isLoading: false}))
     // }
@@ -78,12 +85,15 @@ class Clubs extends Component {
         });
 
         return <div className="main">
-            <div className="divAddClub">
-                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                        onClick={() => openAddClubPopUpBox()}>
-                    + Add Club
-                </button>
-            </div>
+            {(JSON.stringify(this.props.user) !== '{}' &&
+                checkUserManageClubsRole(this.props.user.roles)) ?
+                <div className="divAddClub">
+                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                            onClick={() => openAddClubPopUpBox()}>
+                        + Add Club
+                    </button>
+                </div> : null
+            }
             <div>
                 <div className="clubsTableHead">
                     <div className="clubNumber"/>
@@ -99,6 +109,8 @@ class Clubs extends Component {
                     <div className="clubContacts">
                         Contacts
                     </div>
+                    <div className="clubEdit"/>
+                    <div className="clubDelete"/>
                     <div className="clubArrow"/>
                 </div>
                 {clubsList}
@@ -107,4 +119,10 @@ class Clubs extends Component {
     }
 }
 
-export default Clubs;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Clubs);

@@ -5,6 +5,7 @@ import SignedOutLinks from './SignedOutLinks/SignedOutLinks';
 import './Navbar.css';
 
 const Navbar = (props) => {
+    console.log(props.token)
     return props.token !== null ?
         <SignedInLinks token={props.token}/> :
         <SignedOutLinks/>;

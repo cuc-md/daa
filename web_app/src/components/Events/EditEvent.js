@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import DatePicker from 'react-datepicker';
 import {PopupboxManager} from 'react-popupbox';
@@ -7,20 +6,21 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
-class AddEvent extends Component {
+class EditEvent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            long_name: '',
-            description: '',
+            name: this.props.event.name,
+            long_name: this.props.event.long_name,
+            description: this.props.event.description,
+            // cover_photo: this.props.event.cover_photo,
             cover_photo: '',
-            start_date: null,
-            end_date: null,
-            status: '',
-            fee: '',
-            registration_end: null
+            start_date: new Date(this.props.event.dates.start_date),
+            end_date: new Date(this.props.event.dates.end_date),
+            status: this.props.event.registration.status,
+            fee: this.props.event.registration.fee,
+            registration_end: new Date(this.props.event.registration.registation_end)
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -47,11 +47,10 @@ class AddEvent extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch('/api/v1/events', {
-            method: 'POST',
+        fetch('/api/v1/events/' + this.props.eventId, {
+            method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state)
         }).then(response => {
@@ -61,7 +60,7 @@ class AddEvent extends Component {
                     position: "bottom"
                 });
             } else {
-                toaster.notify("Event was successfully added", {
+                toaster.notify("Event was successfully edited", {
                     duration: 3000,
                     position: "bottom"
                 });
@@ -76,7 +75,7 @@ class AddEvent extends Component {
             <form className="form"
                   onSubmit={this.handleSubmit}>
                 <h3 className="formText">
-                    Add Event
+                    Edit Event
                 </h3>
                 <br/>
                 <input
@@ -161,10 +160,4 @@ class AddEvent extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        token: state.token,
-    }
-};
-
-export default connect(mapStateToProps, null)(AddEvent);
+export default EditEvent;

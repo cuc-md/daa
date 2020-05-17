@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import toaster from 'toasted-notes';
 import {registerFetch} from '../../store/actions/authActions';
 import '../Utils/Form/Form.css';
+
+const MIN_PASSWORD_LENGTH = 6;
 
 class Registration extends Component {
 
@@ -11,7 +14,7 @@ class Registration extends Component {
             name: '',
             email: '',
             password: '',
-            password_сonfirmation: ''
+            password_confirmation: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,9 +27,15 @@ class Registration extends Component {
     handleSubmit(e) {
         e.preventDefault();
         let password = this.state.password;
-        let passwordConfirmation = this.state.passwordConfirmation;
+        let passwordConfirmation = this.state.password_confirmation;
 
-        if (password === passwordConfirmation) {
+        if (password.length < MIN_PASSWORD_LENGTH) {
+            toaster.notify("Password must contain minimum 6 characters",
+                {duration: 3000, position: "bottom"});
+        } else if (password !== passwordConfirmation) {
+            toaster.notify("Passwords don't match",
+                {duration: 3000, position: "bottom"});
+        } else {
             this.props.registerFetch(this.state)
         }
     };
@@ -66,9 +75,9 @@ class Registration extends Component {
                     />
                     <input
                         type="password"
-                        name="passwordConfirmation"
+                        name="password_confirmation"
                         placeholder="Confirm Password"
-                        value={this.state.password_сonfirmation}
+                        value={this.state.password_confirmation}
                         onChange={this.handleChange}
                         required
                     />

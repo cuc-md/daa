@@ -6,6 +6,8 @@ import Events from './components/Events/Events';
 import Clubs from './components/Clubs/Clubs';
 import Teams from './components/Teams/Teams';
 import Results from './components/Results/Results';
+import QuestionPacks from './components/QuestionPacks/QuestionPacks';
+import UsersRedux from './components/Users/UsersRedux';
 import Navbar from './components/Navigation/Navbar/Navbar';
 import Sidebar from './components/Navigation/Sidebar/Sidebar';
 
@@ -31,10 +33,12 @@ function App() {
                         <div className="col-sm-11">
                             <Switch>
                                 <Route exact path='/' component={Home}/>
-                                <Route path='/events' component={Events}/>
+                                <Route exact path='/events' component={Events}/>
+                                <Route path='/events/:eventId/results' component={Results}/>
                                 <Route path='/clubs' component={Clubs}/>
                                 <Route path='/teams' component={Teams}/>
-                                <Route path='/results' component={Results}/>
+                                <Route path='/question_store' component={QuestionPacks}/>
+                                <Route path='/users' component={UsersRedux}/>
                             </Switch>
                         </div>
                     </div>

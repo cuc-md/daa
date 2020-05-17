@@ -4,7 +4,7 @@ export const meFetch = (token) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': token
+                'Authorization': token
             },
         })
             .then(response => response.json())

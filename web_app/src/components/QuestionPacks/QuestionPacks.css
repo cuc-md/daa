@@ -1,15 +1,11 @@
-.divAddTeams {
-    float: right;
-}
-
-.teamsTableHead {
+.questionPacksTableHead {
     display: table;
     width: 100%;
     height: 30px;
     color: #9b9696;
 }
 
-.teamsTableRow {
+.questionPacksTableRow {
     display: table;
     width: 100%;
     height: 70px;
@@ -19,13 +15,13 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-.divTeamsTableRow {
+.divQuestionPacksTableRow {
     display: table;
     width: 100%;
     height: 70px;
 }
 
-.teamNumber {
+.questionPackNumber {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
@@ -33,64 +29,46 @@
     color: #9b9696;
 }
 
-.teamName {
+.questionPackEventName {
     display: table-cell;
     vertical-align: middle;
-    width: 80%;
+    width: 30%;
 }
 
-.teamEdit {
+.questionPackDifficulty {
     display: table-cell;
     vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
+    width: 60%;
 }
 
-.teamDelete {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
-}
-
-.teamArrow {
+.questionPackArrow {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
     cursor: pointer;
 }
 
-.teamIcon {
+.questionPackIcon {
     height: 15px;
     width: 15px;
 }
 
-.divTeamDetails {
+.divQuestionPackDetails {
     width: 100%;
 }
 
-.teamsDescriptionTableRow {
+.questionPacksDescriptionTableRow {
     margin-top: 0;
 }
 
-.teamCaptainAvatar {
-    margin-right: 15px;
-}
-
-.teamCaptain {
+.questionPackAuthor {
     display: table-cell;
     vertical-align: middle;
-    width: 20%;
+    width: 30%;
 }
 
-.teamCaptainPhone {
+.questionPackEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 20%;
-}
-
-.teamEmpty {
-    display: table-cell;
-    vertical-align: middle;
-    width: 55%;
+    width: 65%;
 }

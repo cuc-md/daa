@@ -4,14 +4,14 @@ import {PopupboxManager} from 'react-popupbox';
 import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
-class AddTeam extends Component {
+class EditTeam extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            captain: '',
-            phone: '',
+            name: this.props.team.name,
+            captain: this.props.team.captain,
+            phone: this.props.team.phone,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,8 +24,8 @@ class AddTeam extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch('/api/v1/teams', {
-            method: 'POST',
+        fetch('/api/v1/teams/' + this.props.teamId, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -37,7 +37,7 @@ class AddTeam extends Component {
                     position: "bottom"
                 });
             } else {
-                toaster.notify("Team was successfully added", {
+                toaster.notify("Team was successfully edited", {
                     duration: 3000,
                     position: "bottom"
                 });
@@ -52,7 +52,7 @@ class AddTeam extends Component {
             <form className="form"
                   onSubmit={this.handleSubmit}>
                 <h3 className="formText">
-                    Add team
+                    Edit team
                 </h3>
                 <br/>
                 <input
@@ -87,4 +87,4 @@ class AddTeam extends Component {
     }
 }
 
-export default AddTeam;
+export default EditTeam;
