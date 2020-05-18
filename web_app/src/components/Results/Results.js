@@ -28,24 +28,24 @@ class Results extends Component {
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': this.props.token
-    //         }
-    //     }).then(response => {
-    //         if (response.ok) {
-    //             return response.json()
-    //         } else {
-    //             console.log("Response status " + response.status);
-    //             return Promise.reject('Error')
-    //         }
-    //     })
-    //         .then(data => this.setState({results: data, isLoading: false}))
-    //         .catch(error => console.log(error));
-    // }
+    componentDidMount() {
+        fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
+        })
+            .then(data => this.setState({results: data, isLoading: false}))
+            .catch(error => console.log(error));
+    }
 
     render() {
         const {results, isLoading} = this.state;

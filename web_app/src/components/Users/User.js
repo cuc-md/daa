@@ -37,9 +37,16 @@ class User extends Component {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             }
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
         })
-            .then(response => response.json())
             .then(data => this.setState({userRoles: data, isLoading: false}))
+            .catch(error => console.log(error));
     }
 
     changeCollapseState() {
