@@ -54,9 +54,10 @@ class Event extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        // this.onEntering = this.onEntering.bind(this);
     }
 
-    // componentDidMount() {
+    // onEntering() {
     //     fetch('/api/v1/events/' + this.props.eventId, {
     //         method: 'GET',
     //         headers: {
@@ -153,45 +154,47 @@ class Event extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                                  // onEntering={this.onEntering}
+            >
                 {/*{isLoading ?*/}
                 {/*    <div className="center"><LoaderSpinner/></div> :*/}
-                    <div className="divEventDetails">
-                        <div className="eventsTableHead">
+                <div className="divEventDetails">
+                    <div className="eventsTableHead">
+                        <div className="eventNumber"/>
+                        <div className="eventTeams">
+                            Teams
+                        </div>
+                        <div className="eventRegistrationFee">
+                            Registration fee
+                        </div>
+                        <div className="eventRegistrationEnd">
+                            Registration end
+                        </div>
+                        <div className="eventDescription">
+                            Description
+                        </div>
+                        <div className="eventEmpty"/>
+                    </div>
+                    <div className="eventsDescriptionTableRow">
+                        <div className="divEventsTableRow">
                             <div className="eventNumber"/>
                             <div className="eventTeams">
-                                Teams
+                                {eventTeamsList}
                             </div>
                             <div className="eventRegistrationFee">
-                                Registration fee
+                                {this.props.event.registration.fee}
                             </div>
                             <div className="eventRegistrationEnd">
-                                Registration end
+                                {this.props.event.registration.registation_end}
                             </div>
                             <div className="eventDescription">
-                                Description
+                                {eventDetails.data.event.description}
                             </div>
                             <div className="eventEmpty"/>
                         </div>
-                        <div className="eventsDescriptionTableRow">
-                            <div className="divEventsTableRow">
-                                <div className="eventNumber"/>
-                                <div className="eventTeams">
-                                    {eventTeamsList}
-                                </div>
-                                <div className="eventRegistrationFee">
-                                    {this.props.event.registration.fee}
-                                </div>
-                                <div className="eventRegistrationEnd">
-                                    {this.props.event.registration.registation_end}
-                                </div>
-                                <div className="eventDescription">
-                                    {eventDetails.data.event.description}
-                                </div>
-                                <div className="eventEmpty"/>
-                            </div>
-                        </div>
                     </div>
+                </div>
                 {/*}*/}
             </UncontrolledCollapse>
         </div>

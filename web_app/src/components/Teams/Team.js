@@ -21,9 +21,11 @@ class Team extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        this.onEntering = this.onEntering.bind(this);
     }
 
-    componentDidMount() {
+
+    onEntering() {
         fetch('/api/v1/teams/' + this.props.teamId, {
             method: 'GET',
             headers: {
@@ -83,37 +85,37 @@ class Team extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {isLoading ?
-                    <div className="center"><LoaderSpinner/></div> :
-                <div className="divTeamDetails">
-                    <div className="teamsTableHead">
-                        <div className="teamNumber"/>
-                        <div className="teamCaptain">
-                            Captain
-                        </div>
-                        <div className="teamCaptainPhone">
-                            Phone
-                        </div>
-                        <div className="teamEmpty"/>
-                    </div>
-                    <div className="teamsDescriptionTableRow">
-                        <div className="divTeamsTableRow">
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                                  onEntering={this.onEntering}>
+                {isLoading ? <div className="center"><LoaderSpinner/></div> :
+                    <div className="divTeamDetails">
+                        <div className="teamsTableHead">
                             <div className="teamNumber"/>
                             <div className="teamCaptain">
-                                <Avatar name={teamDetails.data.team.captain}
-                                        size="30" round="30"
-                                        color="#9be8e2"
-                                        className="teamCaptainAvatar"/>
-                                {teamDetails.data.team.captain}
+                                Captain
                             </div>
                             <div className="teamCaptainPhone">
-                                {teamDetails.data.team.phone}
+                                Phone
                             </div>
                             <div className="teamEmpty"/>
                         </div>
+                        <div className="teamsDescriptionTableRow">
+                            <div className="divTeamsTableRow">
+                                <div className="teamNumber"/>
+                                <div className="teamCaptain">
+                                    <Avatar name={teamDetails.data.team.captain}
+                                            size="30" round="30"
+                                            color="#9be8e2"
+                                            className="teamCaptainAvatar"/>
+                                    {teamDetails.data.team.captain}
+                                </div>
+                                <div className="teamCaptainPhone">
+                                    {teamDetails.data.team.phone}
+                                </div>
+                                <div className="teamEmpty"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 }
             </UncontrolledCollapse>
         </div>

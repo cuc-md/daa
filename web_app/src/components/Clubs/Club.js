@@ -21,9 +21,10 @@ class Club extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        this.onEntering = this.onEntering.bind(this);
     }
 
-    componentDidMount() {
+    onEntering() {
         fetch('/api/v1/clubs/' + this.props.clubId, {
             method: 'GET',
             headers: {
@@ -37,6 +38,7 @@ class Club extends Component {
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
+
     }
 
     getArrow(isOpen) {
@@ -106,7 +108,8 @@ class Club extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                                  onEntering={this.onEntering}>
                 {isLoading ? <div className="center"><LoaderSpinner/></div> :
                     <div className="divClubDetails">
                         <div className="clubsTableHead">
