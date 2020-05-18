@@ -114,12 +114,15 @@ class Event extends Component {
                 <div className="eventRegistration">
                     {this.props.event.registration.status}
                 </div>
-                <div className="eventTeamRegister">
-                    <img src={team_register}
-                         className="eventIcon" alt=""
-                         title="register team for event"
-                         onClick={() => openRegisterTeamForEventPopUpBox(this.props.eventId)}/>
-                </div>
+                {this.props.token === null ?
+                    <div className="eventTeamRegister"/> :
+                    <div className="eventTeamRegister">
+                        <img src={team_register}
+                             className="eventIcon" alt=""
+                             title="register team for event"
+                             onClick={() => openRegisterTeamForEventPopUpBox(this.props.eventId)}/>
+                    </div>
+                }
                 <div className="eventResults">
                     <Link to={{
                         pathname: `/events/${this.props.event.id}/results`,
