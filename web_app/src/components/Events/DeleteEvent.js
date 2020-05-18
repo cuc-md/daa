@@ -23,6 +23,7 @@ class DeleteEvent extends Component {
                     duration: 3000,
                     position: "bottom"
                 });
+                window.location = "/events";
                 PopupboxManager.close();
                 return response.json();
             }

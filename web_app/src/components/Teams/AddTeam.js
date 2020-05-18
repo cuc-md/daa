@@ -42,6 +42,7 @@ class AddTeam extends Component {
                     duration: 3000,
                     position: "bottom"
                 });
+                window.location = "/teams";
                 PopupboxManager.close();
                 return response.json();
             }

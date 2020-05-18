@@ -59,6 +59,7 @@ class AddUserRoles extends Component {
                     duration: 3000,
                     position: "bottom"
                 });
+                window.location = "/users";
                 PopupboxManager.close();
                 return response.json();
             }
