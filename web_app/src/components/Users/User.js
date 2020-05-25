@@ -27,18 +27,26 @@ class User extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        this.onEntering = this.onEntering.bind(this);
     }
 
-    componentDidMount() {
+    onEntering() {
         fetch('/api/v1/users/' + this.props.userId + '/roles', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             }
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
         })
-            .then(response => response.json())
             .then(data => this.setState({userRoles: data, isLoading: false}))
+            .catch(error => console.log(error));
     }
 
     changeCollapseState() {
@@ -88,7 +96,8 @@ class User extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                                  onEntering={this.onEntering}>
                 {isLoading ?
                     <div className="center"><LoaderSpinner/></div> :
                     <div className="divUserDetails">

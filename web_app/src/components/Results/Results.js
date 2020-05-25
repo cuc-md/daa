@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import toaster from 'toasted-notes';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import Result from './Result';
 import './Results.css';
 
@@ -9,28 +11,63 @@ class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: {},
+            results: {
+                "data": {
+                    "event_name": "Super Cup",
+                    "result": [
+                        {
+                            "team_name": "team1",
+                            "total_score": 3,
+                            "score": [
+                                {"round": 1, "count": 0, "score": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                                {"round": 2, "count": 3, "score": [0, 1, 0, 0, 0, 0, 0, 1, 0, 1]}
+                            ]
+                        }
+                    ]
+                }
+            },
             isLoading: true
         };
     }
 
-    componentDidMount() {
-        fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            }
-        }).then(response => response.json())
-            .then(data => this.setState({results: data, isLoading: false}));
+    // componentDidMount() {
+    //     fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': this.props.token
+    //         }
+    //     }).then(response => {
+    //         if (response.ok) {
+    //             return response.json()
+    //         } else {
+    //             console.log("Response status " + response.status);
+    //             return Promise.reject('Error')
+    //         }
+    //     })
+    //         .then(data => this.setState({results: data, isLoading: false}))
+    //         .catch(error => console.log(error));
+    // }
+
+    async downloadResultsFile() {
+        let response = await fetch('/api/v1/results/sample', {
+            method: 'GET'
+        });
+        response.blob().then(blob => {
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'sample_form.xlsx';
+            a.click();
+        });
     }
 
     render() {
         const {results, isLoading} = this.state;
 
-        if (isLoading) {
-            return <div className="main center"><LoaderSpinner/></div>;
-        }
+        // if (isLoading) {
+        //     return <div className="main center"><LoaderSpinner/></div>;
+        // }
 
         let resultsList = results.data.result.map((result, i) => {
             let divItemId = "id" + i;
@@ -56,6 +93,16 @@ class Results extends Component {
             <div className="divResultEventName textFontStyle18 center">
                 Results of {this.props.location.state.eventName}
             </div>
+            {(JSON.stringify(this.props.user) !== '{}' &&
+                checkUserManageEventsRole(this.props.user.roles)) ?
+                <div className="divDownloadResultsFile">
+                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                            onClick={this.downloadResultsFile}>
+                        ↓ file for results
+                    </button>
+
+                </div> : null
+            }
             <div>
                 <div className="resultsTableHead">
                     <div className="resultNumber"/>
@@ -78,7 +125,8 @@ class Results extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.token,
+        user: state.user
     }
 };
 

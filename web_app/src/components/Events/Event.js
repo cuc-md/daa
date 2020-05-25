@@ -54,18 +54,26 @@ class Event extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        // this.onEntering = this.onEntering.bind(this);
     }
 
-    // componentDidMount() {
+    // onEntering() {
     //     fetch('/api/v1/events/' + this.props.eventId, {
     //         method: 'GET',
     //         headers: {
     //             'Content-Type': 'application/json',
     //             'Authorization': this.props.token
     //         }
+    //     }).then(response => {
+    //         if (response.ok) {
+    //             return response.json()
+    //         } else {
+    //             console.log("Response status " + response.status);
+    //             return Promise.reject('Error')
+    //         }
     //     })
-    //         .then(response => response.json())
     //         .then(data => this.setState({eventDetails: data, isLoading: false}))
+    //         .catch(error => console.log(error));
     // }
 
     changeCollapseState() {
@@ -106,12 +114,15 @@ class Event extends Component {
                 <div className="eventRegistration">
                     {this.props.event.registration.status}
                 </div>
-                <div className="eventTeamRegister">
-                    <img src={team_register}
-                         className="eventIcon" alt=""
-                         title="register team for event"
-                         onClick={() => openRegisterTeamForEventPopUpBox(this.props.eventId)}/>
-                </div>
+                {this.props.token === null ?
+                    <div className="eventTeamRegister"/> :
+                    <div className="eventTeamRegister">
+                        <img src={team_register}
+                             className="eventIcon" alt=""
+                             title="register team for event"
+                             onClick={() => openRegisterTeamForEventPopUpBox(this.props.eventId)}/>
+                    </div>
+                }
                 <div className="eventResults">
                     <Link to={{
                         pathname: `/events/${this.props.event.id}/results`,
@@ -153,45 +164,47 @@ class Event extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                // onEntering={this.onEntering}
+            >
                 {/*{isLoading ?*/}
                 {/*    <div className="center"><LoaderSpinner/></div> :*/}
-                    <div className="divEventDetails">
-                        <div className="eventsTableHead">
+                <div className="divEventDetails">
+                    <div className="eventsTableHead">
+                        <div className="eventNumber"/>
+                        <div className="eventTeams">
+                            Teams
+                        </div>
+                        <div className="eventRegistrationFee">
+                            Registration fee
+                        </div>
+                        <div className="eventRegistrationEnd">
+                            Registration end
+                        </div>
+                        <div className="eventDescription">
+                            Description
+                        </div>
+                        <div className="eventEmpty"/>
+                    </div>
+                    <div className="eventsDescriptionTableRow">
+                        <div className="divEventsTableRow">
                             <div className="eventNumber"/>
                             <div className="eventTeams">
-                                Teams
+                                {eventTeamsList}
                             </div>
                             <div className="eventRegistrationFee">
-                                Registration fee
+                                {this.props.event.registration.fee}
                             </div>
                             <div className="eventRegistrationEnd">
-                                Registration end
+                                {this.props.event.registration.registation_end}
                             </div>
                             <div className="eventDescription">
-                                Description
+                                {eventDetails.data.event.description}
                             </div>
                             <div className="eventEmpty"/>
                         </div>
-                        <div className="eventsDescriptionTableRow">
-                            <div className="divEventsTableRow">
-                                <div className="eventNumber"/>
-                                <div className="eventTeams">
-                                    {eventTeamsList}
-                                </div>
-                                <div className="eventRegistrationFee">
-                                    {this.props.event.registration.fee}
-                                </div>
-                                <div className="eventRegistrationEnd">
-                                    {this.props.event.registration.registation_end}
-                                </div>
-                                <div className="eventDescription">
-                                    {eventDetails.data.event.description}
-                                </div>
-                                <div className="eventEmpty"/>
-                            </div>
-                        </div>
                     </div>
+                </div>
                 {/*}*/}
             </UncontrolledCollapse>
         </div>

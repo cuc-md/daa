@@ -23,8 +23,16 @@ class Events extends Component {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             }
-        }).then(response => response.json())
-            .then(data => this.setState({events: data, isLoading: false}));
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
+        })
+            .then(data => this.setState({events: data, isLoading: false}))
+            .catch(error => console.log(error));
     }
 
     render() {

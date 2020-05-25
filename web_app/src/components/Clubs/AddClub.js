@@ -53,6 +53,7 @@ class AddClub extends Component {
                     duration: 3000,
                     position: "bottom"
                 });
+                window.location = "/clubs";
                 PopupboxManager.close();
                 return response.json();
             }

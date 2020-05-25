@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Avatar from 'react-avatar';
 import {connect} from 'react-redux';
 import {meFetch as meFetchFunction} from '../../../../store/actions/userActions';
-import {openSignOutPopUpBox} from '../../../Utils/PopUpBox/PopUpBox';
+import {openSignOutPopUpBox, openEditUserPopUpBox} from '../../../Utils/PopUpBox/PopUpBox';
 import {ReactComponent as LogoIcon} from '../../../../assets/icons/logo/logo.svg';
 import {ReactComponent as ExitIcon} from '../../../../assets/icons/navbar/exit.svg';
 import '../Navbar.css';
@@ -27,7 +27,8 @@ class SignedInLinks extends Component {
                                 size="45" round="4px"
                                 color="#ffb41f"
                                 className="userAvatarNavbar"/>
-                        <div className="divNavbarUserInfo">
+                        <div className="divNavbarUserInfo"
+                             onClick={() => openEditUserPopUpBox(this.props.user.id, this.props.user)}>
                             <div>{this.props.user.name}</div>
                             <div>{this.props.user.email}</div>
                         </div>
