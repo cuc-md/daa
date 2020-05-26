@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {UncontrolledCollapse} from 'reactstrap';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
+import {openDeleteResultPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
+import deleteIcon from '../../assets/icons/base/delete.svg';
 import './Results.css';
 
 class Result extends Component {
@@ -68,6 +72,16 @@ class Result extends Component {
                 {resultsRoundCount}
                 <div className="resultEmpty"
                      style={{width: (maxTableCellEmptyWidth - (8 * resultsRoundNumber)) + "%"}}/>
+                {(JSON.stringify(this.props.user) !== '{}' &&
+                    checkUserManageEventsRole(this.props.user.roles)) ?
+                    <div className="resultDelete">
+                        <img src={deleteIcon}
+                             className="resultIcon" alt=""
+                             title="delete"
+                             onClick={() => openDeleteResultPopUpBox(this.props.eventId)}/>
+                    </div> :
+                    <div className="resultDelete"/>
+                }
                 <div className="resultArrow">
                     <img src={this.getArrow(isOpen)}
                          className="resultIcon" alt=""
@@ -85,4 +99,10 @@ class Result extends Component {
     }
 }
 
-export default Result;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapStateToProps, null)(Result);

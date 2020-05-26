@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
+import {openAddResultPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import Result from './Result';
 import './Results.css';
 
@@ -57,7 +58,7 @@ class Results extends Component {
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = url;
-            a.download = 'sample_form.xlsx';
+            a.download = 'results_sample.xlsx';
             a.click();
         });
     }
@@ -96,12 +97,20 @@ class Results extends Component {
             {(JSON.stringify(this.props.user) !== '{}' &&
                 checkUserManageEventsRole(this.props.user.roles)) ?
                 <div className="divDownloadResultsFile">
-                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                    <button className="choiceButton choiceButtonStatic cancelButton textFontStyle16"
                             onClick={this.downloadResultsFile}>
-                        ↓ file for results
+                        ↓ Results sample
                     </button>
-
-                </div> : null
+                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                            onClick={() => openAddResultPopUpBox(
+                                this.props.user.id,
+                                this.props.match.params.eventId,
+                                this.props.location.state.eventName
+                            )}>
+                        + Add results
+                    </button>
+                </div>
+                : null
             }
             <div>
                 <div className="resultsTableHead">
@@ -115,6 +124,7 @@ class Results extends Component {
                     {resultsRoundHead}
                     <div className="resultEmpty"
                          style={{width: (maxTableCellEmptyWidth - (8 * resultsRoundNumber)) + "%"}}/>
+                    <div className="resultDelete"/>
                     <div className="resultArrow"/>
                 </div>
                 {resultsList}

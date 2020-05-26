@@ -17,6 +17,8 @@ import DeleteUser from '../../Users/DeleteUser';
 import AddUserRoles from '../../Users/AddUserRoles';
 import RemoveUserRoles from '../../Users/RemoveUserRoles';
 import RegisterTeamForEvent from '../../Teams/RegisterTeamForEvent';
+import AddResult from '../../Results/AddResult';
+import DeleteResult from '../../Results/DeleteResult';
 
 export const openSignInPopUpBox = () => {
     let content = (<SignIn/>);
@@ -100,5 +102,15 @@ export const openUserAddRolesPopUpBox = (userId, userRoles) => {
 
 export const openUserRemoveRolesPopUpBox = (userId, userRoles) => {
     let content = (<RemoveUserRoles userId={userId} userRoles={userRoles}/>);
+    PopupboxManager.open({content})
+};
+
+export const openAddResultPopUpBox = (userId, eventId, eventName) => {
+    let content = (<AddResult userId={userId} eventId={eventId} eventName={eventName}/>);
+    PopupboxManager.open({content})
+};
+
+export const openDeleteResultPopUpBox = (eventId) => {
+    let content = (<DeleteResult eventId={eventId}/>);
     PopupboxManager.open({content})
 };
