@@ -52,7 +52,7 @@ class Api::V1::ResultsController < ApplicationController
   end
 
   def blob
-    @blob ||= params.dig(:result, :blob)
+    @blob ||= params.dig(:result, :blob).split(";")[1].slice(7..-1).force_encoding("utf-8")
   end
 
   def team_results

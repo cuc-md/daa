@@ -54,7 +54,7 @@ class Api::V1::ResultsController < ApplicationController
   end
 
   def result
-    @result ||= Result.find_by(event_id: params[:id])
+    @result ||= Result.where(event_id: params[:id]).last
   end
 
   def permitted_params
