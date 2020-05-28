@@ -20,17 +20,26 @@ class AddResult extends Component {
         this.setState({[e.target.name]: e.target.files[0]});
     };
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
-        let file = window.btoa(this.state.results);
+
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(this.state.results);
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
 
         fetch('/api/v1/results', {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': this.props.token
             },
             body: JSON.stringify({
-                blob: file,
+                blob: await toBase64(this.state.results),
                 event_name: this.props.eventName,
                 event_id: this.props.eventId,
                 user_id: this.props.userId
@@ -46,7 +55,6 @@ class AddResult extends Component {
                     duration: 3000,
                     position: "bottom"
                 });
-                // window.location = "/events";
                 PopupboxManager.close();
                 return response.json();
             }

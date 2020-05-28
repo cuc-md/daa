@@ -13,21 +13,23 @@ class DeleteResult extends Component {
                 'Authorization': this.props.token
             },
         }).then(response => {
-            if (!response.ok) {
-                toaster.notify("Error", {
-                    duration: 3000,
-                    position: "bottom"
-                });
-            } else {
-                toaster.notify("Results were successfully deleted", {
-                    duration: 3000,
-                    position: "bottom"
-                });
-                window.location = "/events";
-                PopupboxManager.close();
-                return response.json();
+                if (!response.ok) {
+                    toaster.notify("Error", {
+                        duration: 3000,
+                        position: "bottom"
+                    });
+                } else {
+                    toaster.notify("Results were successfully deleted", {
+                        duration: 3000,
+                        position: "bottom"
+                    });
+                    window.location = "/events";
+
+                    PopupboxManager.close();
+                    return response.json();
+                }
             }
-        })
+        )
     };
 
     render() {
