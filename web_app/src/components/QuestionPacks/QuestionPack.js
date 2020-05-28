@@ -11,22 +11,42 @@ class QuestionPack extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionPack: {},
+            questionPack: {
+                "data": {
+                    "question_pack": {
+                        "id": 1,
+                        "author": "anonymous",
+                        "event_name": "Super Cup",
+                        "event_id": "12345",
+                        "difficulty": "medium",
+                        "user_id": "123"
+                    }
+                }
+            },
             isLoading: true,
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        this.onEntering = this.onEntering.bind(this);
     }
 
-    componentDidMount() {
+    onEntering() {
         fetch('/api/v1/question_packs/' + this.props.packId, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             }
-        }).then(response => response.json())
-            .then(data => this.setState({results: data, isLoading: false}));
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
+        })
+            .then(data => this.setState({questionPack: data, isLoading: false}))
+            .catch(error => console.log(error));
     }
 
     changeCollapseState() {
@@ -40,9 +60,9 @@ class QuestionPack extends Component {
     render() {
         const {questionPack, isLoading, isOpen} = this.state;
 
-        if (isLoading) {
-            return <div className="main center"><LoaderSpinner/></div>;
-        }
+        // if (isLoading) {
+        //     return <div className="main center"><LoaderSpinner/></div>;
+        // }
 
         return <div className="questionPacksTableRow" key={this.props.keyItem}>
             <div className="divQuestionPacksTableRow">
@@ -63,26 +83,28 @@ class QuestionPack extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
-                {isLoading ?
-                    <div className="center"><LoaderSpinner/></div> :
-                    <div className="divQuestionPackDetails">
-                        <div className="questionPacksTableHead">
-                            <div className="questionPackNumber"/>
-                            <div className="questionPackAuthor">
-                                Author
-                            </div>
-                            <div className="questionPackEmpty"/>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                                  // onEntering={this.onEntering}
+            >
+                {/*{isLoading ?*/}
+                {/*    <div className="center"><LoaderSpinner/></div> :*/}
+                <div className="divQuestionPackDetails">
+                    <div className="questionPacksTableHead">
+                        <div className="questionPackNumber"/>
+                        <div className="questionPackAuthor">
+                            Author
                         </div>
-                        <div className="questionPacksTableRow">
-                            <div className="questionPackNumber"/>
-                            <div className="questionPackAuthor">
-                                {questionPack.data.question_pack.author}
-                            </div>
-                            <div className="questionPackEmpty"/>
-                        </div>
+                        <div className="questionPackEmpty"/>
                     </div>
-                }
+                    <div className="questionPacksTableRow">
+                        <div className="questionPackNumber"/>
+                        <div className="questionPackAuthor">
+                            {questionPack.data.question_pack.author}
+                        </div>
+                        <div className="questionPackEmpty"/>
+                    </div>
+                </div>
+                {/*}*/}
             </UncontrolledCollapse>
         </div>
     }

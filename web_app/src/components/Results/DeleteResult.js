@@ -24,7 +24,6 @@ class DeleteResult extends Component {
                         position: "bottom"
                     });
                     window.location = "/events";
-
                     PopupboxManager.close();
                     return response.json();
                 }
