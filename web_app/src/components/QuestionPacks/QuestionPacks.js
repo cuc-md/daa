@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Select from 'react-select';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
+import {openAddQuestionPackPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import QuestionPack from './QuestionPack';
 import './QuestionPacks.css';
 
@@ -10,23 +11,13 @@ class QuestionPacks extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionPacks: {
-                "data": {
-                    "question_packs": [
-                        {
-                            "id": 1,
-                            "event_name": "Super Cup",
-                            "event_id": "12345",
-                            "difficulty": "medium"
-                        }
-                    ]
-                }
-            },
+            questionPacks: {},
             selectedOption: 'medium',
             isLoading: true
         };
         this.getQuestionPacks = this.getQuestionPacks.bind(this);
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
+        this.getRandomPack = this.getRandomPack.bind(this);
     }
 
     componentDidMount() {
@@ -62,12 +53,29 @@ class QuestionPacks extends Component {
         this.setState({selectedOption: selectedOption.value});
     }
 
+    async getRandomPack() {
+        let response = await fetch('/api/v1/question_packs/random?difficulty='
+            + this.state.selectedOption, {
+            method: 'GET',
+            headers: {
+                'Authorization': this.props.token
+            }
+        });
+        response.blob().then(blob => {
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'random_pack';
+            a.click();
+        });
+    }
+
     render() {
         const {questionPacks, isLoading} = this.state;
 
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
 
         const questionPackOptions = [
             {value: 'simple', label: 'simple'},
@@ -116,6 +124,21 @@ class QuestionPacks extends Component {
                         onChange={this.handleDropdownChange}
                 />
             </div>
+            <div className="divDownloadQuestionPack">
+                <button className="choiceButton choiceButtonStatic cancelButton textFontStyle16"
+                        onClick={this.getRandomPack}>
+                    ↓ Random pack
+                </button>
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddQuestionPackPopUpBox(
+                            this.props.user.id,
+                            questionPacks.event_id,
+                            questionPacks.event_name
+                        )}>
+                    + Add pack
+                </button>
+            </div>
+
             <div>
                 <div className="questionPacksTableHead">
                     <div className="questionPackNumber"/>
@@ -125,6 +148,8 @@ class QuestionPacks extends Component {
                     <div className="questionPackDifficulty">
                         Difficulty
                     </div>
+                    <div className="questionPackEdit"/>
+                    <div className="questionPackDelete"/>
                     <div className="questionPackArrow"/>
                 </div>
                 {questionPacksList}
@@ -135,7 +160,8 @@ class QuestionPacks extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.token,
+        user: state.user
     }
 };
 

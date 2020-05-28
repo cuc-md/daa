@@ -19,6 +19,9 @@ import RemoveUserRoles from '../../Users/RemoveUserRoles';
 import RegisterTeamForEvent from '../../Teams/RegisterTeamForEvent';
 import AddResult from '../../Results/AddResult';
 import DeleteResult from '../../Results/DeleteResult';
+import AddQuestionPack from '../../QuestionPacks/AddQuestionPack';
+import EditQuestionPack from '../../QuestionPacks/EditQuestionPack';
+import DeleteQuestionPack from '../../QuestionPacks/DeleteQuestionPack';
 
 export const openSignInPopUpBox = () => {
     let content = (<SignIn/>);
@@ -112,5 +115,20 @@ export const openAddResultPopUpBox = (userId, eventId, eventName) => {
 
 export const openDeleteResultPopUpBox = (eventId) => {
     let content = (<DeleteResult eventId={eventId}/>);
+    PopupboxManager.open({content})
+};
+
+export const openAddQuestionPackPopUpBox = (userId) => {
+    let content = (<AddQuestionPack userId={userId}/>);
+    PopupboxManager.open({content})
+};
+
+export const openEditQuestionPackPopUpBox = (packId) => {
+    let content = (<EditQuestionPack packId={packId}/>);
+    PopupboxManager.open({content})
+};
+
+export const openDeleteQuestionPackPopUpBox = (packId) => {
+    let content = (<DeleteQuestionPack packId={packId}/>);
     PopupboxManager.open({content})
 };

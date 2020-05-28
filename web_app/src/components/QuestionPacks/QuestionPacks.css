@@ -1,6 +1,13 @@
-.divSelectQuestionPack{
-    width: 20%;
-    margin-bottom: 20px;
+.divSelectQuestionPack {
+    width: 200px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.divDownloadQuestionPack {
+    float: right;
+    display: inline;
+    margin-bottom: 25px;
 }
 
 .questionPacksTableHead {
@@ -43,7 +50,21 @@
 .questionPackDifficulty {
     display: table-cell;
     vertical-align: middle;
-    width: 60%;
+    width: 50%;
+}
+
+.questionPackEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.questionPackDelete {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .questionPackArrow {
