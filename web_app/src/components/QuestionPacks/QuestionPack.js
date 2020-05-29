@@ -6,6 +6,7 @@ import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
 import deleteIcon from '../../assets/icons/base/delete.svg';
+import randomIcon from '../../assets/icons/base/random.svg';
 import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openEditQuestionPackPopUpBox, openDeleteQuestionPackPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import './QuestionPacks.css';
@@ -56,7 +57,12 @@ class QuestionPack extends Component {
         return <div className="questionPacksTableRow" key={this.props.keyItem}>
             <div className="divQuestionPacksTableRow">
                 <div className="questionPackNumber">
-                    {this.props.keyItem + 1}
+                    {this.props.keyItem === "random" ?
+                        <img src={randomIcon}
+                             className="questionPackRandomIcon" alt=""
+                             title="random"/> :
+                        this.props.keyItem + 1
+                    }
                 </div>
                 <div className="questionPackEventName">
                     {this.props.pack.event_name}
