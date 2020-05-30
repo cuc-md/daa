@@ -1,3 +1,15 @@
+.divSelectQuestionPack {
+    width: 200px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.divDownloadQuestionPack {
+    float: right;
+    display: inline;
+    margin-bottom: 25px;
+}
+
 .questionPacksTableHead {
     display: table;
     width: 100%;
@@ -38,7 +50,21 @@
 .questionPackDifficulty {
     display: table-cell;
     vertical-align: middle;
-    width: 60%;
+    width: 50%;
+}
+
+.questionPackEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
+}
+
+.questionPackDelete {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .questionPackArrow {
@@ -51,6 +77,11 @@
 .questionPackIcon {
     height: 15px;
     width: 15px;
+}
+
+.questionPackRandomIcon {
+    height: 20px;
+    width: 20px;
 }
 
 .divQuestionPackDetails {

@@ -21,11 +21,10 @@ class Team extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
-        this.onEntering = this.onEntering.bind(this);
     }
 
 
-    onEntering() {
+    componentDidMount() {
         fetch('/api/v1/teams/' + this.props.teamId, {
             method: 'GET',
             headers: {
@@ -92,8 +91,7 @@ class Team extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
-                                  onEntering={this.onEntering}>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
                 {isLoading ? <div className="center"><LoaderSpinner/></div> :
                     <div className="divTeamDetails">
                         <div className="teamsTableHead">

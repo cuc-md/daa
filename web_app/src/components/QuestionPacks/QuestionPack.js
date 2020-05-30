@@ -4,6 +4,11 @@ import {UncontrolledCollapse} from 'reactstrap';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import arrow_up from '../../assets/icons/base/arrow_up.svg';
 import arrow_down from '../../assets/icons/base/arrow_down.svg';
+import editIcon from '../../assets/icons/base/edit.svg';
+import deleteIcon from '../../assets/icons/base/delete.svg';
+import randomIcon from '../../assets/icons/base/random.svg';
+import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
+import {openEditQuestionPackPopUpBox, openDeleteQuestionPackPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import './QuestionPacks.css';
 
 class QuestionPack extends Component {
@@ -16,17 +21,26 @@ class QuestionPack extends Component {
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
+        this.onEntering = this.onEntering.bind(this);
     }
 
-    componentDidMount() {
+    onEntering() {
         fetch('/api/v1/question_packs/' + this.props.packId, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             }
-        }).then(response => response.json())
-            .then(data => this.setState({results: data, isLoading: false}));
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
+        })
+            .then(data => this.setState({questionPack: data, isLoading: false}))
+            .catch(error => console.log(error));
     }
 
     changeCollapseState() {
@@ -40,14 +54,15 @@ class QuestionPack extends Component {
     render() {
         const {questionPack, isLoading, isOpen} = this.state;
 
-        if (isLoading) {
-            return <div className="main center"><LoaderSpinner/></div>;
-        }
-
         return <div className="questionPacksTableRow" key={this.props.keyItem}>
             <div className="divQuestionPacksTableRow">
                 <div className="questionPackNumber">
-                    {this.props.keyItem + 1}
+                    {this.props.keyItem === "random" ?
+                        <img src={randomIcon}
+                             className="questionPackRandomIcon" alt=""
+                             title="random"/> :
+                        this.props.keyItem + 1
+                    }
                 </div>
                 <div className="questionPackEventName">
                     {this.props.pack.event_name}
@@ -55,6 +70,27 @@ class QuestionPack extends Component {
                 <div className="questionPackDifficulty">
                     {this.props.pack.difficulty}
                 </div>
+                {(JSON.stringify(this.props.user) !== '{}' &&
+                    checkUserManageEventsRole(this.props.user.roles)) ?
+                    <>
+                        <div className="questionPackEdit">
+                            <img src={editIcon}
+                                 className="questionPackIcon" alt=""
+                                 title="edit"
+                                 onClick={() => openEditQuestionPackPopUpBox(this.props.pack.id)}/>
+                        </div>
+                        <div className="questionPackDelete">
+                            <img src={deleteIcon}
+                                 className="questionPackIcon" alt=""
+                                 title="delete"
+                                 onClick={() => openDeleteQuestionPackPopUpBox(this.props.pack.id)}/>
+                        </div>
+                    </> :
+                    <>
+                        <div className="questionPackEdit"/>
+                        <div className="questionPackDelete"/>
+                    </>
+                }
                 <div className="questionPackArrow">
                     <img src={this.getArrow(isOpen)}
                          className="questionPackIcon" alt=""
@@ -63,7 +99,8 @@ class QuestionPack extends Component {
                 </div>
             </div>
 
-            <UncontrolledCollapse toggler={this.props.divItemIdToggler}>
+            <UncontrolledCollapse toggler={this.props.divItemIdToggler}
+                                  onEntering={this.onEntering}>
                 {isLoading ?
                     <div className="center"><LoaderSpinner/></div> :
                     <div className="divQuestionPackDetails">
@@ -90,7 +127,8 @@ class QuestionPack extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.token,
+        user: state.user
     }
 };
 
