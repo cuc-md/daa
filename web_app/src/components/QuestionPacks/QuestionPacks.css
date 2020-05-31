@@ -98,8 +98,9 @@
     cursor: pointer;
 }
 
-.questionPackEmpty {
+.questionPackDownload {
     display: table-cell;
     vertical-align: middle;
     width: 5%;
+    cursor: pointer;
 }
