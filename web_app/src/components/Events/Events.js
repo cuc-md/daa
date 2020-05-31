@@ -28,11 +28,23 @@ class Events extends Component {
                 return response.json()
             } else {
                 console.log("Response status " + response.status);
+                this.setState({events: {}, isLoading: false});
                 return Promise.reject('Error')
             }
         })
             .then(data => this.setState({events: data, isLoading: false}))
             .catch(error => console.log(error));
+    }
+
+    getEventsHead() {
+        return (JSON.stringify(this.props.user) !== '{}' &&
+            checkUserManageEventsRole(this.props.user.roles)) ?
+            <div className="divAddEvent">
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddEventPopUpBox()}>
+                    + Add Event
+                </button>
+            </div> : null
     }
 
     render() {
@@ -42,50 +54,53 @@ class Events extends Component {
             return <div className="main center"><LoaderSpinner/></div>;
         }
 
-        let eventsList = events.data.events.map((event, i) => {
-            let divItemId = "id" + i;
-            let divItemIdToggler = "#" + divItemId;
-
-            return <Event keyItem={i}
-                          divItemId={divItemId}
-                          divItemIdToggler={divItemIdToggler}
-                          eventId={event.id}
-                          event={event}/>
-        });
-
-        return <div className="main">
-            {(JSON.stringify(this.props.user) !== '{}' &&
-                checkUserManageEventsRole(this.props.user.roles)) ?
-                <div className="divAddEvent">
-                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                            onClick={() => openAddEventPopUpBox()}>
-                        + Add Event
-                    </button>
-                </div> : null
-            }
-            <div>
-                <div className="eventsTableHead">
-                    <div className="eventNumber"/>
-                    <div className="eventName">
-                        Event
+        if (JSON.stringify(events) === '{}') {
+            return <div className="main">
+                {this.getEventsHead()}
+                <div className="eventsTableRow">
+                    <div className="noEvents center">
+                        No events
                     </div>
-                    <div className="eventDate">
-                        Start Date
-                    </div>
-                    <div className="eventDate">
-                        End Date
-                    </div>
-                    <div className="eventRegistration">
-                        Status
-                    </div>
-                    <div className="eventTeamRegister"/>
-                    <div className="eventResults"/>
-                    <div className="eventDelete"/>
-                    <div className="eventArrow"/>
                 </div>
-                {eventsList}
             </div>
-        </div>
+        } else {
+            let eventsList = events.data.events.map((event, i) => {
+                let divItemId = "id" + i;
+                let divItemIdToggler = "#" + divItemId;
+
+                return <Event keyItem={i}
+                              divItemId={divItemId}
+                              divItemIdToggler={divItemIdToggler}
+                              eventId={event.id}
+                              event={event}/>
+            });
+
+            return <div className="main">
+                {this.getEventsHead()}
+                <div>
+                    <div className="eventsTableHead">
+                        <div className="eventNumber"/>
+                        <div className="eventName">
+                            Event
+                        </div>
+                        <div className="eventDate">
+                            Start Date
+                        </div>
+                        <div className="eventDate">
+                            End Date
+                        </div>
+                        <div className="eventRegistration">
+                            Status
+                        </div>
+                        <div className="eventTeamRegister"/>
+                        <div className="eventResults"/>
+                        <div className="eventDelete"/>
+                        <div className="eventArrow"/>
+                    </div>
+                    {eventsList}
+                </div>
+            </div>
+        }
     }
 }
 
