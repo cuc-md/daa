@@ -24,57 +24,32 @@ class Event extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventDetails: {
-                "data": {
-                    "event": {
-                        "id": 123,
-                        "name": "World championship",
-                        "long_name": "World championship 2020",
-                        "description": "description",
-                        "cover_photo": "/api/v1/photos/1234",
-                        "dates": {
-                            "start_date": "2010-01-01 10:00",
-                            "end_date": "2010-01-01 15:00"
-                        },
-                        "registration": {
-                            "status": "open",
-                            "fee": "10 MDL/person",
-                            "registation_end": "2010-01-01 09:00"
-                        },
-                        "teams": [
-                            {
-                                "id": 456,
-                                "name": "Echipa Racheta"
-                            }
-                        ]
-                    }
-                }
-            },
+            eventDetails: {},
             isLoading: true,
             isOpen: false
         };
         this.changeCollapseState = this.changeCollapseState.bind(this);
-        // this.onEntering = this.onEntering.bind(this);
+        this.onEntering = this.onEntering.bind(this);
     }
 
-    // onEntering() {
-    //     fetch('/api/v1/events/' + this.props.eventId, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': this.props.token
-    //         }
-    //     }).then(response => {
-    //         if (response.ok) {
-    //             return response.json()
-    //         } else {
-    //             console.log("Response status " + response.status);
-    //             return Promise.reject('Error')
-    //         }
-    //     })
-    //         .then(data => this.setState({eventDetails: data, isLoading: false}))
-    //         .catch(error => console.log(error));
-    // }
+    onEntering() {
+        fetch('/api/v1/events/' + this.props.eventId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                return Promise.reject('Error')
+            }
+        })
+            .then(data => this.setState({eventDetails: data, isLoading: false}))
+            .catch(error => console.log(error));
+    }
 
     changeCollapseState() {
         this.setState({isOpen: !this.state.isOpen})
@@ -84,14 +59,16 @@ class Event extends Component {
         return isOpen ? arrow_up : arrow_down;
     }
 
-    render() {
-        const {eventDetails, isLoading, isOpen} = this.state;
-
+    getEventTeamsList(eventDetails) {
         let eventTeamsList = "";
         eventDetails.data.event.teams.map(team => {
             return eventTeamsList += team.name + ", ";
         });
-        eventTeamsList = eventTeamsList.substring(0, eventTeamsList.length - 2);
+        return eventTeamsList.substring(0, eventTeamsList.length - 2);
+    }
+
+    render() {
+        const {eventDetails, isLoading, isOpen} = this.state;
 
         return <div className="eventsTableRow" key={this.props.keyItem}>
             <div className="divEventsTableRow">
@@ -137,24 +114,13 @@ class Event extends Component {
                 </div>
                 {(JSON.stringify(this.props.user) !== '{}' &&
                     checkUserManageEventsRole(this.props.user.roles)) ?
-                    <>
-                        <div className="eventEdit">
-                            <img src={editIcon}
-                                 className="eventIcon" alt=""
-                                 title="edit"
-                                 onClick={() => openEditEventPopUpBox(this.props.eventId, eventDetails.data.event)}/>
-                        </div>
-                        <div className="eventDelete">
-                            <img src={deleteIcon}
-                                 className="eventIcon" alt=""
-                                 title="delete"
-                                 onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
-                        </div>
-                    </> :
-                    <>
-                        <div className="eventEdit"/>
-                        <div className="eventDelete"/>
-                    </>
+                    <div className="eventDelete">
+                        <img src={deleteIcon}
+                             className="eventIcon" alt=""
+                             title="delete"
+                             onClick={() => openDeleteEventPopUpBox(this.props.eventId, this.props.event.long_name)}/>
+                    </div> :
+                    <div className="eventDelete"/>
                 }
                 <div className="eventArrow">
                     <img src={this.getArrow(isOpen)}
@@ -165,47 +131,57 @@ class Event extends Component {
             </div>
 
             <UncontrolledCollapse toggler={this.props.divItemIdToggler}
-                // onEntering={this.onEntering}
-            >
-                {/*{isLoading ?*/}
-                {/*    <div className="center"><LoaderSpinner/></div> :*/}
-                <div className="divEventDetails">
-                    <div className="eventsTableHead">
-                        <div className="eventNumber"/>
-                        <div className="eventTeams">
-                            Teams
-                        </div>
-                        <div className="eventRegistrationFee">
-                            Registration fee
-                        </div>
-                        <div className="eventRegistrationEnd">
-                            Registration end
-                        </div>
-                        <div className="eventDescription">
-                            Description
-                        </div>
-                        <div className="eventEmpty"/>
-                    </div>
-                    <div className="eventsDescriptionTableRow">
-                        <div className="divEventsTableRow">
+                                  onEntering={this.onEntering}>
+                {isLoading ?
+                    <div className="center"><LoaderSpinner/></div> :
+                    <div className="divEventDetails">
+                        <div className="eventsTableHead">
                             <div className="eventNumber"/>
                             <div className="eventTeams">
-                                {eventTeamsList}
+                                Teams
                             </div>
                             <div className="eventRegistrationFee">
-                                {this.props.event.registration.fee}
+                                Registration fee
                             </div>
                             <div className="eventRegistrationEnd">
-                                {this.props.event.registration.registation_end}
+                                Registration end
                             </div>
                             <div className="eventDescription">
-                                {eventDetails.data.event.description}
+                                Description
                             </div>
+                            <div className="eventEdit"/>
                             <div className="eventEmpty"/>
                         </div>
+                        <div className="eventsDescriptionTableRow">
+                            <div className="divEventsTableRow">
+                                <div className="eventNumber"/>
+                                <div className="eventTeams">
+                                    {this.getEventTeamsList(eventDetails)}
+                                </div>
+                                <div className="eventRegistrationFee">
+                                    {this.props.event.registration.fee}
+                                </div>
+                                <div className="eventRegistrationEnd">
+                                    {this.props.event.registration.registation_end}
+                                </div>
+                                <div className="eventDescription">
+                                    {eventDetails.data.event.description}
+                                </div>
+                                {(JSON.stringify(this.props.user) !== '{}' &&
+                                    checkUserManageEventsRole(this.props.user.roles)) ?
+                                    <div className="eventEdit">
+                                        <img src={editIcon}
+                                             className="eventIcon" alt=""
+                                             title="edit"
+                                             onClick={() => openEditEventPopUpBox(this.props.eventId, eventDetails.data.event)}/>
+                                    </div> :
+                                    <div className="eventEdit"/>
+                                }
+                                <div className="eventEmpty"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                {/*}*/}
+                }
             </UncontrolledCollapse>
         </div>
     }

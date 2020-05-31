@@ -19,6 +19,11 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
+.noEvents {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .divEventsTableRow {
     display: table;
     width: 100%;
@@ -42,7 +47,7 @@
 .eventName {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .eventDate {
@@ -68,13 +73,6 @@
     display: table-cell;
     vertical-align: middle;
     width: 5%;
-}
-
-.eventEdit {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
 }
 
 .eventDelete {
@@ -107,7 +105,7 @@
 .eventTeams {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .eventRegistrationFee {
@@ -125,11 +123,18 @@
 .eventDescription {
     display: table-cell;
     vertical-align: middle;
-    width: 10%;
+    width: 20%;
+}
+
+.eventEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .eventEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 25%;
+    width: 10%;
 }

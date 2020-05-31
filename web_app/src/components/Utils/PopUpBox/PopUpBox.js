@@ -118,13 +118,13 @@ export const openDeleteResultPopUpBox = (eventId) => {
     PopupboxManager.open({content})
 };
 
-export const openAddQuestionPackPopUpBox = (userId) => {
-    let content = (<AddQuestionPack userId={userId}/>);
+export const openAddQuestionPackPopUpBox = () => {
+    let content = (<AddQuestionPack/>);
     PopupboxManager.open({content})
 };
 
-export const openEditQuestionPackPopUpBox = (packId) => {
-    let content = (<EditQuestionPack packId={packId}/>);
+export const openEditQuestionPackPopUpBox = (packId, pack) => {
+    let content = (<EditQuestionPack packId={packId} pack={pack}/>);
     PopupboxManager.open({content})
 };
 

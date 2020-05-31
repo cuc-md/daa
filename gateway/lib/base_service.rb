@@ -14,7 +14,7 @@ class BaseService
 
   def index
     json do
-      RestClient.get("#{base_url}/api/v1/#{resources}", headers)
+      RestClient.get("#{base_url}/api/v1/#{resources}", headers.merge(params: params))
     end
   end
 

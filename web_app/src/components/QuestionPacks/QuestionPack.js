@@ -7,9 +7,11 @@ import arrow_down from '../../assets/icons/base/arrow_down.svg';
 import editIcon from '../../assets/icons/base/edit.svg';
 import deleteIcon from '../../assets/icons/base/delete.svg';
 import randomIcon from '../../assets/icons/base/random.svg';
+import downloadIcon from '../../assets/icons/base/download.svg';
 import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openEditQuestionPackPopUpBox, openDeleteQuestionPackPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import './QuestionPacks.css';
+import toaster from "toasted-notes";
 
 class QuestionPack extends Component {
 
@@ -51,6 +53,19 @@ class QuestionPack extends Component {
         return isOpen ? arrow_up : arrow_down;
     }
 
+    async downloadQuestionPack(packId) {
+        let response = await fetch('/api/v1/question_packs/' + packId + '/document', {
+            method: 'GET'
+        });
+        response.blob().then(blob => {
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'pack.doc';
+            a.click();
+        });
+    }
+
     render() {
         const {questionPack, isLoading, isOpen} = this.state;
 
@@ -72,24 +87,13 @@ class QuestionPack extends Component {
                 </div>
                 {(JSON.stringify(this.props.user) !== '{}' &&
                     checkUserManageEventsRole(this.props.user.roles)) ?
-                    <>
-                        <div className="questionPackEdit">
-                            <img src={editIcon}
-                                 className="questionPackIcon" alt=""
-                                 title="edit"
-                                 onClick={() => openEditQuestionPackPopUpBox(this.props.pack.id)}/>
-                        </div>
-                        <div className="questionPackDelete">
-                            <img src={deleteIcon}
-                                 className="questionPackIcon" alt=""
-                                 title="delete"
-                                 onClick={() => openDeleteQuestionPackPopUpBox(this.props.pack.id)}/>
-                        </div>
-                    </> :
-                    <>
-                        <div className="questionPackEdit"/>
-                        <div className="questionPackDelete"/>
-                    </>
+                    <div className="questionPackDelete">
+                        <img src={deleteIcon}
+                             className="questionPackIcon" alt=""
+                             title="delete"
+                             onClick={() => openDeleteQuestionPackPopUpBox(this.props.pack.id)}/>
+                    </div> :
+                    <div className="questionPackDelete"/>
                 }
                 <div className="questionPackArrow">
                     <img src={this.getArrow(isOpen)}
@@ -109,14 +113,30 @@ class QuestionPack extends Component {
                             <div className="questionPackAuthor">
                                 Author
                             </div>
-                            <div className="questionPackEmpty"/>
+                            <div className="questionPackEdit"/>
+                            <div className="questionPackDownload"/>
                         </div>
                         <div className="questionPacksTableRow">
                             <div className="questionPackNumber"/>
                             <div className="questionPackAuthor">
                                 {questionPack.data.question_pack.author}
                             </div>
-                            <div className="questionPackEmpty"/>
+                            {(JSON.stringify(this.props.user) !== '{}' &&
+                                checkUserManageEventsRole(this.props.user.roles)) ?
+                                <div className="questionPackEdit">
+                                    <img src={editIcon}
+                                         className="questionPackIcon" alt=""
+                                         title="edit"
+                                         onClick={() => openEditQuestionPackPopUpBox(this.props.pack.id, questionPack.data.question_pack)}/>
+                                </div> :
+                                <div className="questionPackEdit"/>
+                            }
+                            <div className="questionPackDownload">
+                                <img src={downloadIcon}
+                                     className="questionPackIcon" alt=""
+                                     title="download"
+                                     onClick={() => this.downloadQuestionPack(this.props.pack.id)}/>
+                            </div>
                         </div>
                     </div>
                 }

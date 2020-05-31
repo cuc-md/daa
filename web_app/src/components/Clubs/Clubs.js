@@ -29,11 +29,23 @@ class Clubs extends Component {
                 return response.json()
             } else {
                 console.log("Response status " + response.status);
+                this.setState({clubs: {}, isLoading: false});
                 return Promise.reject('Error')
             }
         })
             .then(data => this.setState({clubs: data, isLoading: false}))
             .catch(error => console.log(error));
+    }
+
+    getClubsHead() {
+        return (JSON.stringify(this.props.user) !== '{}' &&
+            checkUserManageClubsRole(this.props.user.roles)) ?
+            <div className="divAddClub">
+                <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
+                        onClick={() => openAddClubPopUpBox()}>
+                    + Add Club
+                </button>
+            </div> : null
     }
 
     render() {
@@ -43,49 +55,51 @@ class Clubs extends Component {
             return <div className="main center"><LoaderSpinner/></div>;
         }
 
-        let clubsList = clubs.data.clubs.map((club, i) => {
-            let divItemId = "id" + i;
-            let divItemIdToggler = "#" + divItemId;
-
-            return <Club keyItem={i}
-                         divItemId={divItemId}
-                         divItemIdToggler={divItemIdToggler}
-                         clubId={club.id}
-                         club={club}/>
-        });
-
-        return <div className="main">
-            {(JSON.stringify(this.props.user) !== '{}' &&
-                checkUserManageClubsRole(this.props.user.roles)) ?
-                <div className="divAddClub">
-                    <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                            onClick={() => openAddClubPopUpBox()}>
-                        + Add Club
-                    </button>
-                </div> : null
-            }
-            <div>
-                <div className="clubsTableHead">
-                    <div className="clubNumber"/>
-                    <div className="clubName">
-                        Club
+        if (JSON.stringify(clubs) === '{}') {
+            return <div className="main">
+                {this.getClubsHead()}
+                <div className="clubsTableRow">
+                    <div className="noClubs center">
+                        No clubs
                     </div>
-                    <div className="clubCity">
-                        City
-                    </div>
-                    <div className="clubAddress">
-                        Address
-                    </div>
-                    <div className="clubContacts">
-                        Contacts
-                    </div>
-                    <div className="clubEdit"/>
-                    <div className="clubDelete"/>
-                    <div className="clubArrow"/>
                 </div>
-                {clubsList}
             </div>
-        </div>
+        } else {
+            let clubsList = clubs.data.clubs.map((club, i) => {
+                let divItemId = "id" + i;
+                let divItemIdToggler = "#" + divItemId;
+
+                return <Club keyItem={i}
+                             divItemId={divItemId}
+                             divItemIdToggler={divItemIdToggler}
+                             clubId={club.id}
+                             club={club}/>
+            });
+
+            return <div className="main">
+                {this.getClubsHead()}
+                <div>
+                    <div className="clubsTableHead">
+                        <div className="clubNumber"/>
+                        <div className="clubName">
+                            Club
+                        </div>
+                        <div className="clubCity">
+                            City
+                        </div>
+                        <div className="clubAddress">
+                            Address
+                        </div>
+                        <div className="clubContacts">
+                            Contacts
+                        </div>
+                        <div className="clubDelete"/>
+                        <div className="clubArrow"/>
+                    </div>
+                    {clubsList}
+                </div>
+            </div>
+        }
     }
 }
 

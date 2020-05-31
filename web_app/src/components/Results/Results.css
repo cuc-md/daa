@@ -6,7 +6,7 @@
     display: inline;
 }
 
-.divDownloadResultsFile{
+.divDownloadResultsFile {
     float: right;
     display: inline;
     margin-bottom: 25px;
@@ -27,6 +27,11 @@
     border-radius: 4px;
     background-color: #fefefe;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.noResults {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .divResultsTableRow {

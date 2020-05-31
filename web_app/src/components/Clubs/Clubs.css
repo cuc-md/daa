@@ -19,6 +19,11 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
+.noClubs {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .divClubsTableRow {
     display: table;
     width: 100%;
@@ -54,7 +59,7 @@
 .clubContacts {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .clubContactsTable {
@@ -78,13 +83,6 @@
     display: table-cell;
     vertical-align: middle;
     width: 50%;
-}
-
-.clubEdit {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
 }
 
 .clubDelete {
@@ -135,11 +133,18 @@
 .clubDescription {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
+}
+
+.clubEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .clubEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 15%;
+    width: 5%;
 }
