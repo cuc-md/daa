@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle install
+RUN bundle install && bundle exec rails db:create db:migrate
 ADD . /app
 
 # Start the main process.
