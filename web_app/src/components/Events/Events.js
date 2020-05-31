@@ -80,7 +80,6 @@ class Events extends Component {
                     </div>
                     <div className="eventTeamRegister"/>
                     <div className="eventResults"/>
-                    <div className="eventEdit"/>
                     <div className="eventDelete"/>
                     <div className="eventArrow"/>
                 </div>

@@ -42,7 +42,7 @@
 .eventName {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .eventDate {
@@ -68,13 +68,6 @@
     display: table-cell;
     vertical-align: middle;
     width: 5%;
-}
-
-.eventEdit {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
 }
 
 .eventDelete {
@@ -107,7 +100,7 @@
 .eventTeams {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .eventRegistrationFee {
@@ -125,11 +118,18 @@
 .eventDescription {
     display: table-cell;
     vertical-align: middle;
-    width: 10%;
+    width: 20%;
+}
+
+.eventEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .eventEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 25%;
+    width: 10%;
 }

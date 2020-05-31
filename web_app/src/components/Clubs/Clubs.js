@@ -79,7 +79,6 @@ class Clubs extends Component {
                     <div className="clubContacts">
                         Contacts
                     </div>
-                    <div className="clubEdit"/>
                     <div className="clubDelete"/>
                     <div className="clubArrow"/>
                 </div>

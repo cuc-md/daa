@@ -69,7 +69,6 @@ class Teams extends Component {
                     <div className="teamName">
                         Team
                     </div>
-                    <div className="teamEdit"/>
                     <div className="teamDelete"/>
                     <div className="teamArrow"/>
                 </div>
