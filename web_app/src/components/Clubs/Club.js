@@ -55,6 +55,8 @@ class Club extends Component {
     render() {
         const {clubDetails, isLoading, isOpen} = this.state;
 
+        const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
         return <div className="clubsTableRow" key={this.props.keyItem}>
             <div className="divClubsTableRow">
                 <div className="clubNumber">
@@ -88,24 +90,13 @@ class Club extends Component {
                 </div>
                 {(JSON.stringify(this.props.user) !== '{}' &&
                     checkUserManageClubsRole(this.props.user.roles)) ?
-                    <>
-                        <div className="clubEdit">
-                            <img src={editIcon}
-                                 className="clubIcon" alt=""
-                                 title="edit"
-                                 onClick={() => openEditClubPopUpBox(this.props.clubId, clubDetails.data.club)}/>
-                        </div>
-                        <div className="clubDelete">
-                            <img src={deleteIcon}
-                                 className="clubIcon" alt=""
-                                 title="delete"
-                                 onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
-                        </div>
-                    </> :
-                    <>
-                        <div className="clubEdit"/>
-                        <div className="clubDelete"/>
-                    </>
+                    <div className="clubDelete">
+                        <img src={deleteIcon}
+                             className="clubIcon" alt=""
+                             title="delete"
+                             onClick={() => openDeleteClubPopUpBox(this.props.clubId, this.props.club.name)}/>
+                    </div> :
+                    <div className="clubDelete"/>
                 }
                 <div className="clubArrow">
                     <img src={this.getArrow(isOpen)}
@@ -133,6 +124,7 @@ class Club extends Component {
                             <div className="clubDescription">
                                 Description
                             </div>
+                            <div className="clubEdit"/>
                             <div className="clubEmpty"/>
                         </div>
                         <div className="clubsDescriptionTableRow">
@@ -150,6 +142,16 @@ class Club extends Component {
                                 <div className="clubDescription">
                                     {clubDetails.data.club.description}
                                 </div>
+                                {(JSON.stringify(this.props.user) !== '{}' &&
+                                    checkUserManageClubsRole(this.props.user.roles)) ?
+                                    <div className="clubEdit">
+                                        <img src={editIcon}
+                                             className="clubIcon" alt=""
+                                             title="edit"
+                                             onClick={() => openEditClubPopUpBox(this.props.clubId, clubDetails.data.club)}/>
+                                    </div> :
+                                    <div className="clubEdit"/>
+                                }
                                 <div className="clubEmpty"/>
                             </div>
                         </div>

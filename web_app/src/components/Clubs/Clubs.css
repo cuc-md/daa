@@ -54,7 +54,7 @@
 .clubContacts {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .clubContactsTable {
@@ -78,13 +78,6 @@
     display: table-cell;
     vertical-align: middle;
     width: 50%;
-}
-
-.clubEdit {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
 }
 
 .clubDelete {
@@ -135,11 +128,18 @@
 .clubDescription {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
+}
+
+.clubEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .clubEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 15%;
+    width: 5%;
 }
