@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import toaster from 'toasted-notes';
 import LoaderSpinner from '../Utils/LoaderSpinner/LoaderSpinner';
 import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openAddResultPopUpBox} from '../Utils/PopUpBox/PopUpBox';
@@ -12,43 +11,30 @@ class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: {
-                "data": {
-                    "event_name": "Super Cup",
-                    "result": [
-                        {
-                            "team_name": "team1",
-                            "total_score": 3,
-                            "score": [
-                                {"round": 1, "count": 0, "score": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
-                                {"round": 2, "count": 3, "score": [0, 1, 0, 0, 0, 0, 0, 1, 0, 1]}
-                            ]
-                        }
-                    ]
-                }
-            },
+            results: {},
             isLoading: true
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': this.props.token
-    //         }
-    //     }).then(response => {
-    //         if (response.ok) {
-    //             return response.json()
-    //         } else {
-    //             console.log("Response status " + response.status);
-    //             return Promise.reject('Error')
-    //         }
-    //     })
-    //         .then(data => this.setState({results: data, isLoading: false}))
-    //         .catch(error => console.log(error));
-    // }
+    componentDidMount() {
+        fetch('/api/v1/results/' + this.props.match.params.eventId + '/details', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            }
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Response status " + response.status);
+                this.setState({results: {}, isLoading: false});
+                return Promise.reject('Error')
+            }
+        })
+            .then(data => this.setState({results: data, isLoading: false}))
+            .catch(error => console.log(error));
+    }
 
     async downloadResultsFile() {
         let response = await fetch('/api/v1/results/sample', {
@@ -63,34 +49,8 @@ class Results extends Component {
         });
     }
 
-    render() {
-        const {results, isLoading} = this.state;
-
-        // if (isLoading) {
-        //     return <div className="main center"><LoaderSpinner/></div>;
-        // }
-
-        let resultsList = results.data.result.map((result, i) => {
-            let divItemId = "id" + i;
-            let divItemIdToggler = "#" + divItemId;
-
-            return <Result keyItem={i}
-                           divItemId={divItemId}
-                           divItemIdToggler={divItemIdToggler}
-                           eventId={this.props.match.params.eventId}
-                           result={result}/>
-        });
-
-        let maxTableCellEmptyWidth = 64;
-        let resultsRoundNumber = 0;
-        let resultsRoundHead = results.data.result[0].score.map(score => {
-            resultsRoundNumber++;
-            return <div className="resultRound center">
-                Round {score.round}
-            </div>
-        });
-
-        return <div className="main">
+    getResultHead() {
+        return <>
             <div className="divResultEventName textFontStyle18 center">
                 Results of {this.props.location.state.eventName}
             </div>
@@ -112,24 +72,67 @@ class Results extends Component {
                 </div>
                 : null
             }
-            <div>
-                <div className="resultsTableHead">
-                    <div className="resultNumber"/>
-                    <div className="resultTeam">
-                        Team
+        </>
+    }
+
+    render() {
+        const {results, isLoading} = this.state;
+
+        if (isLoading) {
+            return <div className="main center"><LoaderSpinner/></div>;
+        }
+
+        if (JSON.stringify(results) === '{}') {
+            return <div className="main">
+                {this.getResultHead()}
+                <div className="resultsTableRow">
+                    <div className="noResults center">
+                        No results
                     </div>
-                    <div className="resultTotalScore center">
-                        Total Score
-                    </div>
-                    {resultsRoundHead}
-                    <div className="resultEmpty"
-                         style={{width: (maxTableCellEmptyWidth - (8 * resultsRoundNumber)) + "%"}}/>
-                    <div className="resultDelete"/>
-                    <div className="resultArrow"/>
                 </div>
-                {resultsList}
             </div>
-        </div>
+        } else {
+            let resultsList = results.data.result.map((result, i) => {
+                let divItemId = "id" + i;
+                let divItemIdToggler = "#" + divItemId;
+
+                return <Result keyItem={i}
+                               divItemId={divItemId}
+                               divItemIdToggler={divItemIdToggler}
+                               eventId={this.props.match.params.eventId}
+                               result={result}/>
+            });
+
+            let maxTableCellEmptyWidth = 64;
+            let resultsRoundNumber = 0;
+            let resultsRoundHead = results.data.result[0].score.map(score => {
+                resultsRoundNumber++;
+                return <div className="resultRound center">
+                    Round {score.round}
+                </div>
+            });
+
+            return <div className="main">
+                {this.getResultHead()}
+                <div>
+                    <div className="resultsTableHead">
+                        <div className="resultNumber"/>
+                        <div className="resultTeam">
+                            Team
+                        </div>
+                        <div className="resultTotalScore center">
+                            Total Score
+                        </div>
+                        {resultsRoundHead}
+                        <div className="resultEmpty"
+                             style={{width: (maxTableCellEmptyWidth - (8 * resultsRoundNumber)) + "%"}}/>
+                        <div className="resultDelete"/>
+                        <div className="resultArrow"/>
+                    </div>
+                    {resultsList}
+                </div>
+            </div>
+        }
     }
 }
 
