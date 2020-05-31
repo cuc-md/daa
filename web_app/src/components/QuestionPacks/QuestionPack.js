@@ -72,24 +72,13 @@ class QuestionPack extends Component {
                 </div>
                 {(JSON.stringify(this.props.user) !== '{}' &&
                     checkUserManageEventsRole(this.props.user.roles)) ?
-                    <>
-                        <div className="questionPackEdit">
-                            <img src={editIcon}
-                                 className="questionPackIcon" alt=""
-                                 title="edit"
-                                 onClick={() => openEditQuestionPackPopUpBox(this.props.pack.id)}/>
-                        </div>
-                        <div className="questionPackDelete">
-                            <img src={deleteIcon}
-                                 className="questionPackIcon" alt=""
-                                 title="delete"
-                                 onClick={() => openDeleteQuestionPackPopUpBox(this.props.pack.id)}/>
-                        </div>
-                    </> :
-                    <>
-                        <div className="questionPackEdit"/>
-                        <div className="questionPackDelete"/>
-                    </>
+                    <div className="questionPackDelete">
+                        <img src={deleteIcon}
+                             className="questionPackIcon" alt=""
+                             title="delete"
+                             onClick={() => openDeleteQuestionPackPopUpBox(this.props.pack.id)}/>
+                    </div> :
+                    <div className="questionPackDelete"/>
                 }
                 <div className="questionPackArrow">
                     <img src={this.getArrow(isOpen)}
@@ -109,6 +98,7 @@ class QuestionPack extends Component {
                             <div className="questionPackAuthor">
                                 Author
                             </div>
+                            <div className="questionPackEdit"/>
                             <div className="questionPackEmpty"/>
                         </div>
                         <div className="questionPacksTableRow">
@@ -116,6 +106,16 @@ class QuestionPack extends Component {
                             <div className="questionPackAuthor">
                                 {questionPack.data.question_pack.author}
                             </div>
+                            {(JSON.stringify(this.props.user) !== '{}' &&
+                                checkUserManageEventsRole(this.props.user.roles)) ?
+                                <div className="questionPackEdit">
+                                    <img src={editIcon}
+                                         className="questionPackIcon" alt=""
+                                         title="edit"
+                                         onClick={() => openEditQuestionPackPopUpBox(this.props.pack.id, questionPack.data.question_pack)}/>
+                                </div> :
+                                <div className="questionPackEdit"/>
+                            }
                             <div className="questionPackEmpty"/>
                         </div>
                     </div>

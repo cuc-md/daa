@@ -2,20 +2,19 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import toaster from 'toasted-notes';
 import {PopupboxManager} from 'react-popupbox';
-import 'react-datepicker/dist/react-datepicker.css';
 import '../Utils/Toaster/Toaster.css';
 import '../Utils/Form/Form.css';
 
-class EditQuestionPack extends Component {
+class AddQuestionPack extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            author: this.props.pack.author,
+            author: '',
             pack: null,
-            event_name: this.props.pack.event_name,
-            event_id: this.props.pack.event_id,
-            difficulty: this.props.pack.difficulty
+            event_name: '',
+            event_id: 123,
+            difficulty: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -32,7 +31,7 @@ class EditQuestionPack extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        //TODO check upload file
+        //TODO check upload file && fix eventName, eventId
         let fileReader = new FileReader();
         fileReader.readAsDataURL(this.state.pack);
         const toBase64 = file => new Promise((resolve, reject) => {
@@ -42,8 +41,8 @@ class EditQuestionPack extends Component {
             reader.onerror = error => reject(error);
         });
 
-        fetch('/api/v1/question_packs/' + this.props.packId, {
-            method: 'PUT',
+        fetch('/api/v1/question_packs', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -62,11 +61,10 @@ class EditQuestionPack extends Component {
                     position: "bottom"
                 });
             } else {
-                toaster.notify("Question pack was successfully edited", {
+                toaster.notify("Question pack was successfully added", {
                     duration: 3000,
                     position: "bottom"
                 });
-                window.location = "/question_store";
                 PopupboxManager.close();
                 return response.json();
             }
@@ -78,7 +76,7 @@ class EditQuestionPack extends Component {
             <form className="form"
                   onSubmit={this.handleSubmit}>
                 <h3 className="formText">
-                    Edit question pack
+                    Add Question Pack
                 </h3>
                 <br/>
                 <input
@@ -115,8 +113,7 @@ class EditQuestionPack extends Component {
                     onChange={this.handleChange}
                     required
                 />
-                <input type='submit'
-                       className="formButton textFontStyle16"/>
+                <input type='submit' className="formButton textFontStyle16"/>
             </form>
         </div>
     }
@@ -124,8 +121,8 @@ class EditQuestionPack extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.token,
     }
 };
 
-export default connect(mapStateToProps, null)(EditQuestionPack);
+export default connect(mapStateToProps, null)(AddQuestionPack);
