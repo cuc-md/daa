@@ -64,24 +64,14 @@ class Team extends Component {
                 </div>
                 {(JSON.stringify(this.props.user) !== '{}' &&
                     checkUserManageEventsRole(this.props.user.roles)) ?
-                    <>
-                        <div className="teamEdit">
-                            <img src={editIcon}
-                                 className="teamIcon" alt=""
-                                 title="edit"
-                                 onClick={() => openEditTeamPopUpBox(this.props.teamId, teamDetails.data.team)}/>
-                        </div>
-                        <div className="teamDelete">
-                            <img src={deleteIcon}
-                                 className="teamIcon" alt=""
-                                 title="delete"
-                                 onClick={() => openDeleteTeamPopUpBox(this.props.teamId, this.props.team.name)}/>
-                        </div>
-                    </> :
-                    <>
-                        <div className="teamEdit"/>
-                        <div className="teamDelete"/>
-                    </>
+
+                    <div className="teamDelete">
+                        <img src={deleteIcon}
+                             className="teamIcon" alt=""
+                             title="delete"
+                             onClick={() => openDeleteTeamPopUpBox(this.props.teamId, this.props.team.name)}/>
+                    </div> :
+                    <div className="teamDelete"/>
                 }
                 <div className="teamArrow">
                     <img src={this.getArrow(isOpen)}
@@ -102,6 +92,7 @@ class Team extends Component {
                             <div className="teamCaptainPhone">
                                 Phone
                             </div>
+                            <div className="teamEdit"/>
                             <div className="teamEmpty"/>
                         </div>
                         <div className="teamsDescriptionTableRow">
@@ -117,6 +108,16 @@ class Team extends Component {
                                 <div className="teamCaptainPhone">
                                     {teamDetails.data.team.phone}
                                 </div>
+                                {(JSON.stringify(this.props.user) !== '{}' &&
+                                    checkUserManageEventsRole(this.props.user.roles)) ?
+                                    <div className="teamEdit">
+                                        <img src={editIcon}
+                                             className="teamIcon" alt=""
+                                             title="edit"
+                                             onClick={() => openEditTeamPopUpBox(this.props.teamId, teamDetails.data.team)}/>
+                                    </div> :
+                                    <div className="teamEdit"/>
+                                }
                                 <div className="teamEmpty"/>
                             </div>
                         </div>
