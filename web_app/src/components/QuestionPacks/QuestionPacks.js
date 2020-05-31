@@ -6,7 +6,6 @@ import {checkUserManageEventsRole} from '../Utils/Helpers/UserHelper';
 import {openAddQuestionPackPopUpBox} from '../Utils/PopUpBox/PopUpBox';
 import QuestionPack from './QuestionPack';
 import './QuestionPacks.css';
-import randomIcon from "../../assets/icons/base/random.svg";
 
 class QuestionPacks extends Component {
 
@@ -178,7 +177,6 @@ class QuestionPacks extends Component {
                     <div className="questionPackDifficulty">
                         Difficulty
                     </div>
-                    <div className="questionPackEdit"/>
                     <div className="questionPackDelete"/>
                     <div className="questionPackArrow"/>
                 </div>

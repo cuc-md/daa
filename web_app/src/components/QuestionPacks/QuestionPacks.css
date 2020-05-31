@@ -44,20 +44,13 @@
 .questionPackEventName {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 35%;
 }
 
 .questionPackDifficulty {
     display: table-cell;
     vertical-align: middle;
     width: 50%;
-}
-
-.questionPackEdit {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
 }
 
 .questionPackDelete {
@@ -95,11 +88,18 @@
 .questionPackAuthor {
     display: table-cell;
     vertical-align: middle;
-    width: 30%;
+    width: 85%;
+}
+
+.questionPackEdit {
+    display: table-cell;
+    vertical-align: middle;
+    width: 5%;
+    cursor: pointer;
 }
 
 .questionPackEmpty {
     display: table-cell;
     vertical-align: middle;
-    width: 65%;
+    width: 5%;
 }
