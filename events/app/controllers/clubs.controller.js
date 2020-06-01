@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Club.find()
         .then(clubs => {
-            res.send(clubs);
+            res.send({data: clubs});
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving clubs."
