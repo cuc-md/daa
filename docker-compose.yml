@@ -5,7 +5,7 @@ services:
     ports:
     - "8080:3000"
   gateway-db:
-    image: postgres
+    image: postgres:12-alpine
     volumes:
       - gateway-database:/var/lib/postgresql/data
     env_file:
