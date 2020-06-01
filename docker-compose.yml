@@ -43,7 +43,16 @@ services:
     image: mongo:3
     volumes:
       - results-database:/data/db
+  events:
+    build: ./events
+    ports:
+    - "4000:4000"
+  events-db:
+    image: mongo:3
+    volumes:
+      - events-database:/data/db
 
 volumes:
   gateway-database:
   results-database:
+  events-database:

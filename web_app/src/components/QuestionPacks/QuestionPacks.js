@@ -160,12 +160,7 @@ class QuestionPacks extends Component {
                 {(JSON.stringify(this.props.user) !== '{}' &&
                     checkUserManageEventsRole(this.props.user.roles)) ?
                     <button className="choiceButton choiceButtonStatic okButton textFontStyle16"
-                            onClick={() => openAddQuestionPackPopUpBox(
-                                this.props.user.id,
-                                questionPacks.event_id,
-                                questionPacks.event_name
-                            )}>
-
+                            onClick={() => openAddQuestionPackPopUpBox()}>
                         + Add pack
                     </button> : null
                 }
@@ -179,7 +174,6 @@ class QuestionPacks extends Component {
                     <div className="questionPackDifficulty">
                         Difficulty
                     </div>
-                    <div className="questionPackEdit"/>
                     <div className="questionPackDelete"/>
                     <div className="questionPackArrow"/>
                 </div>
