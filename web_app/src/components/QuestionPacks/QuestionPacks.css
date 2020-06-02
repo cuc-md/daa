@@ -53,13 +53,6 @@
     width: 50%;
 }
 
-.questionPackEdit {
-    display: table-cell;
-    vertical-align: middle;
-    width: 5%;
-    cursor: pointer;
-}
-
 .questionPackDelete {
     display: table-cell;
     vertical-align: middle;
