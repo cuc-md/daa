@@ -42,7 +42,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Event.find()
         .then(events => {
-            res.send(events);
+            res.send({ data: events });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving events."
@@ -59,7 +59,7 @@ exports.findOne = (req, res) => {
                     message: "Event not found with id " + req.params.id_event
                 });
             }
-            res.send(event);
+            res.send({ data: event });
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
@@ -103,7 +103,7 @@ exports.update = (req, res) => {
                     message: "Event not found with id " + req.params.id_event
                 });
             }
-            res.send(event);
+            res.send({ data: event });
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({

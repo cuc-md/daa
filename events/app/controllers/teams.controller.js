@@ -32,7 +32,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Team.find()
         .then(teams => {
-            res.send(teams);
+            res.send({ data: teams });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving teams."
@@ -49,7 +49,7 @@ exports.findOne = (req, res) => {
                     message: "Team not found with id " + req.params.id_team
                 });
             }
-            res.send(team);
+            res.send({ data: team });
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
@@ -83,7 +83,7 @@ exports.update = (req, res) => {
                     message: "Team not found with id " + req.params.id_team
                 });
             }
-            res.send(team);
+            res.send({ data: team });
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({

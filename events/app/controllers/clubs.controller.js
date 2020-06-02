@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Club.find()
         .then(clubs => {
-            res.send({data: clubs});
+            res.send({ data: clubs });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving clubs."
@@ -53,7 +53,7 @@ exports.findOne = (req, res) => {
                     message: "Club not found with id " + req.params.id_club
                 });
             }
-            res.send(club);
+            res.send({ data: club });
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
@@ -91,7 +91,7 @@ exports.update = (req, res) => {
                     message: "Club not found with id " + req.params.id_club
                 });
             }
-            res.send(club);
+            res.send({ data: club });
         }).catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
